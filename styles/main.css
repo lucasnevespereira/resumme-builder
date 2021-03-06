@@ -1,0 +1,68 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
+
+* {
+  text-rendering: optimizeLegibility;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #ddd;
+  color: #000;
+  font-family: "Lato", sans-serif;
+}
+
+main {
+  max-width: 40rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+ul {
+  margin-left: 0.6rem;
+}
+
+h2 {
+  font-variant: small-caps;
+  font-size: 2rem;
+  line-height: 0.2rem;
+}
+
+/* ABOUT */
+.about {
+  display: grid;
+  grid-template-areas: "name" "role " "contact";
+}
+
+.about__name {
+  font-weight: 900;
+  font-size: 3rem;
+  margin-bottom: 0;
+  grid-area: name;
+}
+
+.about__role {
+  font-size: 1.22rem;
+  font-weight: 900;
+  font-variant: small-caps;
+  margin-top: 0;
+  grid-area: role;
+}
+
+.about__contact {
+  font-size: 1.22rem;
+  grid-area: contact;
+}
+
+/* Experience */
+.experience__employer {
+  padding-left: 2rem;
+  margin-bottom: 1rem;
+}
+.experience__role {
+  display: flex;
+  justify-content: space-between;
+}
+.experience__dates {
+  font-size: 0.85rem;
+  color: #777;
+}
