@@ -1,13 +1,26 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
 
+:root {
+  --blue: #3e84c6;
+  --secondary: #777;
+  --lighter: rgba(0, 0, 0, 0.6);
+  --black: #000;
+}
+
 * {
   text-rendering: optimizeLegibility;
   box-sizing: border-box;
 }
 
+a {
+  text-decoration: none;
+  color: var(--secondary);
+  font-weight: bold;
+}
+
 body {
-  background-color: #ddd;
-  color: #000;
+  background-color: #fff;
+  color: var(--black);
   font-family: "Lato", sans-serif;
 }
 
@@ -25,6 +38,7 @@ h2 {
   font-variant: small-caps;
   font-size: 2rem;
   line-height: 0.2rem;
+  color: var(--blue);
 }
 
 /* ABOUT */
@@ -38,6 +52,7 @@ h2 {
   font-size: 3rem;
   margin-bottom: 0;
   grid-area: name;
+  color: var(--blue);
 }
 
 .about__job {
@@ -51,6 +66,7 @@ h2 {
 .about__contact {
   font-size: 1.22rem;
   grid-area: contact;
+  color: var(--blue);
 }
 
 /* Experience */
@@ -64,5 +80,8 @@ h2 {
 }
 .experience__dates {
   font-size: 0.85rem;
-  color: #777;
+}
+
+.experience__details {
+  color: var(--lighter);
 }
