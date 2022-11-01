@@ -1,7 +1,13 @@
-.PHONY: output clean
+.PHONY: output clean lint
+
+fmt:
+	gofmt -s -l .
+
+lint: fmt
+	golangci-lint run
 
 output:
 	go run .
 
 clean:
-	rm output/*
+	rm -rf output

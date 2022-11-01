@@ -1,13 +1,15 @@
 # resume-builder
 
-- Enter your data into the `data/resume.json` file.
+## Usage
 
-- Run `make output`
+Enter your data into the `data/resume.json` file.
 
-- Open the `output/resume.html` file that is generated in your default browser.
+Run `make output`
 
-- To save in a <b>pdf</b> format, you can use the print functionality in your browser <b>(cmd + P or ctrl + P)</b> and <b><em>Save as File</em></b>.
-
+Open `output/resume.pdf` or `output/resume.html`
 
 ### TODO
-- [ ] Generate Pdf
+- [x] Parse data to Html
+- [x] Generate Pdf
+- [ ] Build an API
+- [ ] Build more templates

@@ -1,0 +1,93 @@
+<style>
+
+    @import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
+
+    :root {
+        --blue: #3e84c6;
+        --secondary: #777;
+        --lighter: rgba(0, 0, 0, 0.6);
+        --black: #000;
+    }
+
+    * {
+        text-rendering: optimizeLegibility;
+        box-sizing: border-box;
+    }
+
+    a {
+        text-decoration: none;
+        color: var(--secondary);
+        font-weight: bold;
+    }
+
+    body {
+        background-color: #fff;
+        color: var(--black);
+        font-family: "Lato", sans-serif;
+    }
+
+    main {
+        max-width: 40rem;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    ul {
+        margin-left: 0.6rem;
+    }
+
+    h2 {
+        font-variant: small-caps;
+        font-size: 2rem;
+        line-height: 0.2rem;
+        color: var(--blue);
+    }
+
+    /* ABOUT */
+    .about {
+        display: grid;
+        grid-template-areas: "name" "role " "contact";
+    }
+
+    .about__name {
+        font-weight: 900;
+        font-size: 3rem;
+        margin-bottom: 0;
+        grid-area: name;
+        color: var(--blue);
+    }
+
+    .about__job {
+        font-size: 1.22rem;
+        font-weight: 900;
+        font-variant: small-caps;
+        margin-top: 0;
+        grid-area: role;
+    }
+
+    .about__contact {
+        font-size: 1.22rem;
+        grid-area: contact;
+        color: var(--blue);
+    }
+
+    /* Experience */
+    .experience__employer {
+        padding-left: 2rem;
+        margin-bottom: 1rem;
+    }
+
+    .experience__role {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .experience__dates {
+        font-size: 0.85rem;
+    }
+
+    .experience__details {
+        color: var(--lighter);
+    }
+
+</style>

@@ -1,7 +1,12 @@
 package utils
 
 const (
-	TemplateFiles = "ui/template/*"
+	OutputDir = "output"
 	ResumeDataFile = "data/resume.json"
 	OutputHtmlFile = "output/resume.html"
+	OutputPdfFile =  "output/resume.pdf"
+)
+
+const (
+	BasicTemplateFiles = "ui/basic/*"
 )
