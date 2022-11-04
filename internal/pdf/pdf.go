@@ -2,18 +2,15 @@ package pdf
 
 import (
 	"context"
-	"fmt"
 	"github.com/chromedp/cdproto/emulation"
 	"github.com/chromedp/cdproto/page"
 	"github.com/chromedp/chromedp"
 	"github.com/pkg/errors"
-	"os"
 	"resume-builder/utils"
 	"time"
 )
 
-func Generate() error {
-	url := utils.GetFilePathAsUrl(utils.OutputHtmlFile)
+func Generate(url string) ([]byte, error) {
 	var pdfData []byte
 
 	chromeCtx, cancelCtx := chromedp.NewContext(context.Background())
@@ -21,16 +18,12 @@ func Generate() error {
 
 	startedAt := time.Now()
 	if err := chromedp.Run(chromeCtx, saveUrlAsPdf(url, &pdfData)); err != nil {
-		return errors.Wrap(err, "GeneratePDF - chromedp.Run")
+		return nil, errors.Wrap(err, "GeneratePDF - chromedp.Run")
 	}
 
-	if err := os.WriteFile(utils.OutputPdfFile, pdfData, 0644); err != nil {
-		return errors.Wrap(err, "GeneratePDF - WriteFile")
-	}
+	utils.Logger.Infof("Pdf generated in %f seconds\n", time.Since(startedAt).Seconds())
 
-	fmt.Printf("Pdf generated in %f seconds\n", time.Since(startedAt).Seconds())
-
-	return nil
+	return pdfData, nil
 }
 
 func saveUrlAsPdf(url string, pdf *[]byte) chromedp.Tasks {
