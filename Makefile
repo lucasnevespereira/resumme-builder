@@ -7,7 +7,10 @@ lint: fmt
 	golangci-lint run
 
 output:
-	go run .
+	go run cmd/local/main.go
+
+run:
+	go run cmd/server/main.go basic
 
 clean:
 	rm -rf output

@@ -1,39 +1,34 @@
 package resume
 
 import (
-	"encoding/json"
 	"github.com/pkg/errors"
 	"html/template"
 	"os"
+	"resume-builder/shared/models"
 	"resume-builder/utils"
 )
 
-func ParseToHtml(templateFiles string) error {
+func ParseToHtml(resumeData models.Resume) (string, error) {
 	utils.EnsureOutputDir(utils.OutputDir)
 
 	htmlOut, err := os.Create(utils.OutputHtmlFile)
 	if err != nil {
-		return errors.Wrap(err, "ParseToHtml - Create")
+		return "", errors.Wrap(err, "ParseToHtml - Create")
 	}
 
-	var data map[string]interface{}
-
-	file, err := os.ReadFile(utils.ResumeDataFile)
-	if err != nil {
-		return errors.Wrap(err, "ParseToHtml - ReadFile")
+	if resumeData.Template == "" {
+		resumeData.Template = utils.BasicTemplate
 	}
-	err = json.Unmarshal(file, &data)
+	t, err := template.ParseGlob("ui/" + resumeData.Template + "/*")
 	if err != nil {
-		return errors.Wrap(err, "ParseToHtml - Unmarshal")
+		return "", errors.Wrap(err, "ParseToHtml - ParseGlob")
 	}
-	t, err := template.ParseGlob(templateFiles)
+	err = t.Execute(htmlOut, resumeData)
 	if err != nil {
-		return errors.Wrap(err, "ParseToHtml - ParseGlob")
-	}
-	err = t.Execute(htmlOut, data)
-	if err != nil {
-		return errors.Wrap(err, "ParseToHtml - Execute")
+		return "", errors.Wrap(err, "ParseToHtml - Execute")
 	}
 
-	return nil
+	utils.Logger.Infof("Html parsed in %s", htmlOut.Name())
+
+	return htmlOut.Name(), nil
 }

@@ -8,5 +8,5 @@ const (
 )
 
 const (
-	BasicTemplateFiles = "ui/basic/*"
+	BasicTemplate = "basic"
 )

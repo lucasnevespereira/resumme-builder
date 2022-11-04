@@ -1,48 +1,51 @@
 {
-  "Name": "Lucas Neves Pereira",
-  "Job": "Web Developer",
-  "Email": "pereiraneveslucas@gmail.com",
-  "Website": "lucasnp.com",
-  "Location": "Paris, France",
-  "Mission": "Looking for a Web Dev Position",
-  "Skills": [
-    "Golang",
-    "React",
-    "Angular",
-    "NodeJS"
-  ],
-  "Experience": [
-    {
-      "Role": "Full Stack Web Developer",
-      "Entity": "GRTgaz",
-      "Started": "September 2019",
-      "Location": "Paris, France",
-      "Details": [
-        "Angular development",
-        "Java Development"
-      ]
-    },
-    {
-      "Role": "PHP Developer",
-      "Entity": "Qualiente",
-      "Started": "July 2019",
-      "Stopped": "September 2019",
-      "Location": "Paris, France",
-      "Details": [
-        "PHP development",
-        "Client consuling"
-      ]
-    }
-  ],
-  "Projects": [
-    "GitUser CLI"
-  ],
-  "Education": [
-    "Bachelor of Digital Project Manager at EEMI"
-  ],
-  "Languages": [
-    "English",
-    "Portuguese",
-    "French"
-  ]
+  "data": {
+    "name": "John Doe",
+    "job": "Web Developer",
+    "email": "john.doe@mail.com",
+    "website": "example.com",
+    "location": "Paris, France",
+    "mission": "Looking for a Web Dev Position",
+    "skills": [
+      "Golang",
+      "React",
+      "Angular",
+      "NodeJS"
+    ],
+    "experience": [
+      {
+        "role": "Full Stack Web Developer",
+        "company": "Example Company",
+        "started": "September 2019",
+        "location": "Paris, France",
+        "details": [
+          "Angular development",
+          "Java Development"
+        ]
+      },
+      {
+        "role": "PHP Developer",
+        "company": "Some Company",
+        "started": "July 2019",
+        "stopped": "September 2019",
+        "location": "Paris, France",
+        "details": [
+          "PHP development",
+          "Client consulting"
+        ]
+      }
+    ],
+    "projects": [
+      "GitUser CLI"
+    ],
+    "education": [
+      "Bachelor of Computer Science at ExampleSchool"
+    ],
+    "languages": [
+      "English",
+      "Portuguese",
+      "French"
+    ]
+  },
+  "template": "basic"
 }
