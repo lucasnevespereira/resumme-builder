@@ -1,4 +1,5 @@
 # resume-builder
+Build your resume with HTML/CSS and JSON Data
 
 ## Local Usage
 
@@ -10,18 +11,23 @@ Open `output/resume.pdf` or `output/resume.html`
 
 ## Api Usage
 
-Run `make run`
+`make run`
 
-Example POST request to generate pdf
+Example request to generate pdf
 
 ```
 [POST] http://localhost:9000/pdf
 ```
-<small>body data example in `data/resume.json` </small>
+body data example in `data/resume.json`
+
+#### Templates
+- ``"template": "basic"``
+
+<hr />
 
 ### TODO
 
 - [x] Parse data to Html
 - [x] Generate Pdf
-- [ ] Build an API
+- [x] Build an API
 - [ ] Build more templates
