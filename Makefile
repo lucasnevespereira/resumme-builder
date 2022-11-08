@@ -10,7 +10,7 @@ output:
 	go run cmd/local/main.go
 
 run:
-	go run cmd/server/main.go basic
+	go run cmd/server/main.go
 
 clean:
 	rm -rf output

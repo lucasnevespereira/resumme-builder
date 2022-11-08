@@ -47,5 +47,6 @@
       "French"
     ]
   },
-  "template": "basic"
+  "template": "basic",
+  "lang": "en"
 }

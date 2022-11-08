@@ -1,8 +1,8 @@
 <div class="languages">
-  <h2>Languages</h2>
-  <ul>
-    {{ range $v := .Languages -}}
-    <li>{{$v}}</li>
-    {{end -}}
-  </ul>
+    <h2>{{ .Labels.Languages }}</h2>
+    <ul>
+        {{ range $v := .Languages -}}
+        <li>{{$v}}</li>
+        {{end -}}
+    </ul>
 </div>

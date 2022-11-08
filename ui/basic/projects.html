@@ -1,5 +1,5 @@
 <div class="projects">
-  <h2>Projects</h2>
+  <h2>{{ .Labels.Projects }}</h2>
   <ul>
     {{ range $n, $v := .Projects -}}
     <li>{{$v}}</li>
