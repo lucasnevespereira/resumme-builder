@@ -12,22 +12,17 @@ Open `output/resume.pdf` or `output/resume.html`
 
 ## Api Usage
 
-`make run`
+```
+make run
+```
 
-Example request to generate pdf
+request to generate pdf
 
 ```
 [POST] http://localhost:9000/pdf
 ```
 
-body data example in [data/resume.json](data/resume.json)
-
-#### Templates
-
-- basic
-
-  e.g [data/resume.json](data/resume.json)
-  ``  "template": "basic"``
+e.g json data request in [data/resume.json](data/resume.json)
 
 #### Languages
 
@@ -35,9 +30,25 @@ body data example in [data/resume.json](data/resume.json)
 - fr
 
 e.g [data/resume.json](data/resume.json)
-``  "lang": "fr"``
+
+```json
+"lang": "fr"
+```
+
+### Templates
+
+- basic
+
+<img src="assets/basic-template.png" width="400px" height="500px"/>
+
+e.g [data/resume.json](data/resume.json)
+
+```json
+  "template": "basic"
+```
 
 <hr />
+
 ### TODO
 
 - [x] Parse data to Html
