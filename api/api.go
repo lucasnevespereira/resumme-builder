@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"net/http"
-	"resume-builder/api/router"
-	"resume-builder/utils"
+	"resumme-builder/api/router"
+	"resumme-builder/utils"
 )
 
 type Api struct {

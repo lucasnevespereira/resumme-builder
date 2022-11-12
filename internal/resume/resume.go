@@ -4,8 +4,8 @@ import (
 	"github.com/pkg/errors"
 	"html/template"
 	"os"
-	"resume-builder/shared/models"
-	"resume-builder/utils"
+	"resumme-builder/shared/models"
+	"resumme-builder/utils"
 )
 
 func ParseToHtml(resume models.Resume) (string, error) {

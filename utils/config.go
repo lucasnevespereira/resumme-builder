@@ -7,7 +7,7 @@ type Config struct {
 
 func LoadConfig() Config {
 	conf := Config{}
-	conf.AppName = "Resume Builder"
+	conf.AppName = "Resumme Builder"
 	conf.Port = 9000
 	return conf
 }

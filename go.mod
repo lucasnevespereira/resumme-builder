@@ -1,4 +1,4 @@
-module resume-builder
+module resumme-builder
 
 go 1.19
 

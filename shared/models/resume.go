@@ -1,9 +1,9 @@
 package models
 
 import (
-	"resume-builder/utils/lang"
-	"resume-builder/utils/lang/en"
-	"resume-builder/utils/lang/fr"
+	"resumme-builder/utils/lang"
+	"resumme-builder/utils/lang/en"
+	"resumme-builder/utils/lang/fr"
 	"strings"
 )
 

@@ -3,10 +3,10 @@ package main
 import (
 	"encoding/json"
 	"os"
-	"resume-builder/internal/pdf"
-	"resume-builder/internal/resume"
-	"resume-builder/shared/models"
-	"resume-builder/utils"
+	"resumme-builder/internal/pdf"
+	"resumme-builder/internal/resume"
+	"resumme-builder/shared/models"
+	"resumme-builder/utils"
 )
 
 func main() {

@@ -1,4 +1,4 @@
-# resume-builder
+# Resumme Builder
 
 Build your resume with HTML/CSS and JSON Data
 

@@ -1,8 +1,8 @@
 package main
 
 import (
-	"resume-builder/api"
-	"resume-builder/utils"
+	"resumme-builder/api"
+	"resumme-builder/utils"
 )
 
 func main() {
