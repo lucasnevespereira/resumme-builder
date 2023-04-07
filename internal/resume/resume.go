@@ -4,8 +4,10 @@ import (
 	"github.com/pkg/errors"
 	"html/template"
 	"os"
-	"resumme-builder/shared/models"
-	"resumme-builder/utils"
+	"path"
+	"path/filepath"
+	"resumme-builder/internal/models"
+	"resumme-builder/internal/utils"
 )
 
 func ParseToHtml(resume models.Resume) (string, error) {
@@ -20,13 +22,26 @@ func ParseToHtml(resume models.Resume) (string, error) {
 	resume.Data.Labels.Experiences = resume.GetExperiencesLabel()
 	resume.Data.Labels.Projects = resume.GetProjectsLabel()
 	resume.Data.Labels.Skills = resume.GetSkillsLabel()
+	resume.Data.Labels.SoftSkills = resume.GetSoftSkillsLabel()
 	resume.Data.Labels.Languages = resume.GetLanguagesLabel()
-	resume.Data.Labels.Present = resume.GetPresentLabel()
+	resume.Data.Labels.Hobbies = resume.GetHobbiesLabel()
+	resume.Data.Labels.Since = resume.GetSinceLabel()
 
 	if resume.Template == "" {
-		resume.Template = utils.BasicTemplate
+		resume.Template = utils.ClassicTemplate
 	}
-	t, err := template.ParseGlob("ui/" + resume.Template + "/*")
+
+	templateFiles, err := filepath.Glob("ui/" + resume.Template + "/*")
+	if err != nil {
+		return "", errors.Wrap(err, "ParseToHtml - filepath.Glob")
+	}
+	templateFuncs := template.FuncMap{
+		"isLast": func(index, length int) bool {
+			return index == length-1
+		},
+	}
+	t := template.New(path.Base(templateFiles[0])).Funcs(templateFuncs)
+	t, err = t.ParseFiles(templateFiles...)
 	if err != nil {
 		return "", errors.Wrap(err, "ParseToHtml - ParseGlob")
 	}

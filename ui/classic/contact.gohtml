@@ -1,0 +1,38 @@
+<div class="contact">
+    <ul>
+        {{if .Email}}
+            <li>
+                <a
+                        href="mailto:{{.Email}}"
+                        target="_blank"
+                >{{.Email}}</a
+                >
+            </li>
+        {{end}}
+        {{if .Phone}}
+            <li>
+                <a href="tel:{{.Phone}}">{{.Phone}}</a>
+            </li>
+        {{end}}
+        <li>
+            <a>{{.Location}}</a>
+        </li>
+        {{if .Socials.Website}}
+            <li>
+                <a href="https://www.{{.Socials.Website}}"
+                   target="_blank">{{.Socials.Website}}</a>
+            </li>
+        {{end}}
+        {{if .Socials.Linkedin}}
+            <li>
+                <a href="https://www.linkedin.com/in/{{.Socials.Linkedin}}"
+                   target="_blank">LinkedIn</a>
+            </li>
+        {{end}}
+        {{if .Socials.Github}}
+            <li>
+                <a href="https://www.github.com/{{.Socials.Github}}" target="_blank">GitHub</a>
+            </li>
+        {{end}}
+    </ul>
+</div>

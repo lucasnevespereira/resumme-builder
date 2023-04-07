@@ -1,0 +1,24 @@
+<html lang="en">
+{{ template "head.gohtml" .Data }}
+<body>
+<main>
+    <div class="header">
+        {{ template "about.gohtml" .Data }}
+        {{ template "contact.gohtml" .Data}}
+    </div>
+    <div class="container">
+        <div class="container-left">
+            {{ template "experiences.gohtml" .Data }}
+        </div>
+        <div class="container-right">
+            {{ template "education.gohtml" .Data }}
+            {{ template "certifications.gohtml" .Data }}
+            {{ template "projects.gohtml" .Data }}
+            {{ template "skills.gohtml" .Data }}
+            {{ template "languages.gohtml" .Data }}
+            {{ template "interests.gohtml" .Data }}
+        </div>
+    </div>
+</main>
+</body>
+</html>

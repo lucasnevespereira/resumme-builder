@@ -4,7 +4,10 @@ Build your resume with HTML/CSS and JSON Data
 
 ## Local Usage
 
-Enter your data into the `data/resume.json` file.
+
+Create a `data/resume.json` file and enter your data.
+
+<i>You can see an example in [data/examples/example.resume.json](data/examples/example.resume.json)</i>
 
 Run `make output`
 
@@ -22,14 +25,14 @@ request to generate pdf
 [POST] http://localhost:9000/pdf
 ```
 
-e.g json data request in [data/resume.json](data/resume.json)
+e.g example json data request in [data/examples/example.resume.json](data/examples/example.resume.json)
 
 #### Languages
 
 - en
 - fr
 
-e.g [data/resume.json](data/resume.json)
+e.g [data/examples/example.resume.json](data/examples/example.resume.json)
 
 ```json
 "lang": "fr"
@@ -37,17 +40,25 @@ e.g [data/resume.json](data/resume.json)
 
 ### Templates
 
-- basic
+- classic
 
-<img src="assets/basic-template.png" width="400px" height="500px"/>
-
-e.g [data/resume.json](data/resume.json)
+e.g [data/examples/example.resume.json](data/examples/example.resume.json)
 
 ```json
-  "template": "basic"
+  "template": "classic"
 ```
 
 <hr />
+
+### Picture
+
+Concerning the picture, if you want one in your resume you will need to pass in a link to the photo json field
+
+```json
+ "photo": "https://i.imgur.com/tHA5l7T.jpg"
+```
+
+For that you can upload your picture to a service like [imgur](https://imgur.com/) and copy the direct link.
 
 ### TODO
 

@@ -11,6 +11,7 @@ func Init() *gin.Engine {
 	router.GET("/status", handlers.Status())
 	router.POST("/pdf", handlers.GetPdf())
 
+
 	return router
 }
 

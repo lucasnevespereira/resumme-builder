@@ -2,7 +2,7 @@ package main
 
 import (
 	"resumme-builder/api"
-	"resumme-builder/utils"
+	"resumme-builder/internal/utils"
 )
 
 func main() {
@@ -11,5 +11,3 @@ func main() {
 		utils.Logger.Fatal(err)
 	}
 }
-
-
