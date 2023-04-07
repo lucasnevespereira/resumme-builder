@@ -4,7 +4,9 @@ const (
 	EducationLabel   = "Education"
 	ExperiencesLabel = "Experiences"
 	SkillsLabel      = "Skills"
+	SoftSkillsLabel  = "Soft Skills"
 	ProjectsLabel    = "Projects"
 	LanguagesLabel   = "Languages"
-	PresentLabel     = "Present"
+	HobbiesLabel     = "Hobbies"
+	SinceLabel       = "Since"
 )

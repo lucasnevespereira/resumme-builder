@@ -1,0 +1,25 @@
+<div class="about">
+    <div class="name">
+        <div>{{ .LastName }}</div>
+        <div>{{ .FirstName }}</div>
+    </div>
+
+    <div class="job-position">
+        {{ .JobPosition }}
+    </div>
+
+    {{if .Profile}}
+    <div class="profile-desc">
+        {{ .Profile }}
+    </div>
+    {{end}}
+</div>
+
+{{if .Photo}}
+    <div class="photo">
+        <img
+                class="round-img"
+                src="{{.Photo}}"
+        />
+    </div>
+{{end}}

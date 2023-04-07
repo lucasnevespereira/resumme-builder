@@ -1,0 +1,105 @@
+{
+  "data": {
+    "firstName": "John",
+    "lastName": "Doe Rust",
+    "jobPosition": "DevOps Engineer",
+    "photo": "https://i.imgur.com/tHA5l7T.jpg",
+    "phone": "07123400808",
+    "location": "Paris, France",
+    "email": "johndoerust@mail.com",
+    "profile": "Experienced DevOps Engineer with over 5 years of experience managing complex cloud infrastructures and implementing automation solutions. Proficient in various cloud platforms such as AWS, Azure, and Google Cloud. Skilled in containerization technologies like Docker and Kubernetes, as well as configuration management tools like Ansible and Chef.",
+    "socials": {
+      "website": "example.com",
+      "linkedin": "johndoerust",
+      "github": "johndoerust"
+    },
+    "skills": [
+      "Go/Java/TypeScript",
+      "Bash/Python",
+      "Prometheus/Grafana",
+      "Jenkins/Travis CI",
+      "Docker/Kubernetes",
+      "AWS/Google Cloud"
+    ],
+    "softSkills": [
+      "Teamwork",
+      "Adaptability",
+      "Attention to detail",
+      "Facilitator"
+    ],
+    "experiences": [
+      {
+        "position": "DevOps Engineer",
+        "company": "French Med Company",
+        "started": "October 2020",
+        "location": "Paris, France",
+        "description": "Led the implementation of cloud infrastructure on AWS and Azure platforms, resulting in a 50% reduction in infrastructure costs.Designed and implemented a highly available Kubernetes cluster for container orchestration, improving application resiliency and reducing downtime.Built a custom CI/CD pipeline using GitLab CI/CD and Jenkins, resulting in faster and more reliable application deployments."
+      },
+      {
+        "position": "DevOps Engineer",
+        "company": "Bold Corporation",
+        "started": "September 2017",
+        "stopped": "September 2020",
+        "location": "Paris, France",
+        "description": "Manage and maintain complex cloud infrastructure consisting of AWS and Azure services.Implemented Kubernetes for container orchestration, resulting in a 30% reduction in deployment time.Set up and maintained monitoring and alerting systems using Prometheus and Grafana."
+      },
+      {
+        "position": "DevOps Engineer",
+        "company": "Defi Solutions",
+        "started": "May 2015",
+        "stopped": "August 2017",
+        "location": "Lisbon, Portugal",
+        "description": "Built and managed cloud infrastructure on AWS and Google Cloud platforms.Implemented Docker containerization and automated deployment using Jenkins.Configured and maintained Ansible playbooks for infrastructure automation and configuration management.Conducted regular security audits and implemented measures to improve security posture."
+      },
+      {
+        "position": "Software Engineer",
+        "company": "Bee Inc.",
+        "started": "April 2015",
+        "stopped": "January 2015",
+        "location": "Aveiro, Portugal",
+        "description": "Work with development teams to design and develop software applications using Java, Spring, and Hibernate.Automate build, test, and deployment processes using tools such as Jenkins, Ansible, and Docker to improve software delivery speed and quality.Design and maintain cloud-based infrastructure using AWS services such as EC2, S3, and RDS."
+      }
+    ],
+    "projects": [
+      {
+        "name": "CloudFormation Templates",
+        "link": "https://example.com",
+        "description": "Developed a set of reusable CloudFormation templates to automate the deployment of cloud infrastructure resources on AWS."
+      }
+    ],
+    "certifications": [{"name": "Docker Certified Associate (DCA)"}, {"name":  "Certified Kubernetes Administrator (CKA)"}],
+    "education": [
+      {
+        "school": "Alta Nova University",
+        "degree": "Master of Science in Computer Engineering",
+        "location": "Lisbon, Portugal",
+        "started": "2015",
+        "stopped": "2013"
+      },
+      {
+        "school": "Pedro Alto University",
+        "degree": "Bachelor of Science in Computer Science",
+        "location": "Lisbon, Portugal",
+        "started": "2010",
+        "stopped": "2013"
+      }
+    ],
+    "languages": [
+      {
+        "label": "English",
+        "level": "Fluent"
+      },
+      {
+        "label": "French",
+        "level": "Fluent"
+      },
+      {
+        "label": "Portuguese",
+        "level": "Native speaker"
+      }
+    ],
+    "hobbies": ["Cooking", "Hiking", "Reading", "Motor Sports"]
+  },
+  "template": "classic",
+  "lang": "en"
+}

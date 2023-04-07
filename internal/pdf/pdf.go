@@ -6,7 +6,7 @@ import (
 	"github.com/chromedp/cdproto/page"
 	"github.com/chromedp/chromedp"
 	"github.com/pkg/errors"
-	"resumme-builder/utils"
+	"resumme-builder/internal/utils"
 	"time"
 )
 

@@ -1,4 +1,6 @@
 .vscode
 .idea
-
+/data/resume.json
+.DS_Store
+ui/.DS_Store
 output/

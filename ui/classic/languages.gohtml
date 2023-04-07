@@ -1,0 +1,13 @@
+{{if .Languages}}
+    <div class="languages">
+        <div class="subtitle">{{.Labels.Languages}}</div>
+        {{range .Languages}}
+            <div class="item">
+                <span class="label">{{.Label}}</span>
+                {{if .Level}}
+                    <small class="value">({{.Level}})</small>
+                {{end}}
+            </div>
+        {{end}}
+    </div>
+{{end}}
