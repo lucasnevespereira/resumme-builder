@@ -1,0 +1,23 @@
+<div class="contact">
+    <div class="subtitle">Contact</div>
+    <div class="element">
+        {{if .Email}}
+            <div class="value"><a class="link" href="mailto:{{.Email}}">{{.Email}}</a></div>
+        {{end}}
+        {{if .Phone}}
+            <div class="value"><a class="link" href="tel:{{.Phone}}">{{.Phone}}</a></div>
+        {{end}}
+        {{if .Socials.Website}}
+            <div class="value"><a class="link" href="https://{{.Socials.Website}}">{{.Socials.Website}}</a></div>
+        {{end}}
+        {{if .Socials.Linkedin}}
+            <div class="value"><a class="link" href="https://linkedin.com/in/{{.Socials.Linkedin}}">in/{{.Socials.Linkedin}}</a></div>
+        {{end}}
+        {{if .Socials.Github}}
+            <div class="value"><a class="link" href="https://github.com/{{.Socials.Github}}">github.com/{{.Socials.Github}}</a></div>
+        {{end}}
+        {{if .Location}}
+            <div class="value"><a>{{.Location}}</a></div>
+        {{end}}
+    </div>
+</div>

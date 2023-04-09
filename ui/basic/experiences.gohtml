@@ -1,0 +1,25 @@
+<div class="experiences">
+    <div class="subtitle">
+        {{.Labels.Experiences}}
+    </div>
+    {{$since := .Labels.Since}}
+    {{range .Experiences}}
+        <div class="element">
+            <div class="position">{{.Position}} <span>| {{.Company}}</span></div>
+
+            <div class="dates">
+                <span>{{.Location}}</span>
+                |
+                {{if .Stopped}}
+                    {{.Started}} - {{.Stopped}}
+                {{else}}
+                    {{$since}} {{.Started}}
+                {{end}}
+            </div>
+
+            <div class="description">
+                {{.Description}}
+            </div>
+        </div>
+    {{end}}
+</div>

@@ -7,7 +7,7 @@ import (
 	"resumme-builder/internal/models"
 	"resumme-builder/internal/pdf"
 	"resumme-builder/internal/resume"
-	utils2 "resumme-builder/internal/utils"
+	"resumme-builder/internal/utils"
 )
 
 func Status() gin.HandlerFunc {
@@ -30,21 +30,21 @@ func GetPdf() gin.HandlerFunc {
 
 		htmlFileName, err := resume.ParseToHtml(resumeData)
 		if err != nil {
-			utils2.Logger.Fatal(err)
+			utils.Logger.Fatal(err)
 		}
 
-		htmlFileUrl := utils2.GetFilePathAsUrl(htmlFileName)
+		htmlFileUrl := utils.GetFilePathAsUrl(htmlFileName)
 
 		pdfData, err := pdf.Generate(htmlFileUrl)
 		if err != nil {
-			utils2.Logger.Fatal(err)
+			utils.Logger.Fatal(err)
 		}
 
-		if err := os.WriteFile(utils2.OutputPdfFile, pdfData, 0644); err != nil {
-			utils2.Logger.Fatal(err)
+		if err := os.WriteFile(utils.OutputPdfFile, pdfData, 0644); err != nil {
+			utils.Logger.Fatal(err)
 		}
 
 		c.Writer.Header().Set("Content-type", "application/pdf")
-		c.File(utils2.OutputPdfFile)
+		c.File(utils.OutputPdfFile)
 	}
 }
