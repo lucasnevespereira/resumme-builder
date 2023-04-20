@@ -4,7 +4,6 @@ Build your resume with HTML/CSS and JSON Data
 
 ## Local Usage
 
-
 Create a `data/resume.json` file and enter your data.
 
 <i>You can see an example in [data/examples/example.resume.json](data/examples/example.resume.json)</i>
@@ -40,7 +39,8 @@ e.g [data/examples/example.resume.json](data/examples/example.resume.json)
 
 ### Templates
 
-- classic
+- classic ([example here](data/examples/example.classic.pdf))
+- basic ([example here](data/examples/example.basic.pdf))
 
 e.g [data/examples/example.resume.json](data/examples/example.resume.json)
 
@@ -67,3 +67,4 @@ For that you can upload your picture to a service like [imgur](https://imgur.com
 - [x] Build an API
 - [x] Handle Multiple Languages
 - [ ] Build more templates
+- [ ] Handle Auto Translation

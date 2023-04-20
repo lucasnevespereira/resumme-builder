@@ -1,0 +1,13 @@
+<div class="educations">
+    <div class="subtitle">{{.Labels.Education}}</div>
+    {{ range .Education }}
+    <div class="element">
+        <div class="degree">
+            {{.Degree}} | {{.School}}
+        </div>
+        <small class="location-date">
+            {{.Location}}, {{.Stopped}}
+        </small>
+    </div>
+    {{end}}
+</div>

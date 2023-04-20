@@ -32,7 +32,7 @@ func saveUrlAsPdf(url string, pdf *[]byte) chromedp.Tasks {
 		chromedp.Navigate(url),
 		chromedp.WaitVisible(`body`, chromedp.ByQuery),
 		chromedp.ActionFunc(func(ctx context.Context) error {
-			data, _, err := page.PrintToPDF().Do(ctx)
+			data, _, err := page.PrintToPDF().WithPrintBackground(true).Do(ctx)
 			if err != nil {
 				return errors.Wrap(err, "page.PrintToPDF")
 			}
