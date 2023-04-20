@@ -6,31 +6,48 @@ import (
 	"github.com/chromedp/cdproto/page"
 	"github.com/chromedp/chromedp"
 	"github.com/pkg/errors"
+	"os"
 	"resumme-builder/internal/utils"
+	"resumme-builder/internal/utils/logger"
 	"time"
 )
 
-func Generate(url string) ([]byte, error) {
-	var pdfData []byte
+const (
+	userAgentOverride = "WebScraper 1.0"
+	htmlSelector      = "body"
+)
+
+func Write(destination string, data []byte) error {
+	if err := os.WriteFile(destination, data, os.ModePerm); err != nil {
+		return errors.Wrap(err, "pdf.Write")
+	}
+
+	return nil
+}
+
+func GenerateFromHtml(file string) ([]byte, error) {
+	startedAt := time.Now()
 
 	chromeCtx, cancelCtx := chromedp.NewContext(context.Background())
 	defer cancelCtx()
 
-	startedAt := time.Now()
+	var pdfData []byte
+	url := utils.GetFilePathAsUrl(file)
+
 	if err := chromedp.Run(chromeCtx, saveUrlAsPdf(url, &pdfData)); err != nil {
-		return nil, errors.Wrap(err, "GeneratePDF - chromedp.Run")
+		return nil, errors.Wrap(err, "chromedp.Run")
 	}
 
-	utils.Logger.Infof("Pdf generated in %f seconds\n", time.Since(startedAt).Seconds())
+	logger.Log.Infof("Pdf generated in %f seconds\n", time.Since(startedAt).Seconds())
 
 	return pdfData, nil
 }
 
 func saveUrlAsPdf(url string, pdf *[]byte) chromedp.Tasks {
 	return chromedp.Tasks{
-		emulation.SetUserAgentOverride("WebScraper 1.0"),
+		emulation.SetUserAgentOverride(userAgentOverride),
 		chromedp.Navigate(url),
-		chromedp.WaitVisible(`body`, chromedp.ByQuery),
+		chromedp.WaitVisible(htmlSelector, chromedp.ByQuery),
 		chromedp.ActionFunc(func(ctx context.Context) error {
 			data, _, err := page.PrintToPDF().WithPrintBackground(true).Do(ctx)
 			if err != nil {

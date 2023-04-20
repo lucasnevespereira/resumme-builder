@@ -5,11 +5,12 @@ import (
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"resumme-builder/api/router"
-	utils2 "resumme-builder/internal/utils"
+	"resumme-builder/internal/utils/config"
+	"resumme-builder/internal/utils/logger"
 )
 
 type Api struct {
-	config utils2.Config
+	config config.ApiConfig
 	router *gin.Engine
 }
 
@@ -20,12 +21,12 @@ func New() *Api {
 }
 
 func (api *Api) setup() {
-	api.config = utils2.LoadConfig()
+	api.config = config.LoadApiConfig()
 	api.router = router.Init()
 }
 
 func (api *Api) Run() error {
-	utils2.Logger.Info(fmt.Sprintf("%s API running on Port %d", api.config.AppName, api.config.Port))
+	logger.Log.Info(fmt.Sprintf("%s API running on Port %d", api.config.AppName, api.config.Port))
 	err := http.ListenAndServe(fmt.Sprintf(":%d", api.config.Port), api.router)
 	if err != nil {
 		return err

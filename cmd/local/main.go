@@ -1,40 +1,32 @@
 package main
 
 import (
-	"encoding/json"
-	"os"
 	"resumme-builder/internal/models"
-	"resumme-builder/internal/pdf"
-	"resumme-builder/internal/resume"
-	"resumme-builder/internal/utils"
+	"resumme-builder/internal/pkg/pdf"
+	"resumme-builder/internal/pkg/resume"
+	"resumme-builder/internal/utils/logger"
 )
 
 func main() {
-	utils.Logger.Info("Generating output")
-	fileData, err := os.ReadFile(utils.ResumeDataFile)
-	if err != nil {
-		utils.Logger.Error(err)
-	}
+	logger.Log.Info("Generating output")
 
-	var resumeData models.Resume
-	err = json.Unmarshal(fileData, &resumeData)
+	resumeData, err := resume.ReadLocalData()
 	if err != nil {
-		utils.Logger.Error(err)
+		logger.Log.Error(err)
+		return
 	}
 
 	htmlFile, err := resume.ParseToHtml(resumeData)
 	if err != nil {
-		utils.Logger.Fatal(err)
+		logger.Log.Fatal(err)
 	}
 
-	htmlFileUrl := utils.GetFilePathAsUrl(htmlFile)
-
-	pdfData, err := pdf.Generate(htmlFileUrl)
+	pdfData, err := pdf.GenerateFromHtml(htmlFile)
 	if err != nil {
-		utils.Logger.Fatal(err)
+		logger.Log.Fatal(err)
 	}
 
-	if err := os.WriteFile(utils.OutputPdfFile, pdfData, 0644); err != nil {
-		utils.Logger.Fatal(err)
+	if err := pdf.Write(models.OutputPdfFile, pdfData); err != nil {
+		logger.Log.Fatal(err)
 	}
 }

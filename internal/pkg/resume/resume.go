@@ -1,6 +1,7 @@
 package resume
 
 import (
+	"encoding/json"
 	"github.com/pkg/errors"
 	"html/template"
 	"os"
@@ -8,12 +9,28 @@ import (
 	"path/filepath"
 	"resumme-builder/internal/models"
 	"resumme-builder/internal/utils"
+	"resumme-builder/internal/utils/logger"
 )
 
-func ParseToHtml(resume models.Resume) (string, error) {
-	utils.EnsureOutputDir(utils.OutputDir)
+func ReadLocalData() (models.Resume, error) {
+	fileData, err := os.ReadFile(models.ResumeDataFile)
+	if err != nil {
+		return models.Resume{}, err
+	}
 
-	htmlOut, err := os.Create(utils.OutputHtmlFile)
+	var resumeData models.Resume
+	err = json.Unmarshal(fileData, &resumeData)
+	if err != nil {
+		return models.Resume{}, err
+	}
+
+	return resumeData, nil
+}
+
+func ParseToHtml(resume models.Resume) (string, error) {
+	utils.EnsureOutputDir(models.OutputDir)
+
+	htmlOut, err := os.Create(models.OutputHtmlFile)
 	if err != nil {
 		return "", errors.Wrap(err, "ParseToHtml - Create")
 	}
@@ -28,22 +45,12 @@ func ParseToHtml(resume models.Resume) (string, error) {
 	resume.Data.Labels.Since = resume.GetSinceLabel()
 
 	if resume.Template == "" {
-		resume.Template = utils.ClassicTemplate
+		resume.Template = models.ClassicTemplate
 	}
 
-	templateFiles, err := filepath.Glob("ui/" + resume.Template + "/*")
+	t, err := getTemplate(resume.Template)
 	if err != nil {
-		return "", errors.Wrap(err, "ParseToHtml - filepath.Glob")
-	}
-	templateFuncs := template.FuncMap{
-		"isLast": func(index, length int) bool {
-			return index == length-1
-		},
-	}
-	t := template.New(path.Base(templateFiles[0])).Funcs(templateFuncs)
-	t, err = t.ParseFiles(templateFiles...)
-	if err != nil {
-		return "", errors.Wrap(err, "ParseToHtml - ParseGlob")
+		return "", err
 	}
 
 	err = t.Execute(htmlOut, resume)
@@ -51,7 +58,28 @@ func ParseToHtml(resume models.Resume) (string, error) {
 		return "", errors.Wrap(err, "ParseToHtml - Execute")
 	}
 
-	utils.Logger.Infof("Html parsed in %s", htmlOut.Name())
+	logger.Log.Infof("Html parsed in %s", htmlOut.Name())
 
 	return htmlOut.Name(), nil
+}
+
+func getTemplate(name string) (*template.Template, error) {
+	templateFiles, err := filepath.Glob("ui/" + name + "/*")
+	if err != nil {
+		return nil, errors.Wrap(err, "getTemplate filepath.Glob")
+	}
+
+	templateFuncs := template.FuncMap{
+		"isLast": func(index, length int) bool {
+			return index == length-1
+		},
+	}
+
+	t := template.New(path.Base(templateFiles[0])).Funcs(templateFuncs)
+	t, err = t.ParseFiles(templateFiles...)
+	if err != nil {
+		return nil, errors.Wrap(err, "getTemplate template.New")
+	}
+
+	return t, nil
 }

@@ -3,11 +3,10 @@ package handlers
 import (
 	"github.com/gin-gonic/gin"
 	"net/http"
-	"os"
 	"resumme-builder/internal/models"
-	"resumme-builder/internal/pdf"
-	"resumme-builder/internal/resume"
-	"resumme-builder/internal/utils"
+	"resumme-builder/internal/pkg/pdf"
+	"resumme-builder/internal/pkg/resume"
+	"resumme-builder/internal/utils/logger"
 )
 
 func Status() gin.HandlerFunc {
@@ -28,23 +27,21 @@ func GetPdf() gin.HandlerFunc {
 			return
 		}
 
-		htmlFileName, err := resume.ParseToHtml(resumeData)
+		htmlFile, err := resume.ParseToHtml(resumeData)
 		if err != nil {
-			utils.Logger.Fatal(err)
+			logger.Log.Fatal(err)
 		}
 
-		htmlFileUrl := utils.GetFilePathAsUrl(htmlFileName)
-
-		pdfData, err := pdf.Generate(htmlFileUrl)
+		pdfData, err := pdf.GenerateFromHtml(htmlFile)
 		if err != nil {
-			utils.Logger.Fatal(err)
+			logger.Log.Fatal(err)
 		}
 
-		if err := os.WriteFile(utils.OutputPdfFile, pdfData, 0644); err != nil {
-			utils.Logger.Fatal(err)
+		if err := pdf.Write(models.OutputPdfFile, pdfData); err != nil {
+			logger.Log.Fatal(err)
 		}
 
 		c.Writer.Header().Set("Content-type", "application/pdf")
-		c.File(utils.OutputPdfFile)
+		c.File(models.OutputPdfFile)
 	}
 }

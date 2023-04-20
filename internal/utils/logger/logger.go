@@ -1,4 +1,4 @@
-package utils
+package logger
 
 import (
 	log "github.com/sirupsen/logrus"
@@ -6,10 +6,10 @@ import (
 	"os"
 )
 
-var Logger = &log.Logger{
-	Out: os.Stdout,
+var Log = &log.Logger{
+	Out:   os.Stdout,
 	Level: log.DebugLevel,
-	Formatter:  &easy.Formatter{
+	Formatter: &easy.Formatter{
 		TimestampFormat: "02-01-2006 15:04:05",
 		LogFormat:       "[%lvl%] %time% - %msg% \n",
 	},
