@@ -8,7 +8,6 @@ import (
 	"path"
 	"path/filepath"
 	"resumme-builder/internal/models"
-	"resumme-builder/internal/utils"
 	"resumme-builder/internal/utils/logger"
 )
 
@@ -28,7 +27,7 @@ func ReadLocalData() (models.Resume, error) {
 }
 
 func ParseToHtml(resume models.Resume) (string, error) {
-	utils.EnsureOutputDir(models.OutputDir)
+	ensureOutputDir(models.OutputDir)
 
 	htmlOut, err := os.Create(models.OutputHtmlFile)
 	if err != nil {
@@ -42,6 +41,7 @@ func ParseToHtml(resume models.Resume) (string, error) {
 	resume.Data.Labels.SoftSkills = resume.GetSoftSkillsLabel()
 	resume.Data.Labels.Languages = resume.GetLanguagesLabel()
 	resume.Data.Labels.Hobbies = resume.GetHobbiesLabel()
+	resume.Data.Labels.Profile = resume.GetProfileLabel()
 	resume.Data.Labels.Since = resume.GetSinceLabel()
 
 	if resume.Template == "" {
@@ -82,4 +82,13 @@ func getTemplate(name string) (*template.Template, error) {
 	}
 
 	return t, nil
+}
+
+func ensureOutputDir(dir string) {
+	if _, err := os.Stat(dir); os.IsNotExist(err) {
+		err := os.Mkdir(dir, 0755)
+		if err != nil {
+			logger.Log.Errorf("EnsureOutputDir: %v", err)
+		}
+	}
 }
