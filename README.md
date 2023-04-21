@@ -69,3 +69,13 @@ For that you can upload your picture to a service like [imgur](https://imgur.com
 - [x] Handle Multiple Languages
 - [ ] Build more templates
 - [ ] Handle Auto Translation
+
+
+## How to Contribute
+
+If you want to contribute you can read [Contributing](CONTRIBUTING.md)
+
+
+## License
+
+This project is under [MIT License](LICENSE)
