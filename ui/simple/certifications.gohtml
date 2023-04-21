@@ -1,0 +1,17 @@
+{{if .Certifications}}
+    <div class="certifications">
+        <div class="subtitle">Certifications</div>
+        <div class="wrapper">
+            <div class="element">
+                    {{range $index, $cert := .Certifications }}
+                    <a class="name">
+                        {{$cert.Name}}
+                        {{if $cert.Score}}<span class="score">({{$cert.Score}})</span>{{end}}
+                        {{if not (isLast $index (len $.Certifications))}},{{end}}
+                    </a>
+                {{end}}
+            </div>
+
+        </div>
+    </div>
+{{end}}

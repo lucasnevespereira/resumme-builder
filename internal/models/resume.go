@@ -42,6 +42,7 @@ type ResumeLabels struct {
 	SoftSkills  string `json:"softSkillsLabel"`
 	Languages   string `json:"languagesLabel"`
 	Hobbies     string `json:"hobbiesLabel"`
+	Profile     string `json:"profileLabel"`
 	Since       string `json:"sinceLabel"`
 }
 
@@ -159,6 +160,17 @@ func (r *Resume) GetHobbiesLabel() string {
 		return fr.HobbiesLabel
 	default:
 		return en.HobbiesLabel
+	}
+}
+
+func (r *Resume) GetProfileLabel() string {
+	switch strings.ToLower(r.Lang) {
+	case lang.EN:
+		return en.ProfileLabel
+	case lang.FR:
+		return fr.ProfileLabel
+	default:
+		return en.ProfileLabel
 	}
 }
 

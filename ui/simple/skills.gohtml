@@ -1,0 +1,24 @@
+<div class="skills">
+    {{if .Skills}}
+        <div class="tech">
+            <div class="subtitle">{{.Labels.Skills}}</div>
+            <div class="element">
+                    {{range $index, $skill := .Skills }}
+                        <a>
+                            {{$skill}}{{if not (isLast $index (len $.Skills))}},{{end}}
+                        </a>
+                    {{end}}
+            </div>
+        </div>
+    {{end}}
+    {{if .SoftSkills}}
+        <div class="soft">
+            <div class="subtitle">{{.Labels.SoftSkills}}</div>
+            <div class="element">
+                {{range $index, $softSkill := .SoftSkills }}
+                    <a>{{$softSkill}}{{if not (isLast $index (len $.SoftSkills))}},{{end}}</a>
+                {{end}}
+            </div>
+        </div>
+    {{end}}
+</div>

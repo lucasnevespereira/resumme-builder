@@ -1,0 +1,40 @@
+<div class="about">
+    <div class="name">
+        <span class="last-name">{{.LastName}}</span> <span class="first-name">{{.FirstName}}</span>
+    </div>
+
+    <div class="job-position">
+        {{.JobPosition}}
+    </div>
+
+    <div class="contact">
+        {{if .Phone}}
+            <div class="phone">
+                <a href="tel:{{.Phone}}">{{.Phone}}</a>
+            </div>
+        {{end}}
+        {{if .Email}}
+            <div class="email">
+                <a href="mailto:{{.Email}}">{{.Email}}</a>
+            </div>
+        {{end}}
+        {{if .Socials}}
+            <div class="socials">
+                {{if .Socials.Website}}
+                    <a href="https://{{.Socials.Website}}}">{{.Socials.Website}}</a>
+                {{end}}
+                {{if .Socials.Linkedin}}
+                    <a href="https://linkedin.com/in/{{.Socials.Linkedin}}}">in/{{.Socials.Linkedin}}</a>
+                {{end}}
+                {{if .Socials.Github}}
+                    <a href="https://github.com/{{.Socials.Github}}}">github.com/{{.Socials.Github}}</a>
+                {{end}}
+            </div>
+        {{end}}
+        {{if .Location}}
+            <div class="location">
+                <a>{{.Location}}</a>
+            </div>
+        {{end}}
+    </div>
+</div>

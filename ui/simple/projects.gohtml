@@ -1,0 +1,15 @@
+{{if .Projects}}
+    <div class="projects">
+        <div class="subtitle">{{.Labels.Projects}}</div>
+        <div class="wrapper">
+            <div class="element">
+                {{range $index, $project := .Projects }}
+                    <div class="name">
+                        <a href="{{$project.Link}}">{{$project.Name}}</a>
+                        {{if not (isLast $index (len $.Projects))}},{{end}}
+                    </div>
+                {{end}}
+            </div>
+        </div>
+    </div>
+{{end}}

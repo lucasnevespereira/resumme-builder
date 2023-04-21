@@ -7,7 +7,6 @@ import (
 	"github.com/chromedp/chromedp"
 	"github.com/pkg/errors"
 	"os"
-	"resumme-builder/internal/utils"
 	"resumme-builder/internal/utils/logger"
 	"time"
 )
@@ -32,7 +31,7 @@ func GenerateFromHtml(file string) ([]byte, error) {
 	defer cancelCtx()
 
 	var pdfData []byte
-	url := utils.GetFilePathAsUrl(file)
+	url := getFilePathAsUrl(file)
 
 	if err := chromedp.Run(chromeCtx, saveUrlAsPdf(url, &pdfData)); err != nil {
 		return nil, errors.Wrap(err, "chromedp.Run")
@@ -57,4 +56,13 @@ func saveUrlAsPdf(url string, pdf *[]byte) chromedp.Tasks {
 			return nil
 		}),
 	}
+}
+
+func getFilePathAsUrl(filename string) string {
+	path, err := os.Getwd()
+	if err != nil {
+		logger.Log.Error(err)
+	}
+
+	return "file://" + path + "/" + filename
 }

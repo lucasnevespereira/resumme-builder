@@ -1,0 +1,277 @@
+<style>
+
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;900&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Catamaran&family=Roboto:wght@400;900&display=swap');
+
+    :root {
+        /*Colors*/
+        --text-color: #000000;
+        --primary-color: #EFEDEE;
+        --secondary-color: #7F7F7F;
+        --secondary-color-rgba: rgba(127, 127, 127, .6);
+
+        /*Fonts*/
+        --main-font: 'Roboto', sans-serif;
+        --secondary-font: 'Catamaran', sans-serif;
+
+        /*Sizes*/
+        --font-small-xs: 12px;
+        --font-small: 14px;
+        --font-medium: 16px;
+        --font-large: 18px;
+        --font-large-xl: 20px;
+        --normal: 400;
+        --semi-bold: 700;
+        --bold: 900;
+        --name-font-size: 33px;
+        --separator-border: 3px solid;
+
+        /*Spacing*/
+        --page-max-width: 45rem;
+        --header-height: 180px;
+        --photo-size: 120px;
+        --left-col-width: 35%;
+        --right-col-width: 65%;
+    }
+
+
+    * {
+        text-rendering: optimizeLegibility;
+        box-sizing: border-box;
+    }
+
+    body {
+        background-color: #fff;
+        color: var(--secondary-color);
+        font-family: var(--main-font)
+    }
+
+    main {
+        max-width: var(--page-max-width);
+        margin-left: auto;
+        margin-right: auto;
+        display: flex;
+        flex-direction: column;
+    }
+
+    ul {
+        font-family: var(--secondary-font);
+        font-style: normal;
+        padding-inline-start: 0 !important;
+        margin-block-start: 0 !important;
+        margin-block-end: 0 !important;
+        padding-left: 0 !important;
+        list-style: none;
+    }
+
+
+    a {
+        font-family: var(--secondary-font);
+        font-style: normal;
+        font-size: var(--font-small);
+        line-height: var(--font-medium);
+        text-decoration: none !important;
+        color: var(--text-color) !important;
+    }
+
+    a:active a:focus a:visited {
+        color: var(--text-color) !important;
+    }
+
+    a:hover {
+        cursor: pointer;
+    }
+
+    .location a:hover {
+        cursor: initial;
+    }
+
+    .top {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .round-img {
+        width: var(--photo-size);
+        height: var(--photo-size);
+        border-radius: 50%;
+        object-fit: cover;
+    }
+
+    /*ABOUT*/
+    .about {
+        text-align: left;
+    }
+
+
+    .about .name {
+        font-size: var(--name-font-size);
+        font-weight: var(--bold);
+        text-transform: uppercase;
+        margin-bottom: 5px;
+    }
+
+    .about .last-name {
+        color: var(--text-color);
+    }
+
+    .about .first-name {
+        color: var(--secondary-color);
+    }
+
+    .about .job-position {
+        font-size: var(--font-large);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .about .contact {
+        margin-top: 10px;
+    }
+
+    .subtitle {
+        margin: 10px 0;
+        text-transform: uppercase;
+        font-weight: var(--bold);
+        font-size: var(--font-medium);
+        color: var(--text-color);
+        border-bottom: 1px solid var(--secondary-color-rgba);
+    }
+
+    .element {
+        margin-bottom: 10px;
+    }
+
+    .profile p {
+        font-size: var(--font-small-xs);
+    }
+
+    .skills {
+        display: grid;
+        place-content: center;
+        grid-template-columns: 1fr 1fr;
+        grid-column-gap: 20px;
+    }
+
+    .skills .element span {
+        font-size: var(--font-small);
+        color: var(--text-color);
+    }
+
+
+    .experiences .wrapper {
+        display: grid;
+        grid-template-columns: 20% 80%;
+        grid-column-gap: 10px;
+    }
+
+    .experiences .wrapper .dates {
+        display: flex;
+        flex-direction: column;
+        font-size: var(--font-small);
+        font-weight: var(--normal);
+    }
+
+    .experiences .wrapper .dates span:first-child {
+        margin-bottom: 10px;
+    }
+
+    .experiences .wrapper .element {
+
+    }
+
+    .experiences .wrapper .element .position {
+        font-weight: var(--normal);
+        color: var(--text-color);
+        font-size: var(--font-medium);
+    }
+
+    .experiences .wrapper .element .company {
+        font-weight: var(--semi-bold);
+        font-size: var(--font-small);
+    }
+
+    .experiences .wrapper .element .description {
+        font-size: var(--font-small-xs);
+    }
+
+
+    .education .wrapper {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, 250px);
+        grid-column-gap: 20px;
+        grid-template-rows: 1fr;
+    }
+
+    .education .wrapper .element {
+        font-size: var(--font-small);
+    }
+
+    .education .wrapper .element .school {
+        font-size: var(--font-small);
+    }
+
+    .education .wrapper .element .degree {
+        font-size: var(--font-small);
+        color: var(--text-color);
+        font-weight: 500;
+    }
+
+    .education .wrapper .element .date {
+        font-size: var(--font-small);
+    }
+
+
+    .projects .wrapper {
+        display: flex;
+    }
+
+    .projects .wrapper .element {
+        font-size: var(--font-medium);
+        display: flex;
+        flex-direction: column;
+        margin-right: 20px;
+    }
+
+    .projects .wrapper .element .name {
+        font-size: var(--font-medium);
+        color: var(--text-color);
+    }
+
+    .projects .wrapper .element .description {
+        font-size: var(--font-small-xs);
+    }
+
+
+    .certifications .wrapper {
+        display: flex;
+    }
+
+    .certifications .wrapper .element .name {
+        font-size: var(--font-small);
+        color: var(--text-color);
+    }
+
+    .certifications .wrapper .element .score {
+        font-size: var(--font-small);
+    }
+
+    .double-col {
+        display: grid;
+        place-content: center;
+        grid-template-columns: 1fr 1fr;
+        grid-column-gap: 20px;
+    }
+
+    .languages .element span {
+        font-size: var(--font-small);
+        color: var(--text-color);
+    }
+
+    .hobbies .element span {
+        font-size: var(--font-small);
+        color: var(--text-color);
+    }
+
+</style>
+

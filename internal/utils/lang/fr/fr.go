@@ -8,5 +8,6 @@ const (
 	ProjectsLabel    = "Projets"
 	LanguagesLabel   = "Langues"
 	HobbiesLabel     = "Centres D'intérêt"
+	ProfileLabel     = "Profil"
 	SinceLabel       = "Depuis"
 )
