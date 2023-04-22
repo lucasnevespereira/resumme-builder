@@ -6,7 +6,7 @@ Build your resume with HTML/CSS and JSON Data
 
 Create a `data/resume.json` file and enter your data.
 
-The JSON structure follows the [JSON Resume schema](https://jsonresume.org/)
+The JSON structure follows the [JSON Resume](https://jsonresume.org/) standard.
 
 <i>You can see an example in [data/examples/example.resume.json](data/examples/example.resume.json)</i>
 
@@ -53,15 +53,15 @@ e.g [data/examples/example.resume.json](data/examples/example.resume.json)
 
 <hr />
 
-### Picture
+### Image
 
-Concerning the picture, if you want one in your resume you will need to pass in a link to the photo json field
+Concerning the image, if you want one in your resume you will need to pass in a link to the image json field
 
 ```json
- "photo": "https://i.imgur.com/tHA5l7T.jpg"
+ "image": "https://i.imgur.com/tHA5l7T.jpg"
 ```
 
-For that you can upload your picture to a service like [imgur](https://imgur.com/) and copy the direct link.
+For that you can upload your image to a service like [imgur](https://imgur.com/) and copy the direct link.
 
 ### TODO
 
