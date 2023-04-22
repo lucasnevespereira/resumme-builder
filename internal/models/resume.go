@@ -8,86 +8,115 @@ import (
 )
 
 type Resume struct {
-	Data     ResumeData `json:"data"`
-	Template string     `json:"template"`
-	Lang     string     `json:"lang"`
+	Basics       Basics        `json:"basics"`
+	Work         []Work        `json:"work"`
+	Projects     []Project     `json:"projects"`
+	Education    []Education   `json:"education"`
+	Certificates []Certificate `json:"certificates"`
+	Skills       []Skill       `json:"skills"`
+	SoftSkills   []Skill       `json:"softSkills"`
+	Languages    []Language    `json:"languages"`
+	Interests    []Interest    `json:"interests"`
+	Meta         Meta          `json:"meta"`
+	Labels       ResumeLabels
 }
 
-type ResumeData struct {
-	FirstName      string          `json:"firstName"`
-	LastName       string          `json:"LastName"`
-	JobPosition    string          `json:"jobPosition"`
-	Profile        string          `json:"profile"`
-	Photo          string          `json:"photo"`
-	Email          string          `json:"email"`
-	Phone          string          `json:"phone"`
-	Socials        Socials         `json:"socials"`
-	Location       string          `json:"location"`
-	SoftSkills     []string        `json:"softSkills"`
-	Skills         []string        `json:"skills"`
-	Experiences    []Experience    `json:"experiences"`
-	Projects       []Project       `json:"projects"`
-	Education      []Education     `json:"education"`
-	Languages      []Language      `json:"languages"`
-	Certifications []Certification `json:"certifications"`
-	Hobbies        []string        `json:"hobbies"`
-	Labels         ResumeLabels    `json:"labels"`
+type Basics struct {
+	Name     string    `json:"name"`
+	Label    string    `json:"label"`
+	Image    string    `json:"image"`
+	Email    string    `json:"email"`
+	Phone    string    `json:"phone"`
+	Summary  string    `json:"summary"`
+	Location Location  `json:"location"`
+	URL      string    `json:"url"`
+	Profiles []Profile `json:"profiles"`
 }
 
-type ResumeLabels struct {
-	Education   string `json:"educationLabel"`
-	Experiences string `json:"experiencesLabel"`
-	Projects    string `json:"projectsLabel"`
-	Skills      string `json:"skillsLabel"`
-	SoftSkills  string `json:"softSkillsLabel"`
-	Languages   string `json:"languagesLabel"`
-	Hobbies     string `json:"hobbiesLabel"`
-	Profile     string `json:"profileLabel"`
-	Since       string `json:"sinceLabel"`
+type Location struct {
+	City        string `json:"city"`
+	CountryCode string `json:"countryCode"`
+	Region      string `json:"region"`
 }
 
-type Socials struct {
-	Website  string `json:"website"`
-	Linkedin string `json:"linkedin"`
-	Github   string `json:"github"`
+type Profile struct {
+	Network  string `json:"network"`
+	Username string `json:"username"`
+	URL      string `json:"url"`
 }
 
-type Language struct {
-	Label string `json:"label"`
-	Level string `json:"level"`
-}
-
-type Certification struct {
-	Name  string `json:"name"`
-	Score int    `json:"score"`
+type Work struct {
+	Position     string   `json:"position"`
+	Company      string   `json:"company"`
+	ContractType string   `json:"contractType"`
+	StartDate    string   `json:"startDate"`
+	EndDate      any      `json:"endDate"`
+	Summary      string   `json:"summary"`
+	Location     string   `json:"location"`
+	Highlights   []string `json:"highlights"`
 }
 
 type Project struct {
-	Name        string `json:"name"`
-	Link        string `json:"link"`
-	Description string `json:"description"`
-}
-
-type Experience struct {
-	Position    string `json:"position"`
-	Company     string `json:"company"`
-	Started     string `json:"started"`
-	Stopped     string `json:"stopped"`
-	Location    string `json:"location"`
-	Description string `json:"description"`
+	Name        string   `json:"name"`
+	Description string   `json:"description"`
+	Highlights  []string `json:"highlights"`
+	URL         string   `json:"url"`
 }
 
 type Education struct {
-	School      string `json:"school"`
-	Degree      string `json:"degree"`
-	Location    string `json:"location"`
-	Started     string `json:"started"`
-	Stopped     string `json:"stopped"`
-	Description string `json:"description"`
+	Institution string   `json:"institution"`
+	Area        string   `json:"area"`
+	StudyType   string   `json:"studyType"`
+	Location    string   `json:"location"`
+	StartDate   string   `json:"startDate"`
+	EndDate     string   `json:"endDate"`
+	Score       string   `json:"score"`
+	Courses     []string `json:"courses"`
+}
+
+type Certificate struct {
+	Title  string `json:"title"`
+	Date   string `json:"date"`
+	Score  string `json:"score"`
+	Issuer string `json:"issuer"`
+	URL    string `json:"url"`
+}
+
+type Skill struct {
+	Name     string   `json:"name"`
+	Level    string   `json:"level"`
+	Keywords []string `json:"keywords"`
+}
+
+type Language struct {
+	Language string `json:"language"`
+	Fluency  string `json:"fluency"`
+}
+
+type Interest struct {
+	Name     string   `json:"name"`
+	Keywords []string `json:"keywords"`
+}
+
+type Meta struct {
+	Template string `json:"template"`
+	Lang     string `json:"lang"`
+}
+
+type ResumeLabels struct {
+	Education   string
+	Experiences string
+	Projects    string
+	Skills      string
+	SoftSkills  string
+	Languages   string
+	Interests   string
+	Profile     string
+	Since       string
 }
 
 func (r *Resume) GetEducationLabel() string {
-	switch strings.ToLower(r.Lang) {
+	switch strings.ToLower(r.Meta.Lang) {
 	case lang.EN:
 		return en.EducationLabel
 	case lang.FR:
@@ -98,7 +127,7 @@ func (r *Resume) GetEducationLabel() string {
 }
 
 func (r *Resume) GetExperiencesLabel() string {
-	switch strings.ToLower(r.Lang) {
+	switch strings.ToLower(r.Meta.Lang) {
 	case lang.EN:
 		return en.ExperiencesLabel
 	case lang.FR:
@@ -109,7 +138,7 @@ func (r *Resume) GetExperiencesLabel() string {
 }
 
 func (r *Resume) GetSkillsLabel() string {
-	switch strings.ToLower(r.Lang) {
+	switch strings.ToLower(r.Meta.Lang) {
 	case lang.EN:
 		return en.SkillsLabel
 	case lang.FR:
@@ -120,7 +149,7 @@ func (r *Resume) GetSkillsLabel() string {
 }
 
 func (r *Resume) GetSoftSkillsLabel() string {
-	switch strings.ToLower(r.Lang) {
+	switch strings.ToLower(r.Meta.Lang) {
 	case lang.EN:
 		return en.SoftSkillsLabel
 	case lang.FR:
@@ -131,7 +160,7 @@ func (r *Resume) GetSoftSkillsLabel() string {
 }
 
 func (r *Resume) GetProjectsLabel() string {
-	switch strings.ToLower(r.Lang) {
+	switch strings.ToLower(r.Meta.Lang) {
 	case lang.EN:
 		return en.ProjectsLabel
 	case lang.FR:
@@ -142,7 +171,7 @@ func (r *Resume) GetProjectsLabel() string {
 }
 
 func (r *Resume) GetLanguagesLabel() string {
-	switch strings.ToLower(r.Lang) {
+	switch strings.ToLower(r.Meta.Lang) {
 	case lang.EN:
 		return en.LanguagesLabel
 	case lang.FR:
@@ -152,19 +181,19 @@ func (r *Resume) GetLanguagesLabel() string {
 	}
 }
 
-func (r *Resume) GetHobbiesLabel() string {
-	switch strings.ToLower(r.Lang) {
+func (r *Resume) GetInterestsLabel() string {
+	switch strings.ToLower(r.Meta.Lang) {
 	case lang.EN:
-		return en.HobbiesLabel
+		return en.InterestsLabel
 	case lang.FR:
-		return fr.HobbiesLabel
+		return fr.InterestsLabel
 	default:
-		return en.HobbiesLabel
+		return en.InterestsLabel
 	}
 }
 
 func (r *Resume) GetProfileLabel() string {
-	switch strings.ToLower(r.Lang) {
+	switch strings.ToLower(r.Meta.Lang) {
 	case lang.EN:
 		return en.ProfileLabel
 	case lang.FR:
@@ -175,7 +204,7 @@ func (r *Resume) GetProfileLabel() string {
 }
 
 func (r *Resume) GetSinceLabel() string {
-	switch strings.ToLower(r.Lang) {
+	switch strings.ToLower(r.Meta.Lang) {
 	case lang.EN:
 		return en.SinceLabel
 	case lang.FR:

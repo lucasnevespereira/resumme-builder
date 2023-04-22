@@ -6,6 +6,8 @@ Build your resume with HTML/CSS and JSON Data
 
 Create a `data/resume.json` file and enter your data.
 
+The JSON structure follows the [JSON Resume schema](https://jsonresume.org/)
+
 <i>You can see an example in [data/examples/example.resume.json](data/examples/example.resume.json)</i>
 
 Run `make output`

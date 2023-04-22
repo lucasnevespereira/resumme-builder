@@ -4,7 +4,7 @@
         <div class="item">
             {{range $index, $skill := .Skills }}
                 <span class="value">
-                    {{$skill}}{{if not (isLast $index (len $.Skills))}},{{end}}
+                    {{$skill.Name}}{{if not (isLast $index (len $.Skills))}},{{end}}
                 </span>
             {{end}}
         </div>
@@ -17,7 +17,7 @@
         <div class="item">
             {{range $index, $skill := .SoftSkills }}
                 <span class="value">
-                    {{$skill}}{{if not (isLast $index (len $.SoftSkills))}},{{end}}
+                    {{$skill.Name}}{{if not (isLast $index (len $.SoftSkills))}},{{end}}
                 </span>
             {{end}}
         </div>
