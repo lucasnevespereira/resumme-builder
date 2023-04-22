@@ -1,13 +1,13 @@
 package resume
 
 import (
-	"encoding/json"
 	"github.com/pkg/errors"
 	"html/template"
 	"os"
 	"path"
 	"path/filepath"
 	"resumme-builder/internal/models"
+	"resumme-builder/internal/utils/json"
 	"resumme-builder/internal/utils/logger"
 	"strings"
 )
