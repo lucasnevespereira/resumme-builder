@@ -21,6 +21,8 @@ func getTemplate(name string) (*template.Template, error) {
 		"trimURLPrefix":   trimURLPrefix,
 		"getFirstName":    getFirstName,
 		"getLastName":     getLastName,
+		"evaluate":        evaluate,
+		"lowerEq":         lowerEq,
 	}
 
 	t := template.New(path.Base(templateFiles[0])).Funcs(templateFuncs)
@@ -79,4 +81,12 @@ func getLastName(name string) string {
 		return strings.Join(parts[1:], " ")
 	}
 	return name
+}
+
+func evaluate(htmlStr string) template.HTML {
+	return template.HTML(htmlStr)
+}
+
+func lowerEq(s1 string, s2 string) bool {
+	return strings.ToLower(s1) == strings.ToLower(s2)
 }

@@ -1,0 +1,12 @@
+{{if .Languages}}
+    <div class="languages">
+        <div class="subtitle">{{.Labels.Languages}}</div>
+        <div class="item">
+            <ul>
+                {{range .Languages}}
+                    <li class="value">{{.Language}} {{if .Fluency}}({{.Fluency}}){{end}}</li>
+                {{end}}
+            </ul>
+        </div>
+    </div>
+{{end}}

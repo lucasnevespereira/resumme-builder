@@ -37,7 +37,7 @@ func GenerateFromHtml(file string) ([]byte, error) {
 		return nil, errors.Wrap(err, "chromedp.Run")
 	}
 
-	logger.Log.Infof("Pdf generated in %f seconds\n", time.Since(startedAt).Seconds())
+	logger.Log.Infof("Pdf %s generated in %f seconds", file, time.Since(startedAt).Seconds())
 
 	return pdfData, nil
 }
@@ -48,7 +48,16 @@ func saveUrlAsPdf(url string, pdf *[]byte) chromedp.Tasks {
 		chromedp.Navigate(url),
 		chromedp.WaitVisible(htmlSelector, chromedp.ByQuery),
 		chromedp.ActionFunc(func(ctx context.Context) error {
-			data, _, err := page.PrintToPDF().WithPrintBackground(true).Do(ctx)
+			data, _, err := page.
+				PrintToPDF().
+				WithMarginLeft(0).
+				WithMarginTop(0).
+				WithMarginRight(0).
+				WithMarginBottom(0).
+				WithPaperWidth(8.3).
+				WithPaperHeight(11.7).
+				WithPrintBackground(true).
+				Do(ctx)
 			if err != nil {
 				return errors.Wrap(err, "page.PrintToPDF")
 			}

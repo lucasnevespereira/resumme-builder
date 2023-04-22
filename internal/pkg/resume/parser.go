@@ -6,9 +6,12 @@ import (
 	"os"
 	"resumme-builder/internal/models"
 	"resumme-builder/internal/utils/logger"
+	"time"
 )
 
 func ParseToHtml(resume models.Resume) (string, error) {
+	startedAt := time.Now()
+
 	ensureOutputDir(models.OutputDir)
 
 	htmlOut, err := os.Create(models.OutputHtmlFile)
@@ -40,7 +43,7 @@ func ParseToHtml(resume models.Resume) (string, error) {
 		return "", errors.Wrap(err, fmt.Sprintf("ParseToHtml %s - Execute", resume.Meta.Template))
 	}
 
-	logger.Log.Infof("Html parsed in %s", htmlOut.Name())
+	logger.Log.Infof("Html %s generated in %f seconds", htmlOut.Name(), time.Since(startedAt).Seconds())
 
 	return htmlOut.Name(), nil
 }

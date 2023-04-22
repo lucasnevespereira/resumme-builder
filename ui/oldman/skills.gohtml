@@ -1,0 +1,12 @@
+{{if .Skills}}
+    <div class="skills">
+        <div class="subtitle">{{.Labels.Skills}}</div>
+        <div class="item">
+            {{ range $index, $skill := .Skills}}
+                <span class="value">
+             {{evaluate $skill.Name}}{{if not (isLast $index (len $.Skills))}},{{end}}
+        </span>
+            {{end}}
+        </div>
+    </div>
+{{end}}

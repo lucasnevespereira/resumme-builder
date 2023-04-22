@@ -1,0 +1,53 @@
+{{ if .Work}}
+    <div class="experiences">
+        <div class="subtitle">
+            {{.Labels.Experiences}}
+        </div>
+        {{$since := .Labels.Since}}
+        {{range .Work}}
+            <div class="element">
+                <div style="    display: flex;
+    flex-direction: row;
+    align-items: center;">
+                    {{if .CompanyLogo}}
+                        <div>
+                            <img class="companyLogo" src="{{.CompanyLogo}}" alt="{{.Company}} logo">
+                        </div>
+                    {{end}}
+                    <div style="
+    margin-right: 10px;
+display: flex; flex-direction: column;">
+                        <div class="position">{{.Position}} <span>| {{.Company}}</span></div>
+                        <div class="dates">
+                            <span>{{.Location}}</span>
+                            |
+                            {{if .EndDate}}
+                                {{.StartDate}} - {{.EndDate}}
+                            {{else}}
+                                {{$since}} {{.StartDate}}
+                            {{end}}
+                        </div>
+                        {{if .TeamDetails}}
+                            <div class="teamDetails">{{.TeamDetails}}</div>
+                        {{end}}
+                    </div>
+                </div>
+
+                <div class="summary">
+                    {{ evaluate .Summary}}
+                    {{if .Highlights}}
+                        <ul class="highlights">
+                            {{range .Highlights}}
+                                <li>{{evaluate .}}</li>
+                            {{end}}
+                        </ul>
+                    {{end}}
+                    {{if .StackDetails}}
+                        <div class="stackDetails">{{.StackDetails}}</div>
+                    {{end}}
+                </div>
+
+            </div>
+        {{end}}
+    </div>
+{{end}}

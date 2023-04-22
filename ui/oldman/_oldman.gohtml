@@ -1,0 +1,41 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{.Basics.Name}} - {{.Basics.Label}}</title>
+    {{ template "styles.gohtml"}}
+    <script src="https://kit.fontawesome.com/990c3c315f.js" crossorigin="anonymous"></script>
+</head>
+<body>
+<main>
+    <aside id="left-column">
+        {{if .Basics.Image}}
+            <div class="photo">
+                <img src="{{.Basics.Image}}" alt="photo">
+            </div>
+        {{end}}
+        <div class="content">
+            {{ template "contact.gohtml" .Basics }}
+            {{ template "skills.gohtml" . }}
+            {{ template "softskills.gohtml" . }}
+            {{ template "educations.gohtml" . }}
+            {{ template "certificates.gohtml" . }}
+            {{ template "languages.gohtml" . }}
+            {{ template "interests.gohtml" . }}
+        </div>
+    </aside>
+    <div class="container">
+        {{ template "work.gohtml" . }}
+        {{ template "projects.gohtml" . }}
+    </div>
+    <script>
+        // const scale = window.devicePixelRatio;
+        // const dpi = scale * 96;
+        const pageHeight = 1123; //842px A4 pageheight for 72dpi, 1123px A4 pageheight for 96dpi,
+        const totalPages = Math.ceil(document.body.scrollHeight / pageHeight);
+        document.getElementById("left-column").style.height = (pageHeight * totalPages - 2) + "px";
+    </script>
+</main>
+</body>
+</html>
