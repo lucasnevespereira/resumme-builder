@@ -1,6 +1,7 @@
 package resume
 
 import (
+	"fmt"
 	"github.com/pkg/errors"
 	"html/template"
 	"os"
@@ -56,7 +57,7 @@ func ParseToHtml(resume models.Resume) (string, error) {
 
 	err = t.Execute(htmlOut, resume)
 	if err != nil {
-		return "", errors.Wrap(err, "ParseToHtml - Execute")
+		return "", errors.Wrap(err, fmt.Sprintf("ParseToHtml %s - Execute", resume.Meta.Template))
 	}
 
 	logger.Log.Infof("Html parsed in %s", htmlOut.Name())
@@ -100,6 +101,20 @@ func getTemplate(name string) (*template.Template, error) {
 				}
 			}
 			return url
+		},
+		"getFirstName": func(name string) string {
+			parts := strings.Split(name, " ")
+			if len(parts) > 0 {
+				return parts[0]
+			}
+			return name
+		},
+		"getLastName": func(name string) string {
+			parts := strings.Split(name, " ")
+			if len(parts) > 1 {
+				return strings.Join(parts[1:], " ")
+			}
+			return name
 		},
 	}
 

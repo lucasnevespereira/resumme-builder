@@ -1,13 +1,13 @@
 <div class="about">
     <div class="name">
-        <span class="first-name">{{.FirstName}}</span> <span class="last-name">{{.LastName}}</span>
+        <span class="first-name">{{getFirstName .Name}}</span> <span class="last-name">{{getLastName .Name}}</span>
     </div>
     <div class="job-position">
-        {{.JobPosition}}
+        {{.Label}}
     </div>
-    {{if .Profile}}
-    <div class="profile-desc">
-        {{.Profile}}
-    </div>
+    {{if .Summary}}
+        <div class="profile-desc">
+            {{.Summary}}
+        </div>
     {{end}}
 </div>
