@@ -4,8 +4,8 @@
         <div class="element">
             {{range $index, $lang := .Languages }}
                 <span>
-                    {{.Label}}
-                    {{if .Level}}({{.Level}}){{end}}
+                    {{$lang.Language}}
+                    {{if $lang.Fluency}}({{$lang.Fluency}}){{end}}
                     {{if not (isLast $index (len $.Languages))}},{{end}}
                 </span>
             {{end}}

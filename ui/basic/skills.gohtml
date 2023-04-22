@@ -1,14 +1,14 @@
 {{if .Skills}}
-<div class="skills">
-    <div class="subtitle">{{.Labels.Skills}}</div>
-    <div class="item">
-        {{ range $index, $skill := .Skills}}
-        <span class="value">
-             {{$skill}}{{if not (isLast $index (len $.Skills))}},{{end}}
+    <div class="skills">
+        <div class="subtitle">{{.Labels.Skills}}</div>
+        <div class="item">
+            {{ range $index, $skill := .Skills}}
+                <span class="value">
+             {{$skill.Name}}{{if not (isLast $index (len $.Skills))}},{{end}}
         </span>
-        {{end}}
+            {{end}}
+        </div>
     </div>
-</div>
 {{end}}
 
 {{if .SoftSkills}}
@@ -17,7 +17,7 @@
         <div class="item">
             {{ range $index, $skill := .SoftSkills}}
                 <span class="value">
-             {{$skill}}{{if not (isLast $index (len $.SoftSkills))}},{{end}}
+             {{$skill.Name}}{{if not (isLast $index (len $.SoftSkills))}},{{end}}
         </span>
             {{end}}
         </div>

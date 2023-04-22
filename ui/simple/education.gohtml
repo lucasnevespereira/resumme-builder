@@ -1,18 +1,20 @@
-<div class="education">
-    <div class="subtitle">{{.Labels.Education}}</div>
-    <div class="wrapper">
-        {{range .Education}}
-            <div class="element">
-                <div class="school">
-                    {{.School}}
+{{if .Education}}
+    <div class="education">
+        <div class="subtitle">{{.Labels.Education}}</div>
+        <div class="wrapper">
+            {{range .Education}}
+                <div class="element">
+                    <div class="school">
+                        {{.Institution}}
+                    </div>
+                    <div class="degree">
+                        {{.StudyType}} {{.Area}}
+                    </div>
+                    <div class="date">
+                        {{.EndDate}}
+                    </div>
                 </div>
-                <div class="degree">
-                    {{.Degree}}
-                </div>
-                <div class="date">
-                    {{.Stopped}}
-                </div>
-            </div>
-        {{end}}
+            {{end}}
+        </div>
     </div>
-</div>
+{{end}}

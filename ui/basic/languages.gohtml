@@ -1,13 +1,13 @@
 {{if .Languages}}
-<div class="languages">
-    <div class="subtitle">{{.Labels.Languages}}</div>
-    <div class="item">
-        <ul>
-            {{range .Languages}}
-                <li class="value">{{.Label}} {{if .Level}}({{.Level}}){{end}}</li>
-            {{end}}
+    <div class="languages">
+        <div class="subtitle">{{.Labels.Languages}}</div>
+        <div class="item">
+            <ul>
+                {{range .Languages}}
+                    <li class="value">{{.Language}} {{if .Fluency}}({{.Fluency}}){{end}}</li>
+                {{end}}
 
-        </ul>
+            </ul>
+        </div>
     </div>
-</div>
 {{end}}

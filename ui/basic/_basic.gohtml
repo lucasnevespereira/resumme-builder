@@ -3,30 +3,30 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{.Data.FirstName}} {{.Data.LastName}} - {{.Data.JobPosition}}</title>
+    <title>{{.Basics.Name}} - {{.Basics.Label}}</title>
     {{ template "styles.gohtml"}}
 </head>
 <body>
 <main>
     <aside>
-        {{if .Data.Photo}}
+        {{if .Basics.Image}}
             <div class="photo">
-                <img src="{{.Data.Photo}}" alt="photo">
+                <img src="{{.Basics.Image}}" alt="photo">
             </div>
         {{end}}
         <div class="content">
-            {{ template "contact.gohtml" .Data}}
-            {{ template "education.gohtml" .Data}}
-            {{ template "certifications.gohtml" .Data}}
-            {{ template "skills.gohtml" .Data}}
-            {{ template "languages.gohtml" .Data}}
-            {{ template "hobbies.gohtml" .Data}}
+            {{ template "contact.gohtml" .Basics }}
+            {{ template "education.gohtml" . }}
+            {{ template "certifications.gohtml" . }}
+            {{ template "skills.gohtml" . }}
+            {{ template "languages.gohtml" . }}
+            {{ template "hobbies.gohtml" . }}
         </div>
     </aside>
     <div class="container">
-        {{ template "about.gohtml" .Data}}
-        {{ template "experiences.gohtml" .Data}}
-        {{ template "projects.gohtml" .Data}}
+        {{ template "about.gohtml" .Basics }}
+        {{ template "experiences.gohtml" . }}
+        {{ template "projects.gohtml" . }}
     </div>
 </main>
 </body>
