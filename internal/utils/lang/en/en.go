@@ -7,7 +7,7 @@ const (
 	SoftSkillsLabel  = "Soft Skills"
 	ProjectsLabel    = "Projects"
 	LanguagesLabel   = "Languages"
-	HobbiesLabel     = "Hobbies"
+	InterestsLabel   = "Hobbies"
 	ProfileLabel     = "Profile"
 	SinceLabel       = "Since"
 )

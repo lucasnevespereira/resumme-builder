@@ -1,13 +1,13 @@
-{{if .Certifications}}
-<div class="certifications">
-  <div class="subtitle">Certifications</div>
-  {{ range .Certifications}}
-  <div class="item">
-    <div class="label">{{.Name}}</div>
-    {{if .Score}}
-    <small class="value">Score: {{.Score}}</small>
-    {{end}}
-  </div>
-  {{end}}
-</div>
+{{if .Certificates}}
+    <div class="certifications">
+        <div class="subtitle">Certifications</div>
+        {{ range .Certificates}}
+            <div class="item">
+                <a {{if .URL}}href="{{.Url}}"{{end}} class="label">{{.Title}}</a>
+                {{if .Score}}
+                    <small class="value">Score: {{.Score}}</small>
+                {{end}}
+            </div>
+        {{end}}
+    </div>
 {{end}}

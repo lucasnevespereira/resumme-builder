@@ -1,16 +1,20 @@
 <div class="educations">
-  <div class="subtitle">{{.Labels.Education}}</div>
-  {{ range .Education }}
-  <div class="element">
-    <div class="degree">
-      {{ .Degree }}
-      | {{ .School }}
-    </div>
+    <div class="subtitle">{{.Labels.Education}}</div>
+    {{ range .Education }}
+        <div class="element">
+            <div class="degree">
+                {{ .StudyType }} {{ .Area }}
+                | {{ .Institution }}
+            </div>
 
-    <div class="dates">
-      {{ .Location }}
-      | {{.Started}} - {{.Stopped}}
-    </div>
-  </div>
-  {{end}}
+            <div class="dates">
+                {{ .Location }}
+                | {{.StartDate}} - {{.EndDate}}
+            </div>
+
+            <div class="description">
+              {{.Score}}
+            </div>
+        </div>
+    {{end}}
 </div>

@@ -9,6 +9,7 @@ import (
 	"path/filepath"
 	"resumme-builder/internal/models"
 	"resumme-builder/internal/utils/logger"
+	"strings"
 )
 
 func ReadLocalData() (models.Resume, error) {
@@ -34,21 +35,21 @@ func ParseToHtml(resume models.Resume) (string, error) {
 		return "", errors.Wrap(err, "ParseToHtml - Create")
 	}
 
-	resume.Data.Labels.Education = resume.GetEducationLabel()
-	resume.Data.Labels.Experiences = resume.GetExperiencesLabel()
-	resume.Data.Labels.Projects = resume.GetProjectsLabel()
-	resume.Data.Labels.Skills = resume.GetSkillsLabel()
-	resume.Data.Labels.SoftSkills = resume.GetSoftSkillsLabel()
-	resume.Data.Labels.Languages = resume.GetLanguagesLabel()
-	resume.Data.Labels.Hobbies = resume.GetHobbiesLabel()
-	resume.Data.Labels.Profile = resume.GetProfileLabel()
-	resume.Data.Labels.Since = resume.GetSinceLabel()
+	resume.Labels.Education = resume.GetEducationLabel()
+	resume.Labels.Experiences = resume.GetExperiencesLabel()
+	resume.Labels.Projects = resume.GetProjectsLabel()
+	resume.Labels.Skills = resume.GetSkillsLabel()
+	resume.Labels.SoftSkills = resume.GetSoftSkillsLabel()
+	resume.Labels.Languages = resume.GetLanguagesLabel()
+	resume.Labels.Interests = resume.GetInterestsLabel()
+	resume.Labels.Profile = resume.GetProfileLabel()
+	resume.Labels.Since = resume.GetSinceLabel()
 
-	if resume.Template == "" {
-		resume.Template = models.ClassicTemplate
+	if resume.Meta.Template == "" {
+		resume.Meta.Template = models.ClassicTemplate
 	}
 
-	t, err := getTemplate(resume.Template)
+	t, err := getTemplate(resume.Meta.Template)
 	if err != nil {
 		return "", err
 	}
@@ -72,6 +73,33 @@ func getTemplate(name string) (*template.Template, error) {
 	templateFuncs := template.FuncMap{
 		"isLast": func(index, length int) bool {
 			return index == length-1
+		},
+		"displayLocation": func(location models.Location) string {
+			var parts []string
+
+			if location.City != "" {
+				parts = append(parts, location.City)
+			}
+			if location.Region != "" {
+				parts = append(parts, location.Region)
+			}
+			if location.CountryCode != "" {
+				parts = append(parts, location.CountryCode)
+			}
+
+			locationStr := strings.Join(parts, ", ")
+			locationStr = strings.TrimSuffix(locationStr, ", ")
+
+			return locationStr
+		},
+		"trimURLPrefix": func(url string) string {
+			prefixes := []string{"http://", "https://", "https://www.", "www."}
+			for _, prefix := range prefixes {
+				if strings.HasPrefix(url, prefix) {
+					return strings.TrimPrefix(url, prefix)
+				}
+			}
+			return url
 		},
 	}
 

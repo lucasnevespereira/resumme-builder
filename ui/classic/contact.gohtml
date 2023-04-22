@@ -14,24 +14,19 @@
                 <a href="tel:{{.Phone}}">{{.Phone}}</a>
             </li>
         {{end}}
-        <li>
-            <a>{{.Location}}</a>
-        </li>
-        {{if .Socials.Website}}
+        {{if .Location}}
             <li>
-                <a href="https://www.{{.Socials.Website}}"
-                   target="_blank">{{.Socials.Website}}</a>
+                <a>{{ (displayLocation .Location) }}</a>
             </li>
         {{end}}
-        {{if .Socials.Linkedin}}
+        {{if .URL}}
             <li>
-                <a href="https://www.linkedin.com/in/{{.Socials.Linkedin}}"
-                   target="_blank">LinkedIn</a>
+                <a href="{{.URL}}" target="_blank">{{trimURLPrefix .URL}}</a>
             </li>
         {{end}}
-        {{if .Socials.Github}}
+        {{range .Profiles}}
             <li>
-                <a href="https://www.github.com/{{.Socials.Github}}" target="_blank">GitHub</a>
+                <a href="{{.URL}}" target="_blank">{{.Network}}</a>
             </li>
         {{end}}
     </ul>
