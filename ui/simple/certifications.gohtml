@@ -1,13 +1,13 @@
-{{if .Certifications}}
+{{if .Certificates}}
     <div class="certifications">
         <div class="subtitle">Certifications</div>
         <div class="wrapper">
             <div class="element">
-                    {{range $index, $cert := .Certifications }}
+                    {{range $index, $cert := .Certificates }}
                     <a class="name">
-                        {{$cert.Name}}
+                        {{$cert.Title}}
                         {{if $cert.Score}}<span class="score">({{$cert.Score}})</span>{{end}}
-                        {{if not (isLast $index (len $.Certifications))}},{{end}}
+                        {{if not (isLast $index (len $.Certificates))}},{{end}}
                     </a>
                 {{end}}
             </div>

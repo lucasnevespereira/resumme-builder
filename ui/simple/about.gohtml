@@ -1,10 +1,10 @@
 <div class="about">
     <div class="name">
-        <span class="last-name">{{.LastName}}</span> <span class="first-name">{{.FirstName}}</span>
+        <span class="last-name">{{getLastName .Name}}</span> <span class="first-name">{{getFirstName .Name}}</span>
     </div>
 
     <div class="job-position">
-        {{.JobPosition}}
+        {{.Label}}
     </div>
 
     <div class="contact">
@@ -18,22 +18,19 @@
                 <a href="mailto:{{.Email}}">{{.Email}}</a>
             </div>
         {{end}}
-        {{if .Socials}}
-            <div class="socials">
-                {{if .Socials.Website}}
-                    <a href="https://{{.Socials.Website}}}">{{.Socials.Website}}</a>
-                {{end}}
-                {{if .Socials.Linkedin}}
-                    <a href="https://linkedin.com/in/{{.Socials.Linkedin}}}">in/{{.Socials.Linkedin}}</a>
-                {{end}}
-                {{if .Socials.Github}}
-                    <a href="https://github.com/{{.Socials.Github}}}">github.com/{{.Socials.Github}}</a>
-                {{end}}
-            </div>
-        {{end}}
+
+        <div class="socials">
+            {{if .URL}}
+                <a href="{{.URL}}">{{trimURLPrefix .URL}}</a>
+            {{end}}
+            {{range .Profiles}}
+                <a href="{{.URL}}">{{.Network}}</a>
+            {{end}}
+        </div>
+
         {{if .Location}}
             <div class="location">
-                <a>{{.Location}}</a>
+                <a>{{displayLocation .Location}}</a>
             </div>
         {{end}}
     </div>

@@ -5,7 +5,7 @@
             <div class="element">
                 {{range $index, $project := .Projects }}
                     <div class="name">
-                        <a href="{{$project.Link}}">{{$project.Name}}</a>
+                        <a href="{{$project.URL}}">{{$project.Name}}</a>
                         {{if not (isLast $index (len $.Projects))}},{{end}}
                     </div>
                 {{end}}
