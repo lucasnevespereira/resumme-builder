@@ -94,8 +94,9 @@ type Interest struct {
 }
 
 type Meta struct {
-	Template string `json:"template"`
-	Lang     string `json:"lang"`
+	Template      string `json:"template"`
+	Lang          string `json:"lang"`
+	AutoTranslate bool   `json:"autoTranslate"`
 }
 
 type ResumeLabels struct {

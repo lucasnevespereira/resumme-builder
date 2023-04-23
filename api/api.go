@@ -5,12 +5,12 @@ import (
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"resumme-builder/api/router"
-	"resumme-builder/internal/utils/config"
+	"resumme-builder/configs"
 	"resumme-builder/internal/utils/logger"
 )
 
 type Api struct {
-	config config.ApiConfig
+	config configs.AppConfig
 	router *gin.Engine
 }
 
@@ -21,7 +21,7 @@ func New() *Api {
 }
 
 func (api *Api) setup() {
-	api.config = config.LoadApiConfig()
+	api.config = configs.LoadAppConfig()
 	api.router = router.Init()
 }
 

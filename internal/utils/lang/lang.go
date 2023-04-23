@@ -10,6 +10,7 @@ import (
 	"github.com/nicksnyder/go-i18n/v2/i18n"
 )
 
+const English = "en"
 const localesDir = "internal/utils/lang/locales"
 
 var bundle *i18n.Bundle

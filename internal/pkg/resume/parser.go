@@ -4,7 +4,10 @@ import (
 	"fmt"
 	"github.com/pkg/errors"
 	"os"
+	"resumme-builder/configs"
 	"resumme-builder/internal/models"
+	"resumme-builder/internal/pkg/translator"
+	"resumme-builder/internal/utils/lang"
 	"resumme-builder/internal/utils/logger"
 )
 
@@ -16,6 +19,10 @@ func ParseToHtml(resume models.Resume) (string, error) {
 		return "", errors.Wrap(err, "ParseToHtml - Create")
 	}
 
+	if resume.Meta.Lang == "" {
+		resume.Meta.Lang = lang.English
+	}
+
 	resume.Labels.Education = resume.GetEducationLabel()
 	resume.Labels.Experiences = resume.GetExperiencesLabel()
 	resume.Labels.Projects = resume.GetProjectsLabel()
@@ -25,6 +32,11 @@ func ParseToHtml(resume models.Resume) (string, error) {
 	resume.Labels.Interests = resume.GetInterestsLabel()
 	resume.Labels.Profile = resume.GetProfileLabel()
 	resume.Labels.Since = resume.GetSinceLabel()
+
+	if resume.Meta.AutoTranslate {
+		translator := translator.New(configs.LoadAppConfig().DeeplAuthKey)
+		resume = translator.Resume(resume, resume.Meta.Lang)
+	}
 
 	if resume.Meta.Template == "" {
 		resume.Meta.Template = models.ClassicTemplate
