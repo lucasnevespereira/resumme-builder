@@ -10,14 +10,14 @@ The JSON structure follows the [JSON Resume](https://jsonresume.org/) standard.
 
 <i>You can see an example in [data/examples/example.resume.json](data/examples/example.resume.json)</i>
 
-Run `make output`
+Run `make local`
 
 Open `output/resume.pdf` or `output/resume.html`
 
 ## Api Usage
 
 ```
-make run
+make server
 ```
 
 request to generate pdf

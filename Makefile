@@ -1,16 +1,18 @@
-.PHONY: output clean lint
+.PHONY: local server clean lint fmt
 
 fmt:
-	gofmt -s -l .
+	gofmt -s -l -w .
 
 lint: fmt
 	golangci-lint run
 
-output:
-	go run cmd/local/main.go
+local:
+	go run *.go local
 
-run:
-	go run cmd/server/main.go
+server:
+	go run *.go server
+
 
 clean:
 	rm -rf output
+	@echo "Output directory cleaned"
