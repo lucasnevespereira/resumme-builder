@@ -1,11 +1,6 @@
 package models
 
-import (
-	"resumme-builder/internal/utils/lang"
-	"resumme-builder/internal/utils/lang/en"
-	"resumme-builder/internal/utils/lang/fr"
-	"strings"
-)
+import "resumme-builder/internal/utils/lang"
 
 type Resume struct {
 	Basics       Basics        `json:"basics"`
@@ -116,100 +111,37 @@ type ResumeLabels struct {
 }
 
 func (r *Resume) GetEducationLabel() string {
-	switch strings.ToLower(r.Meta.Lang) {
-	case lang.EN:
-		return en.EducationLabel
-	case lang.FR:
-		return fr.EducationLabel
-	default:
-		return en.EducationLabel
-	}
+	return lang.Translate(r.Meta.Lang, EducationLabel)
 }
 
 func (r *Resume) GetExperiencesLabel() string {
-	switch strings.ToLower(r.Meta.Lang) {
-	case lang.EN:
-		return en.ExperiencesLabel
-	case lang.FR:
-		return fr.ExperiencesLabel
-	default:
-		return en.ExperiencesLabel
-	}
+	return lang.Translate(r.Meta.Lang, ExperiencesLabel)
 }
 
 func (r *Resume) GetSkillsLabel() string {
-	switch strings.ToLower(r.Meta.Lang) {
-	case lang.EN:
-		return en.SkillsLabel
-	case lang.FR:
-		return fr.SkillsLabel
-	default:
-		return en.SkillsLabel
-	}
+	return lang.Translate(r.Meta.Lang, SkillsLabel)
 }
 
 func (r *Resume) GetSoftSkillsLabel() string {
-	switch strings.ToLower(r.Meta.Lang) {
-	case lang.EN:
-		return en.SoftSkillsLabel
-	case lang.FR:
-		return fr.SoftSkillsLabel
-	default:
-		return en.SoftSkillsLabel
-	}
+	return lang.Translate(r.Meta.Lang, SoftSkillsLabel)
 }
 
 func (r *Resume) GetProjectsLabel() string {
-	switch strings.ToLower(r.Meta.Lang) {
-	case lang.EN:
-		return en.ProjectsLabel
-	case lang.FR:
-		return fr.ProjectsLabel
-	default:
-		return en.ProjectsLabel
-	}
+	return lang.Translate(r.Meta.Lang, ProjectsLabel)
 }
 
 func (r *Resume) GetLanguagesLabel() string {
-	switch strings.ToLower(r.Meta.Lang) {
-	case lang.EN:
-		return en.LanguagesLabel
-	case lang.FR:
-		return fr.LanguagesLabel
-	default:
-		return en.LanguagesLabel
-	}
+	return lang.Translate(r.Meta.Lang, LanguagesLabel)
 }
 
 func (r *Resume) GetInterestsLabel() string {
-	switch strings.ToLower(r.Meta.Lang) {
-	case lang.EN:
-		return en.InterestsLabel
-	case lang.FR:
-		return fr.InterestsLabel
-	default:
-		return en.InterestsLabel
-	}
+	return lang.Translate(r.Meta.Lang, InterestsLabel)
 }
 
 func (r *Resume) GetProfileLabel() string {
-	switch strings.ToLower(r.Meta.Lang) {
-	case lang.EN:
-		return en.ProfileLabel
-	case lang.FR:
-		return fr.ProfileLabel
-	default:
-		return en.ProfileLabel
-	}
+	return lang.Translate(r.Meta.Lang, ProfileLabel)
 }
 
 func (r *Resume) GetSinceLabel() string {
-	switch strings.ToLower(r.Meta.Lang) {
-	case lang.EN:
-		return en.SinceLabel
-	case lang.FR:
-		return fr.SinceLabel
-	default:
-		return en.SinceLabel
-	}
+	return lang.Translate(r.Meta.Lang, SinceLabel)
 }
