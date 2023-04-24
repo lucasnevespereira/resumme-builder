@@ -34,8 +34,14 @@ func ParseToHtml(resume models.Resume) (string, error) {
 	resume.Labels.Since = resume.GetSinceLabel()
 
 	if resume.Meta.AutoTranslate {
-		translator := translator.New(configs.LoadAppConfig().DeeplAuthKey)
-		resume = translator.Resume(resume, resume.Meta.Lang)
+		deeplAuthKey := configs.LoadAppConfig().DeeplAuthKey
+		if deeplAuthKey != "" {
+			translatorClient := translator.New(deeplAuthKey)
+			resume = translatorClient.Resume(resume, resume.Meta.Lang)
+		} else {
+			return "", errors.New("ParseToHtml: Deepl Auth Key is missing, and autotranslate is enabled")
+		}
+
 	}
 
 	if resume.Meta.Template == "" {
