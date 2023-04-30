@@ -7,12 +7,15 @@
         <div class="element">
             <div class="position">
                 {{.Position}}
-                <span>| {{.Company}}</span>
+                {{if .Company}}
+                    <span>| {{.Company}}</span>
+                {{end}}
             </div>
 
             <div class="dates">
-                <span>{{.Location}}</span>
-                |
+                {{if .Location}}
+                    <span>{{.Location}}</span> |
+                {{end}}
                 {{if .EndDate}}
                     {{.StartDate}} - {{.EndDate}}
                 {{else}}

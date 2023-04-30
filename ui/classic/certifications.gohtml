@@ -3,7 +3,7 @@
         <div class="subtitle">Certifications</div>
         {{ range .Certificates}}
             <div class="item">
-                <a {{if .URL}}href="{{.Url}}"{{end}} class="label">{{.Title}}</a>
+                <a {{if .URL}}href="{{.URL}}"{{end}} >{{.Title}}</a>
                 {{if .Score}}
                     <small class="value">Score: {{.Score}}</small>
                 {{end}}
