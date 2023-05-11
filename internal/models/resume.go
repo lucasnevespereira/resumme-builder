@@ -70,10 +70,10 @@ type Education struct {
 }
 
 type Certificate struct {
-	Title  string `json:"name"`
-	Date   string `json:"startDate"`
-	Score  string `json:"score"`
+	Title  string `json:"title"`
+	Date   string `json:"date"`
 	Issuer string `json:"issuer"`
+	Score  string `json:"score"`
 	URL    string `json:"url"`
 }
 
