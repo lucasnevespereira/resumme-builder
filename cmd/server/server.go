@@ -2,7 +2,7 @@ package server
 
 import (
 	"github.com/spf13/cobra"
-	"resumme-builder/api"
+	"resumme-builder/internal/api"
 )
 
 var serverCmd = &cobra.Command{

@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"net/http"
-	"resumme-builder/api/router"
+	"resumme-builder/internal/api/router"
 	"resumme-builder/internal/utils/config"
 	"resumme-builder/internal/utils/logger"
 )

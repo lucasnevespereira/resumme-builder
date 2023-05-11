@@ -1,6 +1,6 @@
 module resumme-builder
 
-go 1.19
+go 1.20
 
 require (
 	github.com/chromedp/cdproto v0.0.0-20221029224954-108014bf7279

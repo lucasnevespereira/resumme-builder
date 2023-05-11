@@ -8,7 +8,7 @@ Create a `data/resume.json` file and enter your data.
 
 The JSON structure follows the [JSON Resume](https://jsonresume.org/) standard.
 
-<i>You can see an example in [data/examples/example.resume.json](data/examples/example.resume.json)</i>
+<i>You can see an example in [examples/example.resume.json](examples/example.resume.json)</i>
 
 Run `make local`
 
@@ -26,14 +26,14 @@ request to generate pdf
 [POST] http://localhost:9000/pdf
 ```
 
-e.g example json data request in [data/examples/example.resume.json](data/examples/example.resume.json)
+e.g example json data request in [examples/example.resume.json](examples/example.resume.json)
 
 #### Languages
 
 - en
 - fr
 
-e.g [data/examples/example.resume.json](data/examples/example.resume.json)
+e.g [examples/example.resume.json](examples/example.resume.json)
 
 ```json
 "lang": "fr"
@@ -41,11 +41,11 @@ e.g [data/examples/example.resume.json](data/examples/example.resume.json)
 
 ### Templates
 
-- classic ([example here](data/examples/example.classic.pdf))
-- basic ([example here](data/examples/example.basic.pdf))
-- simple ([example here](data/examples/example.simple.pdf))
+- classic ([example here](examples/example.classic.pdf))
+- basic ([example here](examples/example.basic.pdf))
+- simple ([example here](examples/example.simple.pdf))
 
-e.g [data/examples/example.resume.json](data/examples/example.resume.json)
+e.g [examples/example.resume.json](examples/example.resume.json)
 
 ```json
   "template": "classic"

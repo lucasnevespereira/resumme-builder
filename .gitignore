@@ -5,3 +5,5 @@
 ui/.DS_Store
 output/
 .env
+bin/
+data/
