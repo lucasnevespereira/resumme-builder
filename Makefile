@@ -23,7 +23,6 @@ docker-build:
 docker-run:
 	docker run -it --rm -p 9000:9000 $(APP_NAME)
 
-
 clean:
 	rm -rf output
 	rm -rf bin/
