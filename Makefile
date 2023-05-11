@@ -18,7 +18,7 @@ build:
 	go build -o bin/$(APP_NAME)
 
 docker-build:
-	docker build -t $(APP_NAME) .
+	docker build --no-cache -t $(APP_NAME) .
 
 docker-run:
 	docker run -it --rm -p 9000:9000 $(APP_NAME)
