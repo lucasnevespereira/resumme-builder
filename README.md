@@ -20,8 +20,14 @@ Open `output/resume.pdf` or `output/resume.html`
 make server
 ```
 
-request to generate pdf
+or use Docker
 
+```
+make docker-build
+make docker-run
+```
+
+request to generate pdf
 ```
 [POST] http://localhost:9000/pdf
 ```
