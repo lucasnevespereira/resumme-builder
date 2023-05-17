@@ -1,0 +1,245 @@
+<style>
+    @import url('http://fonts.googleapis.com/css?family=Noto+Sans:400,700&subset=latin,latin-ext&display=swap');
+
+    :root {
+        /*Colors*/
+        --text-color: #000000;
+        --primary-color: #e4f1fd;
+        --secondary-color: #556777;
+
+        /*Fonts*/
+        --main-font: 'Noto Sans', sans-serif;
+
+        /*Sizes*/
+        --font-small-xs: 10px;
+        --font-small: 12px;
+        --font-medium: 14px;
+        --font-large: 16px;
+        --normal: 400;
+        --semi-bold: 700;
+        --bold: 900;
+        --separator-border: 3px solid;
+
+        /*Spacing*/
+        --page-max-width: 45rem;
+        --header-height: 180px;
+        --photo-size: 120px;
+        --left-col-width: 35%;
+        --right-col-width: 65%;
+        --line-height-default: 1.5;
+    }
+
+    * {
+        text-rendering: optimizeLegibility;
+        box-sizing: border-box;
+    }
+
+    @page {
+        size: 21cm 29.7cm;
+    }
+
+    @page :left {
+        margin: 0;
+    }
+
+    @page :right {
+        margin: 0;
+    }
+
+    html, body {
+        margin: 0;
+
+        color: var(--text-color);
+        font-family: var(--main-font);
+        font-size: var(--font-small);
+        font-weight: var(--normal);
+        line-height: var(--line-height-default);
+    }
+
+    main {
+        min-height: 100vh;
+        margin-left: auto;
+        margin-right: auto;
+        display: grid;
+        grid-template-columns: var(--left-col-width) var(--right-col-width);
+    }
+
+    ul {
+        padding-inline-start: 0 !important;
+        margin-block-start: 0 !important;
+        margin-block-end: 0 !important;
+        padding-left: 0 !important;
+        list-style: none;
+    }
+
+    a {
+        text-decoration: none !important;
+        color: var(--text-color);
+    }
+
+    a:active a:focus {
+        color: var(--text-color) !important;
+    }
+
+    .link:hover {
+        cursor: pointer;
+    }
+
+    .first-name{
+        font-size: var(--font-large);
+        font-weight: var(--semi-bold);
+    }
+
+    .subtitle {
+        font-weight: var(--bold);
+        font-size: var(--font-medium);
+        text-transform: uppercase;
+        margin-bottom: 10px;
+    }
+
+    .element {
+        margin-bottom: 16px;
+    }
+
+    .value {
+    }
+
+    .item {
+        margin-bottom: 10px;
+    }
+
+    .description {
+        white-space: pre-line;
+        margin-top: -10px;
+    }
+
+    .location-date {
+        margin-top: 2px;
+    }
+
+    .position,
+    .degree {
+    }
+
+    /*ASIDE*/
+    aside {
+        background-color: var(--primary-color);
+    }
+
+    .photo {
+        margin: 20px 0;
+        display: grid;
+        place-items: center;
+    }
+
+    .photo img {
+        width: var(--photo-size);
+        height: var(--photo-size);
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px var(--secondary-color) solid;
+    }
+
+    aside .content {
+        margin-top: 10px;
+        padding: 15px;
+    }
+
+    .educations {
+        margin-top: 16px;
+    }
+
+    .certifications {
+        margin-bottom: 10px;
+    }
+
+    .contact {
+        margin-top: 10px;
+    }
+
+    .contact .element {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .contact .value {
+        margin-bottom: 5px;
+    }
+
+    .contact i {
+        margin-right: 2px;
+    }
+
+
+    /*CONTAINER*/
+
+    .container {
+        background-color: #fff;
+    }
+
+    .about {
+        background-color: var(--secondary-color);
+        min-height: var(--header-height);
+        color: var(--primary-color);
+        padding-top: 30px;
+        padding-left: 30px;
+    }
+
+    .about .name {
+        font-size: var(--font-large);
+        font-weight: var(--semi-bold);
+    }
+
+    .about .last-name {
+        text-transform: uppercase;
+    }
+
+    .about .job-position {
+        text-transform: capitalize;
+    }
+
+    .about .profile-desc {
+        white-space: pre-line;
+        padding-bottom: 10px;
+        width: 90%;
+    }
+
+    .experiences, .projects {
+        padding-top: 20px;
+        padding-left: 30px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+    }
+
+    .experiences .element {
+        break-inside: avoid-page;
+    }
+
+    .experiences .summary {
+        margin-right: 10px;
+    }
+
+    .experiences .highlights {
+        padding-inline-start: 16px !important;
+        margin-block-start: 0 !important;
+        margin-block-end: 0 !important;
+        padding-left: 16px !important;
+        list-style: disc;
+    }
+
+    .experiences .teamDetails, .stackDetails {
+        font-size: var(--font-small-xs);
+        font-weight: lighter;
+        color: var(--secondary-color);
+    }
+
+    .experiences .companyLogo {
+        max-width: 50px;
+        max-height: 50px;
+        margin-right: 10px;
+    }
+
+
+</style>

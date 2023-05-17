@@ -43,12 +43,15 @@ type Profile struct {
 type Work struct {
 	Position     string   `json:"position"`
 	Company      string   `json:"company"`
-	ContractType string   `json:"contractType"`
 	StartDate    string   `json:"startDate"`
-	EndDate      any      `json:"endDate"`
+	EndDate      string   `json:"endDate"`
 	Summary      string   `json:"summary"`
 	Location     string   `json:"location"`
 	Highlights   []string `json:"highlights"`
+	ContractType string   `json:"contractType"`
+	CompanyLogo  *string  `json:"companyLogo,omitempty"`
+	TeamDetails  *string  `json:"teamDetails,omitempty"`
+	StackDetails *string  `json:"stackDetails,omitempty"`
 }
 
 type Project struct {

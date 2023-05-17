@@ -1,0 +1,18 @@
+{{if .Education}}
+    <div class="educations">
+        <div class="subtitle">{{.Labels.Education}}</div>
+        {{ range .Education }}
+            <div class="element">
+                <div class="degree">
+                    <span><strong>{{.StudyType}}</strong> in {{.Area}} | {{.Institution}}</span>
+                </div>
+                <div>
+                    {{if .Score}}<span>{{.Score}}</span>{{end}}
+                </div>
+                <small class="location-date">
+                    {{.Location}}, {{.StartDate}} - {{.EndDate}}
+                </small>
+            </div>
+        {{end}}
+    </div>
+{{end}}

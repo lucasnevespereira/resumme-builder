@@ -1,0 +1,14 @@
+{{if .Certificates}}
+    <div class="certifications">
+        <div class="subtitle">Certifications</div>
+        {{ range $index, $certification := .Certificates}}
+            <ul class="item">
+                <li class="value">
+                    {{$certification.Title}}
+                    {{if $certification.Date}}($certification.Date){{end}}
+                    {{if $certification.Score}}($certification.Score){{end}}
+                </li>
+            </ul>
+        {{end}}
+    </div>
+{{end}}

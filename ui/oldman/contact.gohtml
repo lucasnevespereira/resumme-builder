@@ -1,0 +1,30 @@
+<div class="contact">
+    <div class="element">
+        <div class="name">
+            <span class="first-name">{{.Name}}</span>
+        </div>
+        <div class="job-position">
+            {{.Label}}
+        </div>
+        {{if .Email}}
+            <div class="value"><a class="link" href="mailto:{{.Email}}">{{.Email}}</a></div>
+        {{end}}
+        {{if .Phone}}
+            <div class="value"><a class="link" href="tel:{{.Phone}}">{{.Phone}}</a></div>
+        {{end}}
+        {{range .Profiles}}
+            <div class="value">
+                {{if lowerEq .Network "github"}}
+                    <a class="link" href="{{.URL}}"><i class="fa-brands fa-github"></i>{{.URL}}</a>
+                {{else if lowerEq .Network "linkedin"}}
+                    <a class="link" href="{{.URL}}"><i class="fa-brands fa-linkedin"></i>{{.URL}}</a>
+                {{else}}
+                    <a class="link" href="{{.URL}}">{{.URL}}</a>
+                {{end}}
+            </div>
+        {{end}}
+        {{if .Location}}
+            <div class="value"><a>{{displayLocation .Location}}</a></div>
+        {{end}}
+    </div>
+</div>
