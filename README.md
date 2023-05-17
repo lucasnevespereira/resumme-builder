@@ -50,6 +50,7 @@ e.g [examples/example.resume.json](examples/example.resume.json)
 - classic ([example here](examples/example.classic.pdf))
 - basic ([example here](examples/example.basic.pdf))
 - simple ([example here](examples/example.simple.pdf))
+- oldman ([example here](examples/example.oldman.pdf))
 
 e.g [examples/example.resume.json](examples/example.resume.json)
 
