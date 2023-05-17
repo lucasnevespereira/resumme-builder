@@ -8,12 +8,14 @@
             </div>
 
             <div class="dates">
-                {{ .Location }}
-                | {{.StartDate}} - {{.EndDate}}
+                {{if .Location}}
+                    <span>{{.Location}}</span> |
+                {{end}}
+                {{.EndDate}}
             </div>
 
             <div class="description">
-              {{.Score}}
+                {{.GPA}}
             </div>
         </div>
     {{end}}

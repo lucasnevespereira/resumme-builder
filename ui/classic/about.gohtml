@@ -10,11 +10,12 @@
     {{end}}
 </div>
 
-{{if .Image}}
-    <div class="photo">
+
+<div class="photo">
+    {{if .Picture}}
         <img
                 class="round-img"
-                src="{{.Image}}"
+                src="{{.Picture}}"
         />
-    </div>
-{{end}}
+    {{end}}
+</div>

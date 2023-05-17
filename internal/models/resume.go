@@ -19,7 +19,7 @@ type Resume struct {
 type Basics struct {
 	Name     string    `json:"name"`
 	Label    string    `json:"label"`
-	Image    string    `json:"image"`
+	Picture  string    `json:"picture"`
 	Email    string    `json:"email"`
 	Phone    string    `json:"phone"`
 	Summary  string    `json:"summary"`
@@ -68,15 +68,15 @@ type Education struct {
 	Location    string   `json:"location"`
 	StartDate   string   `json:"startDate"`
 	EndDate     string   `json:"endDate"`
-	Score       string   `json:"score"`
+	GPA         string   `json:"gpa"`
 	Courses     []string `json:"courses"`
 }
 
 type Certificate struct {
 	Title  string `json:"title"`
 	Date   string `json:"date"`
-	Score  string `json:"score"`
 	Issuer string `json:"issuer"`
+	Score  string `json:"score"`
 	URL    string `json:"url"`
 }
 

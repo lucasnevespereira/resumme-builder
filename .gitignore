@@ -5,3 +5,6 @@
 ui/.DS_Store
 output/
 ignored/
+.env
+bin/
+data/

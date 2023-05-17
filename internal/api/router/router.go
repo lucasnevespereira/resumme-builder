@@ -2,7 +2,7 @@ package router
 
 import (
 	"github.com/gin-gonic/gin"
-	"resumme-builder/api/handlers"
+	"resumme-builder/internal/api/handlers"
 )
 
 func Init() *gin.Engine {

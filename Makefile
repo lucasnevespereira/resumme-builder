@@ -1,5 +1,7 @@
 .PHONY: local server clean lint fmt
 
+APP_NAME=resumme-builder
+
 fmt:
 	gofmt -s -l -w .
 
@@ -12,7 +14,16 @@ local:
 server:
 	go run *.go server
 
+build:
+	go build -o bin/$(APP_NAME)
+
+docker-build:
+	docker build --no-cache -t $(APP_NAME) .
+
+docker-run:
+	docker run -it --rm -p 9000:9000 $(APP_NAME)
 
 clean:
 	rm -rf output
-	@echo "Output directory cleaned"
+	rm -rf bin/
+	@echo "cleaned!"
