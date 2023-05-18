@@ -10,11 +10,11 @@
 <main>
     <div class="top">
         {{ template "about.gohtml" .Basics }}
-        {{if .Basics.Picture}}
+        {{if .Basics.Image}}
             <div class="photo">
                 <img
                         class="round-img"
-                        src="{{.Basics.Picture}}"
+                        src="{{.Basics.Image}}"
                 />
             </div>
         {{end}}

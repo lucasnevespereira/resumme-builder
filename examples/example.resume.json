@@ -2,7 +2,7 @@
   "basics": {
     "name": "John Doe Rust",
     "label": "DevOps Engineer",
-    "picture": "https://i.imgur.com/tHA5l7T.jpg",
+    "image": "https://i.imgur.com/tHA5l7T.jpg",
     "email": "johndoerust@mail.com",
     "phone": "07123400808",
     "location": {
