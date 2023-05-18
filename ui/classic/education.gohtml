@@ -6,17 +6,17 @@
                 {{ .StudyType }} {{ .Area }}
                 | {{ .Institution }}
             </div>
-
             <div class="dates">
                 {{if .Location}}
                     <span>{{.Location}}</span> |
                 {{end}}
                 {{.EndDate}}
             </div>
-
-            <div class="description">
-                {{.GPA}}
-            </div>
+            {{if .GPA}}
+                <div class="description">
+                    {{.GPA}}
+                </div>
+            {{end}}
         </div>
     {{end}}
 </div>
