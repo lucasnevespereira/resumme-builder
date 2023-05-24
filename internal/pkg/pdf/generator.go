@@ -2,6 +2,7 @@ package pdf
 
 import (
 	"context"
+	"fmt"
 	"github.com/chromedp/cdproto/emulation"
 	"github.com/chromedp/cdproto/page"
 	"github.com/chromedp/chromedp"
@@ -16,33 +17,34 @@ const (
 	htmlSelector      = "body"
 )
 
-func Write(destination string, data []byte) error {
-	if err := os.WriteFile(destination, data, os.ModePerm); err != nil {
-		return errors.Wrap(err, "pdf.Write")
-	}
+// Generator provides functionality to generate PDF from HTML.
+type Generator struct{}
 
-	return nil
+// NewPDFGenerator creates a new instance of PDFGenerator.
+func NewPDFGenerator() *Generator {
+	return &Generator{}
 }
 
-func GenerateFromHtml(file string) ([]byte, error) {
+// GenerateFromHTML generates a PDF from HTML file.
+func (g *Generator) GenerateFromHTML(file string) ([]byte, error) {
 	startedAt := time.Now()
 
 	chromeCtx, cancelCtx := chromedp.NewContext(context.Background())
 	defer cancelCtx()
 
 	var pdfData []byte
-	url := getFilePathAsUrl(file)
+	url := getFilePathAsURL(file)
 
-	if err := chromedp.Run(chromeCtx, saveUrlAsPdf(url, &pdfData)); err != nil {
-		return nil, errors.Wrap(err, "chromedp.Run")
+	if err := chromedp.Run(chromeCtx, g.saveURLAsPDF(url, &pdfData)); err != nil {
+		return nil, errors.Wrap(err, "GenerateFromHTML - chromedp.Run")
 	}
 
-	logger.Log.Infof("Pdf %s generated in %f seconds", file, time.Since(startedAt).Seconds())
+	logger.Log.Infof("PDF %s generated in %f seconds", file, time.Since(startedAt).Seconds())
 
 	return pdfData, nil
 }
 
-func saveUrlAsPdf(url string, pdf *[]byte) chromedp.Tasks {
+func (g *Generator) saveURLAsPDF(url string, pdf *[]byte) chromedp.Tasks {
 	return chromedp.Tasks{
 		emulation.SetUserAgentOverride(userAgentOverride),
 		chromedp.Navigate(url),
@@ -59,7 +61,7 @@ func saveUrlAsPdf(url string, pdf *[]byte) chromedp.Tasks {
 				WithPrintBackground(true).
 				Do(ctx)
 			if err != nil {
-				return errors.Wrap(err, "page.PrintToPDF")
+				return errors.Wrap(err, "saveURLAsPDF - page.PrintToPDF")
 			}
 			*pdf = data
 			return nil
@@ -67,11 +69,11 @@ func saveUrlAsPdf(url string, pdf *[]byte) chromedp.Tasks {
 	}
 }
 
-func getFilePathAsUrl(filename string) string {
+func getFilePathAsURL(filename string) string {
 	path, err := os.Getwd()
 	if err != nil {
 		logger.Log.Error(err)
 	}
 
-	return "file://" + path + "/" + filename
+	return fmt.Sprintf("file://%s/%s", path, filename)
 }

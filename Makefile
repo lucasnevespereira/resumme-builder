@@ -9,7 +9,7 @@ lint: fmt
 	golangci-lint run
 
 local:
-	go run *.go local
+	go run *.go local -f='$(file)'
 
 server:
 	go run *.go server

@@ -4,8 +4,8 @@ import (
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"resumme-builder/internal/models"
-	"resumme-builder/internal/pkg/pdf"
-	"resumme-builder/internal/pkg/resume"
+	"resumme-builder/internal/services"
+	"resumme-builder/internal/utils/fs"
 	"resumme-builder/internal/utils/logger"
 )
 
@@ -15,7 +15,7 @@ func Status() gin.HandlerFunc {
 	}
 }
 
-func GetPdf() gin.HandlerFunc {
+func GetPdf(service *services.ResumeService) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		var resumeData models.Resume
 
@@ -27,17 +27,17 @@ func GetPdf() gin.HandlerFunc {
 			return
 		}
 
-		htmlFile, err := resume.ParseToHtml(resumeData)
+		htmlFile, err := service.Parser.ParseToHtml(resumeData)
 		if err != nil {
 			logger.Log.Fatal(err)
 		}
 
-		pdfData, err := pdf.GenerateFromHtml(htmlFile)
+		pdfData, err := service.Pdf.GenerateFromHTML(htmlFile)
 		if err != nil {
 			logger.Log.Fatal(err)
 		}
 
-		if err := pdf.Write(models.OutputPdfFile, pdfData); err != nil {
+		if err := fs.WriteFile(models.OutputPdfFile, pdfData); err != nil {
 			logger.Log.Fatal(err)
 		}
 
