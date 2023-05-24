@@ -2,88 +2,127 @@
 
 Build your resume with HTML/CSS and JSON Data
 
+## Table of Contents
+
+- [Introduction](#introduction)
+- [Local Usage](#local-usage)
+- [API Usage](#api-usage)
+- [Templates](#templates)
+- [Image](#image)
+- [Languages](#languages)
+- [Todo List](#todo-list)
+- [How to Contribute](#how-to-contribute)
+- [License](#license)
+
+## Introduction
+
+Resumme Builder is a tool that allows you to generate a resume using HTML/CSS templates and JSON data.
+It follows the [JSON Resume](https://jsonresume.org/) standard for structuring resume data.
+
 ## Local Usage
 
-Create a `data/resume.json` file and enter your data.
+Create a JSON file with your resume data. You can specify the file path using the `file` flag.
 
-The JSON structure follows the [JSON Resume](https://jsonresume.org/) standard.
+<i>You can see a json file example in [examples/example.resume.json](examples/example.resume.json)</i>
 
-<i>You can see an example in [examples/example.resume.json](examples/example.resume.json)</i>
+Run the following command to generate the resume in PDF and HTML formats:
 
-Run `make local`
+```shell
+make local file="data/resume.json"
+```
 
-Open `output/resume.pdf` or `output/resume.html`
+Alternatively, you can use the following command:
 
-## Api Usage
+```shell
+go run *.go local -f="data/resume.json"
+```
+
+The generated resume files (`resume.pdf` and `resume.html`) will be saved in the `output` directory.
+
+## API Usage
+
+To use Resumme Builder as an API, follow these steps:
+
+Start the server by running the following command:
 
 ```
 make server
 ```
 
-or use Docker
+You can also use Docker to run the server:
 
 ```
 make docker-build
 make docker-run
 ```
 
-request to generate pdf
-```
-[POST] http://localhost:9000/pdf
-```
+Send a POST request to `http://localhost:9000/pdf` with the JSON resume data in the request body.
+You can use the example JSON data provided in [examples/example.resume.json](examples/example.resume.json).
+
+The server will generate the resume in PDF format and return it as a response.
 
 e.g example json data request in [examples/example.resume.json](examples/example.resume.json)
 
-#### Languages
+## Templates
 
-- en
-- fr
+Resumme Builder provides the following templates for generating resumes:
 
+- Classic: [Example](examples/example.classic.pdf)
+- Basic: [Example](examples/example.basic.pdf)
+- Simple: [Example](examples/example.simple.pdf)
+- Oldman: [Example](examples/example.oldman.pdf)
+
+To use a specific template, specify the template name in the JSON resume data:
+
+```json
+  "template": "classic"
+```
+
+## Image
+
+If you want to include an image in your resume, provide the image URL in the JSON resume data:
+
+```json
+ "image": "https://i.imgur.com/tHA5l7T.jpg"
+```
+
+Upload your image to a service like [imgur](https://imgur.com/) and copy the direct link.
+
+## Languages
+
+Resumme Builder supports multiple languages for your resume, allowing you to create your resume in a language that suits
+your needs. The default language is English (en), but you can choose to use other supported languages as well.
+
+Currently, the following languages are supported:
+
+- English (en)
+- French (fr)
+
+This will automatically translate labels such as "Education," "Experiences," and other sections based on the chosen
+language.
+
+To set the language for your resume, include the following field in the JSON resume data:
 e.g [examples/example.resume.json](examples/example.resume.json)
 
 ```json
 "lang": "fr"
 ```
 
-### Templates
+## Todo List
 
-- classic ([example here](examples/example.classic.pdf))
-- basic ([example here](examples/example.basic.pdf))
-- simple ([example here](examples/example.simple.pdf))
-- oldman ([example here](examples/example.oldman.pdf))
-
-e.g [examples/example.resume.json](examples/example.resume.json)
-
-```json
-  "template": "classic"
-```
-
-<hr />
-
-### Image
-
-Concerning the image, if you want one in your resume you will need to pass in a link to the image json field
-
-```json
- "image": "https://i.imgur.com/tHA5l7T.jpg"
-```
-
-For that you can upload your image to a service like [imgur](https://imgur.com/) and copy the direct link.
-
-### TODO
-
-- [x] Parse data to Html
-- [x] Generate Pdf
+- [x] Parse data to HTML
+- [x] Generate PDF
 - [x] Build an API
-- [x] Handle Multiple Languages
-- [ ] Build more templates
-- [ ] Handle Auto Translation
+- [x] Handle multiple languages (i18n)
+- [ ] Expand template options
+- [ ] Implement automatic translation support
+- [ ] Add unit tests and improve test coverage
 
+Feel free to contribute additional templates and features to enhance the Resumme Builder project!
 
 ## How to Contribute
 
 If you want to contribute you can read [Contributing](CONTRIBUTING.md)
-
 
 ## License
 
