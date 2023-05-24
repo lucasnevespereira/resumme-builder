@@ -4,13 +4,18 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"net/http"
+	"resumme-builder/configs"
 	"resumme-builder/internal/api/router"
-	"resumme-builder/internal/utils/config"
+	"resumme-builder/internal/models"
+	"resumme-builder/internal/pkg/parser"
+	"resumme-builder/internal/pkg/pdf"
+	"resumme-builder/internal/pkg/template"
+	"resumme-builder/internal/services"
 	"resumme-builder/internal/utils/logger"
 )
 
 type Api struct {
-	config config.ApiConfig
+	config configs.ApiConfig
 	router *gin.Engine
 }
 
@@ -21,8 +26,12 @@ func New() *Api {
 }
 
 func (api *Api) setup() {
-	api.config = config.LoadApiConfig()
-	api.router = router.Init()
+	templateManager := template.NewTemplateManager("ui")
+	parser := parser.NewHTMLParser(models.OutputDir, models.OutputHtmlFile, templateManager)
+	pdfGenerator := pdf.NewPDFGenerator()
+	resumeService := services.NewResumeService(parser, pdfGenerator)
+	api.config = configs.LoadApiConfig()
+	api.router = router.Init(resumeService)
 }
 
 func (api *Api) Run() error {

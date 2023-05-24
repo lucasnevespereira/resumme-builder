@@ -3,38 +3,63 @@ package local
 import (
 	"github.com/spf13/cobra"
 	"resumme-builder/internal/models"
+	"resumme-builder/internal/pkg/parser"
 	"resumme-builder/internal/pkg/pdf"
-	"resumme-builder/internal/pkg/resume"
+	"resumme-builder/internal/pkg/template"
+	"resumme-builder/internal/services"
+	"resumme-builder/internal/utils/fs"
 	"resumme-builder/internal/utils/logger"
 )
 
+var resumeDataFile string
+
+func init() {
+	localCmd.Flags().StringVarP(&resumeDataFile, "file", "f", "", "Resume data file")
+	err := localCmd.MarkFlagRequired("file")
+	if err != nil {
+		logger.Log.Error("Failed to mark 'file' flag as required:", err)
+	}
+}
+
 var localCmd = &cobra.Command{
-	Use:   "local",
-	Short: "Generates output locally",
-	RunE: func(cmd *cobra.Command, args []string) error {
-		logger.Log.Info("Generating output")
+	Use:     "local",
+	Short:   "Generates output locally",
+	PreRunE: preRunLocalCommand,
+	RunE:    runLocalCommand,
+}
 
-		resumeData, err := resume.ReadLocalData()
-		if err != nil {
-			logger.Log.Error(err)
-		}
+func preRunLocalCommand(cmd *cobra.Command, args []string) error {
+	filePath := cmd.Flag("file").Value.String()
+	err := fs.EnsureNonEmptyFile(filePath)
+	if err != nil {
+		return err
+	}
 
-		htmlFile, err := resume.ParseToHtml(resumeData)
-		if err != nil {
-			return err
-		}
+	return nil
+}
 
-		pdfData, err := pdf.GenerateFromHtml(htmlFile)
-		if err != nil {
-			return err
-		}
+func runLocalCommand(cmd *cobra.Command, args []string) error {
+	logger.Log.Info("Generating output")
 
-		if err := pdf.Write(models.OutputPdfFile, pdfData); err != nil {
-			return err
-		}
+	templateManager := template.NewTemplateManager("ui")
+	parser := parser.NewHTMLParser(models.OutputDir, models.OutputHtmlFile, templateManager)
+	pdfGenerator := pdf.NewPDFGenerator()
+	resumeService := services.NewResumeService(parser, pdfGenerator)
 
-		return nil
-	},
+	fileData, err := fs.ReadFile(resumeDataFile)
+	if err != nil {
+		return err
+	}
+	resumeData, err := resumeService.UnmarshalResume(fileData)
+	if err != nil {
+		return err
+	}
+
+	if err := resumeService.GeneratePDF(resumeData); err != nil {
+		return err
+	}
+
+	return nil
 }
 
 func Cmd() *cobra.Command {
