@@ -1,0 +1,42 @@
+{{ if .Projects }}
+<section class="section">
+  <header>
+    <h2 class='section-title'>{{ .Labels.Projects }}</h2>
+  </header>
+  <section id="projects">
+    {{ range $index, $project := .Projects }}
+    <section class="project-item">
+      {{ if $project.Description }}
+        <label for="project-item-{{ $index }}"></label>
+      {{ end }}
+
+      {{ if $project.Name }}
+      <header class="clear">
+        {{ if $project.Name }}
+        <div class="position">{{ $project.Name }}</div>
+        {{ end }}
+      </header>
+      {{ end }}
+      {{ if $project.URL }}
+      <span class="website">
+        <span class="fa-solid fa-up-right-from-square"></span>
+        <a target="_blank" href="{{ $project.URL }}">{{ $project.URL }}</a>
+      </span>
+      {{ end }}
+      <div class="item">
+        {{ if $project.Description }}
+          <div class="summary">{{ $project.Description }}</div>
+        {{ end }}
+        {{ if $project.Highlights }}
+        <ul class="highlights">
+          {{ range $highlight := $project.Highlights }}
+            <li>{{ $highlight }}</li>
+          {{ end }}
+        </ul>
+        {{ end }}
+      </div>
+    </section>
+    {{ end }}
+  </section>
+</section>
+{{ end }}

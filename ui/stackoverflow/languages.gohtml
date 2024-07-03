@@ -1,0 +1,26 @@
+{{ if .Languages }}
+<section class="section">
+  <header>
+    <h2 class='section-title'>{{ .Labels.Languages }}</h2>
+  </header>
+  <section id="languages">
+    {{ range $language := .Languages }}
+    <div class="display">
+      {{ if $language.Language }}
+      <h3 class="language">
+        {{ $language.Language }}
+      </h3>
+      {{ end }}
+      <div class="item">
+        {{ if $language.Fluency }}
+        <div class="level fluency {{ $language.Fluency }}">
+          <em>{{ $language.Fluency }}</em>
+          <div class="bar"></div>
+        </div>
+        {{ end }}
+      </div>
+    </div>
+    {{ end }}
+  </section>
+</section>
+{{ end }}

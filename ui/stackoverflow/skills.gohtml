@@ -1,0 +1,37 @@
+{{ if .Skills }}
+<section class="section">
+  <header>
+    <h2 class='section-title'>{{ .Labels.Skills }}</h2>
+  </header>
+  <section id="skills">
+    {{ range $skill := .Skills }}
+    <div class="display">
+      {{ if $skill.Name }}
+      <h3 class="name">
+        {{ $skill.Name }}
+      </h3>
+      {{ end }}
+      <div class="item">
+        {{ if $skill.Level }}
+        <div class="level skillLevel {{ $skill.Level }}">
+          {{ if $skill.LevelDisplay }}
+          <em>{{ $skill.LevelDisplay }}</em>
+          {{ else }}
+          <em>{{ $skill.Level }}</em>
+          {{ end }}
+          <div class="bar"></div>
+        </div>
+        {{ end }}
+        {{ if $skill.Keywords }}
+        <ul class="keywords">
+          {{ range $keyword := $skill.Keywords }}
+            <li>{{ $keyword }}</li>
+          {{ end }}
+        </ul>
+        {{ end }}
+      </div>
+    </div>
+    {{ end }}
+  </section>
+</section>
+{{ end }}

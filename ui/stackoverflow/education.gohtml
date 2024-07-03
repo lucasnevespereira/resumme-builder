@@ -1,0 +1,72 @@
+{{ if .Education }}
+<section class="section">
+  <header>
+    <h2 class='section-title'>{{ .Labels.Education }}</h2>
+  </header>
+
+  <section id="education">
+    {{ range $index, $education := .Education }}
+    <section class="education-item">
+      <header class="clear">
+        <div class="date">
+          {{ if $education.StartDate }}
+          <span class="startDate">
+          {{ formatDate "Jan, 2006" $education.StartDate }}
+          </span>
+          {{ end }}
+          {{ if $education.EndDate }}
+          <span class="endDate">
+          - {{ formatDate "Jan, 2006" $education.EndDate }}
+          </span>
+          {{ else }}
+          <span class="endDate">
+          - Current
+          </span>
+          {{ end }}
+        </div>
+        <div class="header-left">
+          {{ if $education.StudyType }}
+          <div class="studyType">
+            {{ $education.StudyType }}
+          </div>
+          {{ end }}
+          {{ if $education.Area }}
+          <div class="area">
+            {{ $education.Area }}
+          </div>
+          {{ end }}
+          {{ if $education.Institution }}
+          <div class="institution">
+            {{ $education.Institution }}
+          </div>
+          {{ end }}
+        </div>
+      </header>
+
+      {{ if $education.Location }}
+      <span class="location">
+        <span class="fa-solid fa-location-dot"></span>
+        <span class="city">{{ $education.Location }}</span>
+      </span>
+      {{ end }}
+
+      {{ if $education.Courses }}
+      <ul class="courses">
+        {{ range $course := $education.Courses }}
+        <li>{{ $course }}</li>
+        {{ end }}
+      </ul>
+      {{ end }}
+
+      <div class="item">
+        {{ if $education.Score }}
+        <div class='gpa'>
+          <strong> Grade:</strong> <span>{{ $education.Score }}</span>
+        </div>
+        {{ end }}
+      </div>
+    </section>
+    {{ end }}
+  </section>
+</section>
+{{ end }}
