@@ -4,6 +4,7 @@ import (
 	"html/template"
 	"resumme-builder/internal/models"
 	"strings"
+	"time"
 )
 
 func isLast(index, length int) bool {
@@ -61,4 +62,13 @@ func evaluate(htmlStr string) template.HTML {
 
 func lowerEq(s1 string, s2 string) bool {
 	return strings.EqualFold(strings.ToLower(s1), strings.ToLower(s2))
+}
+
+func formatDate(s1 string, s2 string) string {
+	t, err := time.Parse("2006-01-02", s2)
+	if err != nil {
+		panic(err)
+	}
+
+	return t.Format(s1)
 }
