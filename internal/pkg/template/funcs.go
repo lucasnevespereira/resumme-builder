@@ -1,6 +1,7 @@
 package template
 
 import (
+	"fmt"
 	"html/template"
 	"resumme-builder/internal/models"
 	"strings"
@@ -64,11 +65,21 @@ func lowerEq(s1 string, s2 string) bool {
 	return strings.EqualFold(strings.ToLower(s1), strings.ToLower(s2))
 }
 
+var formats = []string{
+	"2006-01-02",
+	"2006-01",
+	"January 2 2006",
+	"January 2006",
+	"2006",
+}
+
 func formatDate(s1 string, s2 string) string {
-	t, err := time.Parse("2006-01-02", s2)
-	if err != nil {
-		panic(err)
+	for _, format := range formats {
+		t, err := time.Parse(format, s2)
+		if err == nil {
+			return t.Format(s1)
+		}
 	}
 
-	return t.Format(s1)
+	panic(fmt.Sprintf("Source string date format could not be recognized, valid formats are: %v", strings.Join(formats, ", ")))
 }
