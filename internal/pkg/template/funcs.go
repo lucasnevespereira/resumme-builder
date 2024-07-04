@@ -73,11 +73,11 @@ var formats = []string{
 	"2006",
 }
 
-func formatDate(s1 string, s2 string) string {
+func formatDate(layout string, date string) string {
 	for _, format := range formats {
-		t, err := time.Parse(format, s2)
+		t, err := time.Parse(format, date)
 		if err == nil {
-			return t.Format(s1)
+			return t.Format(layout)
 		}
 	}
 
