@@ -1,0 +1,53 @@
+{{ if .Work }}
+<section class="section">
+  <header>
+    <h2 class='section-title'>{{ .Labels.Experiences }}</h2>
+  </header>
+  <section id="work">
+    {{ range $index, $work := .Work }}
+    <section class="work-item">
+      {{ if $work.Summary }}
+      <label for="work-item-{{ $index }}"></label>
+      {{ end }}
+
+      <header class="clear">
+        <div class="date">
+          {{ if $work.StartDate }}
+          <span class="startDate">{{ formatDate "Jan, 2006" $work.StartDate }}</span>
+          {{ end }}
+          {{ if $work.EndDate }}
+          <span class="endDate">- {{ formatDate "Jan, 2006" $work.EndDate }}</span>
+          {{ else }}
+          <span class="endDate">- Current</span>
+          {{ end }}
+        </div>
+        {{ if $work.Position }}
+        <div class="position">{{ $work.Position }}</div>
+        {{ end }}
+        <div class="company">{{ $work.Company }}</div>
+      </header>
+
+      {{ if $work.Location }}
+      <span class="location">
+        <span class="fa-solid fa-location-dot"></span>
+        <span class="city">{{ $work.Location }}</span>
+      </span>
+      {{ end }}
+
+      <div class="item" id="work-item">
+        {{ if $work.Summary }}
+        <div class="summary">{{ $work.Summary }}</div>
+        {{ end }}
+        {{ if $work.Highlights }}
+        <ul class="highlights">
+          {{ range $highlight := $work.Highlights }}
+          <li>{{ $highlight }}</li>
+          {{ end }}
+        </ul>
+        {{ end }}
+      </div>
+    </section>
+    {{ end }}
+  </section>
+</section>
+{{ end }}

@@ -102,15 +102,16 @@ type Meta struct {
 }
 
 type ResumeLabels struct {
-	Education   string
-	Experiences string
-	Projects    string
-	Skills      string
-	SoftSkills  string
-	Languages   string
-	Interests   string
-	Profile     string
-	Since       string
+	Education    string
+	Experiences  string
+	Projects     string
+	Skills       string
+	SoftSkills   string
+	Languages    string
+	Interests    string
+	Profile      string
+	Since        string
+	Certificates string
 }
 
 func (r *Resume) GetEducationLabel() string {
@@ -147,4 +148,8 @@ func (r *Resume) GetProfileLabel() string {
 
 func (r *Resume) GetSinceLabel() string {
 	return lang.Translate(r.Meta.Lang, SinceLabel)
+}
+
+func (r *Resume) GetCertificatesLabel() string {
+	return lang.Translate(r.Meta.Lang, CertificatesLabel)
 }

@@ -1,0 +1,25 @@
+{{ if .Interests }}
+<section class="section">
+  <header>
+    <h2 class='section-title'>{{ .Labels.Interests }}</h2>
+  </header>
+  <section id="interests">
+    {{ range $interest := .Interests }}
+    <div class="item">
+      {{ if $interest.Name }}
+      <h3 class="name">
+        {{ $interest.Name }}
+      </h3>
+      {{ end }}
+      {{ if $interest.Keywords }}
+      <ul class="keywords">
+        {{ range $keyword := $interest.Keywords }}
+        <li>{{ $keyword }}</li>
+        {{ end }}
+      </ul>
+      {{ end }}
+    </div>
+    {{ end }}
+  </section>
+</section>
+{{ end }}

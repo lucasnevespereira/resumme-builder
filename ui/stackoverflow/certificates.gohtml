@@ -1,0 +1,41 @@
+{{ if .Certificates }}
+  <section class="section">
+    <header>
+      <h2 class="section-title">{{ .Labels.Certificates }}</h2>
+    </header>
+    <section id="certificates">
+      {{ range $index, $certificate := .Certificates }}
+        <section class="certificate-item">
+          <header class="clear">
+            {{ if $certificate.Date }}
+              <div class="date">
+                {{ $certificate.Date }}
+              </div>
+            {{ end }}
+            <div class="header-left">
+              {{ if $certificate.Title }}
+                <div class="name">
+                  {{ $certificate.Title }}
+                </div>
+              {{ end }}
+              {{ if $certificate.Issuer }}
+                <div class="issuer">
+                  {{ $certificate.Issuer }}
+                </div>
+              {{ end }}
+            </div>
+          </header>
+
+          <div class="item">
+            {{ if $certificate.URL }}
+              <span class="url">
+                <span class="fa-solid fa-up-right-from-square"></span>
+                <a target="_blank" href="{{ $certificate.URL }}">{{ $certificate.URL }}</a>
+              </span>
+            {{ end }}
+          </div>
+        </section>
+      {{ end }}
+    </section>
+  </section>
+{{ end }}

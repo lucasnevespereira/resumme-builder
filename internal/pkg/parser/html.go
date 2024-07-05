@@ -2,12 +2,13 @@ package parser
 
 import (
 	"fmt"
-	"github.com/pkg/errors"
 	"resumme-builder/internal/models"
 	"resumme-builder/internal/pkg/template"
 	"resumme-builder/internal/utils/fs"
 	"resumme-builder/internal/utils/logger"
 	"time"
+
+	"github.com/pkg/errors"
 )
 
 type HTMLParser struct {
@@ -64,6 +65,7 @@ func (p *HTMLParser) updateResumeLabels(resumeData *models.Resume) error {
 	resumeData.Labels.Interests = resumeData.GetInterestsLabel()
 	resumeData.Labels.Profile = resumeData.GetProfileLabel()
 	resumeData.Labels.Since = resumeData.GetSinceLabel()
+	resumeData.Labels.Certificates = resumeData.GetCertificatesLabel()
 
 	if resumeData.Meta.Template == "" {
 		resumeData.Meta.Template = models.ClassicTemplate

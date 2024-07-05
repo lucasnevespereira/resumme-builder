@@ -1,10 +1,11 @@
 package template
 
 import (
-	"github.com/pkg/errors"
 	"html/template"
 	"path"
 	"path/filepath"
+
+	"github.com/pkg/errors"
 )
 
 type Manager struct {
@@ -31,6 +32,7 @@ func (tm *Manager) GetTemplate(name string) (*template.Template, error) {
 		"getLastName":     getLastName,
 		"evaluate":        evaluate,
 		"lowerEq":         lowerEq,
+		"formatDate":      formatDate,
 	}
 
 	t := template.New(path.Base(templateFiles[0])).Funcs(templateFuncs)
