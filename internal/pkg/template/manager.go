@@ -2,7 +2,6 @@ package template
 
 import (
 	"html/template"
-	"path"
 	"path/filepath"
 
 	"github.com/pkg/errors"
@@ -35,7 +34,7 @@ func (tm *Manager) GetTemplate(name string) (*template.Template, error) {
 		"formatDate":      formatDate,
 	}
 
-	t := template.New(path.Base(templateFiles[0])).Funcs(templateFuncs)
+	t := template.New(filepath.Base(templateFiles[0])).Funcs(templateFuncs)
 	t, err = t.ParseFiles(templateFiles...)
 	if err != nil {
 		return nil, errors.Wrap(err, "GetTemplate template.New")
