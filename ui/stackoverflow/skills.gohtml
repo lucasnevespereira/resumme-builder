@@ -5,13 +5,12 @@
   </header>
   <section id="skills">
     {{ range $skill := .Skills }}
-    <div class="display">
+      <div class="item">
       {{ if $skill.Name }}
       <h3 class="name">
         {{ $skill.Name }}
       </h3>
       {{ end }}
-      <div class="item">
         {{ if $skill.Level }}
         <div class="level skillLevel {{ $skill.Level }}">
           {{ if $skill.LevelDisplay }}
@@ -30,7 +29,6 @@
         </ul>
         {{ end }}
       </div>
-    </div>
     {{ end }}
   </section>
 </section>
