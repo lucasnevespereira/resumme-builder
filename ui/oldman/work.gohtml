@@ -22,9 +22,9 @@ display: flex; flex-direction: column;">
                             <span>{{.Location}}</span>
                             |
                             {{if .EndDate}}
-                                {{.StartDate}} - {{.EndDate}}
+                                {{ formatDate "Jan, 2006" .StartDate }} - {{ formatDate "Jan, 2006" .EndDate }}
                             {{else}}
-                                {{$since}} {{.StartDate}}
+                                {{$since}} {{ formatDate "Jan, 2006" .StartDate }}
                             {{end}}
                         </div>
                         {{if .TeamDetails}}
