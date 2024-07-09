@@ -11,7 +11,7 @@
                         {{.StudyType}} {{.Area}}
                     </div>
                     <div class="date">
-                        {{.EndDate}}
+                        {{ formatDate "Jan, 2006" .EndDate }}
                     </div>
                 </div>
             {{end}}

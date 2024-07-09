@@ -10,7 +10,7 @@
                 {{if .Location}}
                     <span>{{.Location}}</span> |
                 {{end}}
-                {{.EndDate}}
+                {{ formatDate "Jan, 2006" .EndDate }}
             </div>
             {{if .Score}}
                 <div class="description">

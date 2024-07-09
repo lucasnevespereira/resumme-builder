@@ -10,6 +10,7 @@ Build your resume with HTML/CSS and JSON Data
 - [Templates](#templates)
 - [Image](#image)
 - [Languages](#languages)
+- [Date Formats](#date-formats)
 - [Todo List](#todo-list)
 - [How to Contribute](#how-to-contribute)
 - [License](#license)
@@ -71,6 +72,7 @@ Resumme Builder provides the following templates for generating resumes:
 - Basic: [Example](examples/example.basic.pdf)
 - Simple: [Example](examples/example.simple.pdf)
 - Oldman: [Example](examples/example.oldman.pdf)
+- Stackoverflow: [Example](examples/example.stackoverflow.pdf)
 
 To use a specific template, specify the template name in the JSON resume data:
 
@@ -106,6 +108,40 @@ e.g [examples/example.resume.json](examples/example.resume.json)
 
 ```json
 "lang": "fr"
+```
+
+## Date Formats
+
+Resumme Builder supports the following date formats:
+
+- `2006-01-02` (e.g., "2024-07-09")
+- `2006-01` (e.g., "2024-07")
+- `January 2 2006` (e.g., "July 9 2024")
+- `January 2006` (e.g., "July 2024")
+- `2006` (e.g., "2024")
+
+Example of date fields in JSON resume data:
+
+```json
+{
+  "education": [
+    {
+      "institution": "University of Example",
+      "area": "Computer Science",
+      "studyType": "Bachelor",
+      "startDate": "2015-09-01",
+      "endDate": "2019-06-30"
+    }
+  ],
+  "work": [
+    {
+      "company": "Example Corp",
+      "position": "Software Engineer",
+      "startDate": "2020-01",
+      "endDate": "2024-07"
+    }
+  ]
+}
 ```
 
 ## Todo List
