@@ -7,7 +7,7 @@
                     {{.StudyType}} {{.Area}} | {{.Institution}}
                 </div>
                 <small class="location-date">
-                    {{.Location}}, {{ formatDate "Jan, 2006" .EndDate }}
+                    {{.Location}}, {{ formatDate "Jan, 2006" .EndDate $.Meta.Lang }}
                 </small>
             </div>
         {{end}}

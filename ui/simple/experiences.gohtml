@@ -4,8 +4,8 @@
         {{range .Work}}
             <div class="wrapper">
                 <div class="dates">
-                    <span class="started">{{ formatDate "Jan, 2006" .StartDate }}</span>
-                    <span class="stopped">{{ formatDate "Jan, 2006" .EndDate }}</span>
+                    <span class="started">{{ formatDate "Jan, 2006" .StartDate $.Meta.Lang }}</span>
+                    <span class="stopped">{{ formatDate "Jan, 2006" .EndDate $.Meta.Lang }}</span>
                 </div>
                 <div class="element">
                     <div class="position">{{.Position}} {{if .ContractType}}(.ContractType){{end}}</div>

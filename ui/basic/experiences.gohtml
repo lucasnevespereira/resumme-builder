@@ -16,9 +16,9 @@
                     <span>{{.Location}}</span>
                     |
                     {{if .EndDate}}
-                        {{ formatDate "Jan, 2006" .StartDate }} - {{ formatDate "Jan, 2006" .EndDate }}
+                        {{ formatDate "Jan, 2006" .StartDate $.Meta.Lang }} - {{ formatDate "Jan, 2006" .EndDate $.Meta.Lang }}
                     {{else}}
-                        {{$since}} {{ formatDate "Jan, 2006" .StartDate }}
+                        {{$since}} {{ formatDate "Jan, 2006" .StartDate $.Meta.Lang }}
                     {{end}}
                 </div>
 
