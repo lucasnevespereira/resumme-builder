@@ -6,6 +6,8 @@ import (
 	"resumme-builder/internal/models"
 	"strings"
 	"time"
+
+	"github.com/ruang-guru/monday"
 )
 
 func isLast(index, length int) bool {
@@ -73,11 +75,11 @@ var formats = []string{
 	"2006",
 }
 
-func formatDate(layout string, date string) string {
+func formatDate(layout string, date string, locale string) string {
 	for _, format := range formats {
 		t, err := time.Parse(format, date)
 		if err == nil {
-			return t.Format(layout)
+			return monday.Format(t, layout, monday.Locale(locale))
 		}
 	}
 

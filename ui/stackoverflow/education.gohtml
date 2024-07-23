@@ -11,12 +11,12 @@
         <div class="date">
           {{ if $education.StartDate }}
           <span class="startDate">
-          {{ formatDate "Jan, 2006" $education.StartDate }}
+          {{ formatDate "Jan, 2006" $education.StartDate $.Meta.Lang }}
           </span>
           {{ end }}
           {{ if $education.EndDate }}
           <span class="endDate">
-          - {{ formatDate "Jan, 2006" $education.EndDate }}
+          - {{ formatDate "Jan, 2006" $education.EndDate $.Meta.Lang }}
           </span>
           {{ else }}
           <span class="endDate">

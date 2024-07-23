@@ -13,10 +13,10 @@
       <header class="clear">
         <div class="date">
           {{ if $work.StartDate }}
-          <span class="startDate">{{ formatDate "Jan, 2006" $work.StartDate }}</span>
+          <span class="startDate">{{ formatDate "Jan, 2006" $work.StartDate $.Meta.Lang }}</span>
           {{ end }}
           {{ if $work.EndDate }}
-          <span class="endDate">- {{ formatDate "Jan, 2006" $work.EndDate }}</span>
+          <span class="endDate">- {{ formatDate "Jan, 2006" $work.EndDate $.Meta.Lang }}</span>
           {{ else }}
           <span class="endDate">- Current</span>
           {{ end }}
