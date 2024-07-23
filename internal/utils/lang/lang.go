@@ -1,11 +1,12 @@
 package lang
 
 import (
-	"golang.org/x/text/language"
 	"path/filepath"
 	"resumme-builder/internal/utils/json"
 	"resumme-builder/internal/utils/logger"
 	"strings"
+
+	"golang.org/x/text/language"
 
 	"github.com/nicksnyder/go-i18n/v2/i18n"
 )
@@ -14,7 +15,7 @@ const localesDir = "internal/utils/lang/locales"
 
 var bundle *i18n.Bundle
 
-var supportedLanguages = []string{"en", "fr"}
+var supportedLanguages = []string{"en_US", "fr_FR"}
 
 func init() {
 	bundle = i18n.NewBundle(language.English)
