@@ -24,14 +24,15 @@ func (tm *Manager) GetTemplate(name string) (*template.Template, error) {
 	}
 
 	templateFuncs := template.FuncMap{
-		"isLast":          isLast,
-		"displayLocation": displayLocation,
-		"trimURLPrefix":   trimURLPrefix,
-		"getFirstName":    getFirstName,
-		"getLastName":     getLastName,
-		"evaluate":        evaluate,
-		"lowerEq":         lowerEq,
-		"formatDate":      formatDate,
+		"isLast":                   isLast,
+		"displayLocation":          displayLocation,
+		"displayLocationWithSlash": displayLocationWithSlash,
+		"trimURLPrefix":            trimURLPrefix,
+		"getFirstName":             getFirstName,
+		"getLastName":              getLastName,
+		"evaluate":                 evaluate,
+		"lowerEq":                  lowerEq,
+		"formatDate":               formatDate,
 	}
 
 	t := template.New(filepath.Base(templateFiles[0])).Funcs(templateFuncs)

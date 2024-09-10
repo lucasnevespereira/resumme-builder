@@ -1,0 +1,43 @@
+<div class="experiences">
+    <div class="section-title">
+        {{ .Labels.Experiences }}
+    </div>
+    {{$since := .Labels.Since}}
+    {{range .Work }}
+        <div class="element">
+            <div class="position">
+                {{.Position}}
+            </div>
+            <div class="info">
+                {{if .Company}}
+                    <span class="schooladdress">{{.Company}}{{if .Location}}, {{.Location}} {{end}}</span>
+                {{end}}
+                {{if .StartDate}}
+                    <span class="dates">
+                        {{if .EndDate}}
+                            {{.StartDate}} - {{.EndDate}}
+                        {{else}}
+                            {{$since}} {{.StartDate}}
+                        {{end}}
+                    </span>
+                {{end}}
+            </div>
+            <div class="description">
+                {{if .Summary}}
+                    <p>
+                        {{.Summary}}
+                    </p>
+                {{end}}
+                {{if .Highlights}}
+                    <ul>
+                        {{range .Highlights}}
+                            <li>
+                                <p class="highlight">{{.}}</p>
+                            </li>
+                        {{end}}
+                    </ul>
+                {{end}}
+            </div>
+        </div>
+    {{end}}
+</div>

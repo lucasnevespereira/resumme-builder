@@ -33,8 +33,27 @@ func displayLocation(location models.Location) string {
 	return locationStr
 }
 
+func displayLocationWithSlash(location models.Location) string {
+	var parts []string
+
+	if location.City != "" {
+		parts = append(parts, location.City)
+	}
+	if location.CountryCode != "" {
+		parts = append(parts, location.CountryCode)
+	}
+	if location.Region != "" {
+		parts = append(parts, location.Region)
+	}
+
+	locationStr := strings.Join(parts, "/ ")
+	locationStr = strings.TrimSuffix(locationStr, "/ ")
+
+	return locationStr
+}
+
 func trimURLPrefix(url string) string {
-	prefixes := []string{"http://", "https://", "https://www.", "www."}
+	prefixes := []string{"http://", "https://", "https://www.", "www.", ""}
 	for _, prefix := range prefixes {
 		if strings.HasPrefix(url, prefix) {
 			return strings.TrimPrefix(url, prefix)

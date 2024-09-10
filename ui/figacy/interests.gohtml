@@ -1,0 +1,12 @@
+{{if .Interests}}
+    <div class="interestFields">
+        <div class="section-title">{{.Labels.Interests}}</div>
+        <div class="item">
+            <span>
+            {{range $index, $interest := .Interests}}
+                {{$interest.Name}}{{if not (isLast $index (len $.Interests))}},{{end}}
+            {{end}}
+            </span>
+        </div>
+    </div>
+{{end}}

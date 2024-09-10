@@ -1,0 +1,40 @@
+{{if .Skills}}
+    <div class="skills">
+        <div class="section-title">{{.Labels.Skills}}</div>
+        <div class="tech-soft-skills">
+            <div class="softSkills">
+                <div class="skillsTitle">SAVOIR-ETRE</div>
+                    <ul class="items">
+                        {{range $index, $skill := .SoftSkills }}
+                            <li class="skills-value">
+                                {{$skill.Name}}
+                            </li>
+                        {{end}}
+                    </ul>
+            </div>
+            <div class="technicalSkills">
+                <div class="skillsTitle">SAVOIR-FAIRE</div>
+                <ul class="items">
+                    {{range $index, $skill := .Skills }}
+                        <li class="skills-value">
+                            {{$skill.Name}}
+                        </li>
+                    {{end}}
+                </ul>
+            </div>
+        </div>
+    </div>
+{{end}}
+
+{{/*{{if .SoftSkills}}*/}}
+{{/*    <div class="skills">*/}}
+{{/*        <div class="subtitle">{{.Labels.SoftSkills}}</div>*/}}
+{{/*        <div class="item">*/}}
+{{/*            {{range $index, $skill := .SoftSkills }}*/}}
+{{/*                <span class="value">*/}}
+{{/*                    {{$skill.Name}}{{if not (isLast $index (len $.SoftSkills))}},{{end}}*/}}
+{{/*                </span>*/}}
+{{/*            {{end}}*/}}
+{{/*        </div>*/}}
+{{/*    </div>*/}}
+{{/*{{end}}*/}}
