@@ -5,7 +5,9 @@
             <div class="wrapper">
                 <div class="dates">
                     <span class="started">{{ formatDate "Jan, 2006" .StartDate $.Meta.Lang }}</span>
+                    {{if .EndDate}}
                     <span class="stopped">{{ formatDate "Jan, 2006" .EndDate $.Meta.Lang }}</span>
+                    {{end}}
                 </div>
                 <div class="element">
                     <div class="position">{{.Position}} {{if .ContractType}}(.ContractType){{end}}</div>
