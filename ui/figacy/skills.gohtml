@@ -3,7 +3,13 @@
         <div class="section-title">{{.Labels.Skills}}</div>
         <div class="tech-soft-skills">
             <div class="softSkills">
-                <div class="skillsTitle">SAVOIR-ETRE</div>
+                <div class="skillsTitle uppercase">
+                    {{ if eq .Meta.Lang "fr_FR" }}
+                        Savoir-être
+                    {{ else }}
+                        Soft Skills
+                    {{ end }}
+                </div>
                     <ul class="items">
                         {{range $index, $skill := .SoftSkills }}
                             <li class="skills-value">
@@ -13,7 +19,13 @@
                     </ul>
             </div>
             <div class="technicalSkills">
-                <div class="skillsTitle">SAVOIR-FAIRE</div>
+                <div class="skillsTitle uppercase">
+                    {{ if eq .Meta.Lang "fr_FR" }}
+                    Savoir-faire
+                    {{ else }}
+                    Tech Skills
+                    {{ end }}
+                </div>
                 <ul class="items">
                     {{range $index, $skill := .Skills }}
                         <li class="skills-value">
@@ -25,16 +37,3 @@
         </div>
     </div>
 {{end}}
-
-{{/*{{if .SoftSkills}}*/}}
-{{/*    <div class="skills">*/}}
-{{/*        <div class="subtitle">{{.Labels.SoftSkills}}</div>*/}}
-{{/*        <div class="item">*/}}
-{{/*            {{range $index, $skill := .SoftSkills }}*/}}
-{{/*                <span class="value">*/}}
-{{/*                    {{$skill.Name}}{{if not (isLast $index (len $.SoftSkills))}},{{end}}*/}}
-{{/*                </span>*/}}
-{{/*            {{end}}*/}}
-{{/*        </div>*/}}
-{{/*    </div>*/}}
-{{/*{{end}}*/}}
