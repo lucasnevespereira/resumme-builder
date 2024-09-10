@@ -1,0 +1,12 @@
+<div class="profile-container">
+    {{ if .Image }}
+        <div class="top-container-image">
+            <img class="base64imageRound" src="{{ .Image }}">
+        </div>
+    {{ end }}
+    {{ if .Summary }}
+        <div class="profile-description">
+            <p>{{ .Summary }}</p>
+        </div>
+    {{ end }}
+</div>

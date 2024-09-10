@@ -1,0 +1,14 @@
+{{if .Languages}}
+    <div class="languages">
+        <div class="section-title">{{.Labels.Languages}}</div>
+        <div class="item">
+            {{range $index, $lang := .Languages}}
+                <p class="value">
+                    <strong>{{$lang.Language}}</strong>
+                    {{if $lang.Fluency}} - {{$lang.Fluency}}{{end}}
+                    {{if not (isLast $index (len $.Languages))}},{{end}}
+                </p>
+            {{end}}
+        </div>
+    </div>
+{{end}}

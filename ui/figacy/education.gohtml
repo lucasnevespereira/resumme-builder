@@ -1,0 +1,19 @@
+<div class="educations">
+    <div class="section-title">{{.Labels.Education}}</div>
+    {{ range .Education }}
+        <div class="element">
+            <div class="degree">
+                {{ .StudyType }} {{ .Area }}
+            </div>
+            <div class="infos">
+                <span class="schooladdress">
+                    <span>{{ .Institution }}</span>
+                    {{if .Location}}
+                        <span> / {{.Location}}</span>
+                    {{end}}
+                    <span class="dates"> / {{ .StartDate }} - {{ .EndDate }}</span>
+                </span>
+            </div>
+        </div>
+    {{end}}
+</div>
