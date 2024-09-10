@@ -32,7 +32,11 @@
       "startDate": "October 2020",
       "summary": "Led the implementation of cloud infrastructure on AWS and Azure platforms, resulting in a 50% reduction in infrastructure costs.Designed and implemented a highly available Kubernetes cluster for container orchestration, improving application resiliency and reducing downtime.Built a custom CI/CD pipeline using GitLab CI/CD and Jenkins, resulting in faster and more reliable application deployments.",
       "location": "Paris, France",
-      "highlights": []
+      "highlights": [
+        "Example highlight",
+        "Other highlighted example",
+        "One more highlighted example"
+      ]
     },
     {
       "position": "DevOps Engineer",
@@ -41,7 +45,11 @@
       "endDate": "September 2020",
       "summary": "Manage and maintain complex cloud infrastructure consisting of AWS and Azure services.Implemented Kubernetes for container orchestration, resulting in a 30% reduction in deployment time.Set up and maintained monitoring and alerting systems using Prometheus and Grafana.",
       "location": "Paris, France",
-      "highlights": []
+      "highlights": [
+        "Example highlight",
+        "Other highlighted example",
+        "One more highlighted example"
+      ]
     },
     {
       "position": "DevOps Engineer",
