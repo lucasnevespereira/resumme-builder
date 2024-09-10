@@ -73,6 +73,7 @@ Resumme Builder provides the following templates for generating resumes:
 - Simple: [Example](examples/example.simple.pdf)
 - Oldman: [Example](examples/example.oldman.pdf)
 - Stackoverflow: [Example](examples/example.stackoverflow.pdf)
+- Figacy: [Example](examples/example.figacy.pdf)
 
 To use a specific template, specify the template name in the JSON resume data:
 
