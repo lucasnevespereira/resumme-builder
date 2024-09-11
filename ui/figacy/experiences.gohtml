@@ -24,7 +24,7 @@
             </div>
             <div class="description">
                 {{if .Summary}}
-                    <p>
+                    <p class="justify">
                         {{.Summary}}
                     </p>
                 {{end}}
@@ -32,7 +32,7 @@
                     <ul>
                         {{range .Highlights}}
                             <li>
-                                <p class="highlight">{{.}}</p>
+                                <p class="highlight justify">{{.}}</p>
                             </li>
                         {{end}}
                     </ul>
