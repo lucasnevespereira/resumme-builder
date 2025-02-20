@@ -1,0 +1,40 @@
+<section class="section">
+    <h2>{{ .Labels.Experiences }}</h2>
+     {{$since := .Labels.Since}}
+     {{range .Work }}
+        <div class="experience-item">
+              <div class="experience-item-header">
+                {{if .CompanyLogo}}
+                    <img src="{{.CompanyLogo}}" alt="{{.Company}}" class="company-logo">
+                {{end}}
+                <div class="experience-content">
+                    <div class="company-header">
+                        <div class="job-title">{{.Position}}</div>
+                        <div class="date-location">
+                            {{if .EndDate}}
+                                {{ formatDate "Jan, 2006" .StartDate $.Meta.Lang }} -  {{ formatDate "Jan, 2006" .EndDate $.Meta.Lang }}
+                            {{else}}
+                                {{$since}} {{ formatDate "Jan, 2006" .StartDate $.Meta.Lang }}
+                            {{end}}
+                        </div>
+                    </div>
+                    <div class="company-name">{{.Company}}</div>
+                    <div class="date-location">{{.Location}}</div>
+                </div>
+            </div>
+            {{if .Summary}}
+                <p class="summary">{{.Summary}}</p>
+            {{end}}
+            {{if .Highlights}}
+                <ul>
+                    {{range .Highlights}}
+                        <li>{{.}}</li>
+                    {{end}}
+                </ul>
+            {{end}}
+            {{if .StackDetails}}
+                <p class="stack-details"><b> Stack: </b> {{.StackDetails}}</p>
+            {{end}}
+        </div>
+    {{end}}
+</section>

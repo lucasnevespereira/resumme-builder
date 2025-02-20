@@ -1,9 +1,11 @@
 {
   "EducationLabel": "Education",
   "ExperiencesLabel": "Experiences",
+  "SocialsLabel": "Socials",
   "SkillsLabel": "Skills",
   "SoftSkillsLabel": "Soft Skills",
   "ProjectsLabel": "Projects",
+  "PublicationsLabel": "Publications",
   "LanguagesLabel": "Languages",
   "InterestsLabel": "Hobbies",
   "ProfileLabel": "Profile",

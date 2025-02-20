@@ -1,0 +1,18 @@
+  <section class="section">
+                <h2>{{ .Labels.Education }}</h2>
+                {{range .Education}}
+                    <div class="education-item">
+                        <div class="title">{{.StudyType}} {{.Area}}</div>
+                        <div class="subtitle">{{.Institution}}</div>
+                        <div class="location">
+                            {{if .Location}}
+                                {{.Location}}
+                            {{end}}
+                            {{ formatDate "Jan, 2006" .EndDate $.Meta.Lang }}
+                        </div>
+                        {{if .Score}}
+                            <div class="score">{{.Score}}</div>
+                        {{end}}
+                    </div>
+                {{end}}
+    </section>

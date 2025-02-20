@@ -1,9 +1,11 @@
 {
   "EducationLabel": "Formation",
   "ExperiencesLabel": "Expériences Professionnelles",
+  "SocialsLabel": "Liens",
   "SkillsLabel": "Compétences Techniques",
   "SoftSkillsLabel": "Compétences Relationnelles",
   "ProjectsLabel": "Projets",
+  "PublicationsLabel": "Publications",
   "LanguagesLabel": "Langues",
   "InterestsLabel": "Centres D'intérêt",
   "ProfileLabel": "Profil",

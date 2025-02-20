@@ -7,7 +7,7 @@ const (
 )
 
 const (
-	ClassicTemplate = "classic"
+	DefaultTemplate = "classic"
 )
 
 const (
@@ -16,7 +16,9 @@ const (
 	LanguagesLabel    = "LanguagesLabel"
 	SkillsLabel       = "SkillsLabel"
 	SoftSkillsLabel   = "SoftSkillsLabel"
+	PublicationsLabel = "PublicationsLabel"
 	ProjectsLabel     = "ProjectsLabel"
+	SocialsLabel      = "SocialsLabel"
 	InterestsLabel    = "InterestsLabel"
 	ProfileLabel      = "ProfileLabel"
 	SinceLabel        = "SinceLabel"
