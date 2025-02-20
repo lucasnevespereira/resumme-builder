@@ -27,8 +27,8 @@
     {{ template "skills.gohtml" . }}
     {{ template "soft-skills.gohtml" . }}
     {{ template "languages.gohtml" . }}
-    {{ template "interests.gohtml" . }}
     {{ template "publications.gohtml" . }}
+    {{ template "interests.gohtml" . }}
   </div>
  </div>
 </body>
