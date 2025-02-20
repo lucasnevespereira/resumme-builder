@@ -1,0 +1,24 @@
+{{ if .Certificates }}
+<section class="section">
+    <h2>{{ .Labels.Certificates }}</h2>
+    <div class="section-content">
+        {{ range .Certificates }}
+            <div class="certificate-item">
+                <h3 class="certificate-title">{{ .Title }}</h3>
+                {{ if .Date }}
+                    <p class="certificate-date">{{ formatDate "Jan, 2006" .Date $.Meta.Lang }}</p>
+                {{ end }}
+                {{ if .Issuer }}
+                    <p class="certificate-issuer">{{ .Issuer }}</p>
+                {{ end }}
+                {{ if .Score }}
+                    <p class="certificate-score">{{ .Score }}</p>
+                {{ end }}
+                {{ if .URL }}
+                    <a href="{{ .URL }}" class="certificate-url">{{ .URL }}</a>
+                {{ end }}
+            </div>
+        {{ end }}
+    </div>
+</section>
+{{ end }}

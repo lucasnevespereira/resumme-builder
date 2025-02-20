@@ -1,0 +1,9 @@
+  <section class="section">
+    <h2>{{.Labels.Languages}}</h2>
+    {{ range .Languages }}
+    <div class="language-item">
+        <span>{{.Language}}</span>
+        <span>{{.Fluency}}</span>
+    </div>
+   {{end}}
+</section>

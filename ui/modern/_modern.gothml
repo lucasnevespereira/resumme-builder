@@ -1,0 +1,35 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ .Basics.Name}} | {{ .Basics.Label }}</title>
+    {{ template "styles.gohtml" }}
+</head>
+<body>
+  <header class="header">
+    {{ template "profile.gohtml" . }}
+    {{if .Basics.Image}}
+        <img src="{{ .Basics.Image }}" alt="Profile Picture" class="profile-picture">
+    {{end}}
+</header>
+
+ <div class="main-content">
+  <div class="left-column">
+    {{ template "summary.gohtml" . }}
+    {{ template "experiences.gohtml" . }}
+    {{ template "projects.gohtml" . }}
+  </div>
+  <div class="right-column">
+    {{ template "socials.gohtml" . }}
+    {{ template "education.gohtml" . }}
+    {{ template "certificates.gohtml" . }}
+    {{ template "skills.gohtml" . }}
+    {{ template "soft-skills.gohtml" . }}
+    {{ template "languages.gohtml" . }}
+    {{ template "interests.gohtml" . }}
+    {{ template "publications.gohtml" . }}
+  </div>
+ </div>
+</body>
+</html>

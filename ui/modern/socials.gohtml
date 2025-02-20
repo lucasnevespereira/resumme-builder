@@ -1,0 +1,11 @@
+{{if .Basics.Profiles}}
+<section class="section">
+    <h2>{{.Labels.Socials}}</h2>
+    {{range .Basics.Profiles}}
+        <div class="socials-item">
+            <span>{{.Network}}</span>
+            <a href="{{.URL}}" target="_blank">{{.Username}}</a>
+        </div>
+    {{end}}
+</section>
+{{end}}

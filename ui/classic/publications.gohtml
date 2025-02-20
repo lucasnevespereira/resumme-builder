@@ -1,0 +1,11 @@
+{{if .Projects}}
+    <div class="projects">
+        <div class="subtitle">{{.Labels.Publications}}</div>
+        {{ range .Publications}}
+            <div style="margin-bottom: 5px; display: flex; flex-direction: column;" class="item">
+                <a href="{{.URL}}" target="_blank">{{.Name}}</a>
+                <small style="font-size: 12px;" class="value">Published by {{.Publisher}}</small>
+            </div>
+        {{end}}
+    </div>
+{{end}}

@@ -1,0 +1,10 @@
+{{if .SoftSkills}}
+<section class="section">
+    <h2>{{.Labels.SoftSkills}}</h2>
+    <div class="soft-skills-list">
+        {{range .SoftSkills}}
+            <span class="soft-skill-item">{{.Name}}</span>
+        {{end}}
+    </div>
+</section>
+{{end}}

@@ -86,6 +86,10 @@ func lowerEq(s1 string, s2 string) bool {
 	return strings.EqualFold(strings.ToLower(s1), strings.ToLower(s2))
 }
 
+func lower(s string) string {
+	return strings.ToLower(s)
+}
+
 var formats = []string{
 	"2006-01-02",
 	"2006-01",
@@ -99,8 +103,9 @@ func formatDate(layout string, date string, locale string) string {
 		t, err := time.Parse(format, date)
 		if err == nil {
 			return monday.Format(t, layout, monday.Locale(locale))
+		} else {
+			return date
 		}
 	}
-
 	panic(fmt.Sprintf("Source string date format could not be recognized, valid formats are: %v", strings.Join(formats, ", ")))
 }
