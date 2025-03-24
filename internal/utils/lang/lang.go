@@ -4,7 +4,6 @@ import (
 	"path/filepath"
 	"resumme-builder/internal/utils/json"
 	"resumme-builder/internal/utils/logger"
-	"strings"
 
 	"golang.org/x/text/language"
 
@@ -15,7 +14,7 @@ const localesDir = "internal/utils/lang/locales"
 
 var bundle *i18n.Bundle
 
-var supportedLanguages = []string{"en_US", "fr_FR"}
+var supportedLanguages = []string{"en", "fr"}
 
 func init() {
 	bundle = i18n.NewBundle(language.English)
@@ -36,7 +35,7 @@ func init() {
 }
 
 func loadTranslation(lang string) (*i18n.MessageFile, error) {
-	translationFile := filepath.Join(localesDir, strings.ToLower(lang)+".json")
+	translationFile := filepath.Join(localesDir, lang+".json")
 	return bundle.LoadMessageFile(translationFile)
 }
 
