@@ -167,13 +167,13 @@
     .experience-list {
         display: flex;
         flex-direction: column;
-        gap: var(--gap-medium);
+        gap: calc(var(--gap-small) / 2);
     }
 
     .company-group {
         page-break-inside: avoid;
         break-inside: avoid;
-        margin-bottom: var(--gap-medium);
+        margin-bottom: var(--gap-small);
         position: relative;
     }
 
@@ -181,59 +181,73 @@
         display: flex;
         align-items: center;
         gap: var(--gap-small);
-        margin-bottom: var(--gap-medium);
+        margin-bottom: calc(var(--gap-small) / 2);
+    }
+
+    /* Create consistent left alignment with space for logo */
+    .company-group-header .company-logo {
+        width: 32px;
+        height: 32px;
+        border-radius: 10px;
+        object-fit: cover;
+        flex-shrink: 0;
     }
 
     .company-group-header .company-name {
         font-size: var(--font-large);
         font-weight: bold;
+        padding-left: calc(var(--gap-medium) / 2);
+    }
+
+    /* When no logo, maintain alignment */
+    .company-group-header:not(:has(.company-logo)) .company-name {
+        margin-left: 32px; /* Width of logo */
+        padding-left: var(--gap-medium);
     }
 
     .experience-item {
         position: relative;
-        margin-bottom: var(--gap-medium);
-        margin-left: 32px; /* All items aligned with company logo width */
-        padding-left: var(--gap-medium); /* Consistent padding for all content */
+        margin-bottom: calc(var(--gap-small) / 1.5); /* Even tighter spacing between positions */
+        margin-left: 32px; /* Width of logo */
+        padding-left: var(--gap-medium);
     }
 
-    /* Only show vertical line for subsequent roles */
-    .company-group:has(.subsequent-role) .experience-item::before {
-        content: "";
-        position: absolute;
-        left: 0; /* Adjust to align with padding-left */
-        top: 0;
-        bottom: 0;
-        width: 2px;
-        background-color: var(--text-color-light);
-        opacity: 0.3;
+    .company-group:has(.subsequent-role) .experience-item {
+        &::after {
+            content: "";
+            position: absolute;
+            left: -4px;
+            top: 8px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: var(--text-color-light);
+            opacity: 0.8;
+            z-index: 1;
+        }
+
+        &:not(:last-child)::before {
+            content: "";
+            position: absolute;
+            left: -2px;
+            top: 24px;
+            height: calc(100% + calc(var(--gap-small) / 1.5) - 28px); /* Adjusted for tighter spacing */
+            width: 2px;
+            background-color: var(--text-color-light);
+            opacity: 0.3;
+        }
     }
 
-    .content-wrapper {
-        margin-top: var(--gap-small);
-    }
-
-    .company-logo {
-        width: 32px;
-        height: 32px;
-        border-radius: 10px;
-        object-fit: cover;
+    .experience-content {
+        display: flex;
+        flex-direction: column;
+        gap: 0.1rem; /* Minimal spacing between title and location */
     }
 
     .company-header {
         display: flex;
         justify-content: space-between;
-        margin-bottom: 0.25rem;
-    }
-
-    .company-name {
-        font-weight: bold;
-    }
-
-    .summary {
-        font-size: var(--font-small);
-        text-align: justify;
-        margin-top: var(--gap-small);
-        margin-bottom: var(--gap-small);
+        align-items: flex-start;
     }
 
     .job-title {
@@ -244,11 +258,22 @@
     .date-location {
         color: var(--text-color-light);
         font-size: var(--font-small);
+        text-align: left; /* Ensure left alignment */
+    }
+
+    .content-wrapper {
+        margin-top: calc(var(--gap-small) / 2);
+    }
+
+    .summary {
+        font-size: var(--font-small);
+        text-align: justify;
+        margin-bottom: calc(var(--gap-small) / 2);
     }
 
     .stack-details {
         font-size: var(--font-small);
-        margin-top: var(--gap-small);
+        margin-top: calc(var(--gap-small) / 2);
     }
 
     
