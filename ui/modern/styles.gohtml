@@ -170,16 +170,46 @@
         gap: var(--gap-medium);
     }
 
-    .experience-item {
+    .company-group {
         page-break-inside: avoid;
         break-inside: avoid;
         margin-bottom: var(--gap-medium);
+        position: relative;
     }
 
-   .experience-item-header {
+    .company-group-header {
         display: flex;
+        align-items: center;
         gap: var(--gap-small);
-        margin-bottom: var(--gap-small);
+        margin-bottom: var(--gap-medium);
+    }
+
+    .company-group-header .company-name {
+        font-size: var(--font-large);
+        font-weight: bold;
+    }
+
+    .experience-item {
+        position: relative;
+        margin-bottom: var(--gap-medium);
+        margin-left: 32px; /* All items aligned with company logo width */
+        padding-left: var(--gap-medium); /* Consistent padding for all content */
+    }
+
+    /* Only show vertical line for subsequent roles */
+    .company-group:has(.subsequent-role) .experience-item::before {
+        content: "";
+        position: absolute;
+        left: 0; /* Adjust to align with padding-left */
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background-color: var(--text-color-light);
+        opacity: 0.3;
+    }
+
+    .content-wrapper {
+        margin-top: var(--gap-small);
     }
 
     .company-logo {
@@ -187,10 +217,6 @@
         height: 32px;
         border-radius: 10px;
         object-fit: cover;
-    }
-
-    .experience-content {
-        flex: 1;
     }
 
     .company-header {
