@@ -13,6 +13,7 @@
         --font-xlarge: 26px;
         --font-xxlarge: 32px;
         --font-xxxlarge: 42px;
+        --gap-tiny: 0.25rem;
         --gap-small: 0.5rem;
         --gap-medium: 1rem;
         --gap-large: 2rem;
@@ -55,7 +56,6 @@
         align-items: flex-start;
         margin-bottom: 1rem;
         gap: var(--gap-medium);
-        margin-top: -0.2in; /* Compensate for the first page margin */
     }
 
     .main-content {
@@ -165,7 +165,7 @@
     .experience-list {
         display: flex;
         flex-direction: column;
-        gap: calc(var(--gap-small) / 2);
+        gap: var(--gap-tiny);
     }
 
     .company-group {
@@ -179,7 +179,7 @@
         display: flex;
         align-items: center;
         gap: var(--gap-small);
-        margin-bottom: calc(var(--gap-small) / 2);
+        margin-bottom: var(--gap-tiny);
     }
 
     /* Create consistent left alignment with space for logo */
@@ -194,14 +194,14 @@
     .company-group-header .company-name {
         font-size: var(--font-large);
         font-weight: bold;
-        padding-left: calc(var(--gap-medium) / 2);
+        padding-left: var(--gap-small);
     }
     .company-location {
         color: var(--text-color-light);
         font-size: var(--font-small);
         margin-top: 0.1rem;
-        margin-bottom: calc(var(--gap-small) / 1.5); /* Even tighter spacing between positions */
-        padding-left: calc(var(--gap-medium) / 2);
+        margin-bottom: var(--gap-tiny);
+        padding-left: var(--gap-small);
         text-align: left; /* Ensure left alignment */
     }
 
@@ -213,7 +213,7 @@
 
     .experience-item {
         position: relative;
-        margin-bottom: calc(var(--gap-small) / 1.5); /* Even tighter spacing between positions */
+        margin-bottom: var(--gap-tiny);
         margin-left: 32px; /* Width of logo */
         padding-left: var(--gap-medium);
     }
@@ -268,18 +268,18 @@
     }
 
     .content-wrapper {
-        margin-top: calc(var(--gap-small) / 2);
+        margin-top: var(--gap-tiny);
     }
 
     .summary {
         font-size: var(--font-small);
         text-align: justify;
-        margin-bottom: calc(var(--gap-small) / 2);
+        margin-bottom: var(--gap-tiny);
     }
 
     .stack-details {
         font-size: var(--font-small);
-        margin-top: calc(var(--gap-small) / 2);
+        margin-top: var(--gap-tiny);
     }
 
     
