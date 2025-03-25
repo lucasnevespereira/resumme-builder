@@ -198,6 +198,14 @@
         font-weight: bold;
         padding-left: calc(var(--gap-medium) / 2);
     }
+    .company-location {
+        color: var(--text-color-light);
+        font-size: var(--font-small);
+        margin-top: 0.1rem;
+        margin-bottom: calc(var(--gap-small) / 1.5); /* Even tighter spacing between positions */
+        padding-left: calc(var(--gap-medium) / 2);
+        text-align: left; /* Ensure left alignment */
+    }
 
     /* When no logo, maintain alignment */
     .company-group-header:not(:has(.company-logo)) .company-name {
@@ -258,7 +266,7 @@
     .date-location {
         color: var(--text-color-light);
         font-size: var(--font-small);
-        text-align: left; /* Ensure left alignment */
+        text-align: right; /* Ensure left alignment */
     }
 
     .content-wrapper {

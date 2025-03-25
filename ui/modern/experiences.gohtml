@@ -16,7 +16,10 @@
                     {{if .CompanyLogo}}
                         <img src="{{.CompanyLogo}}" alt="{{.Company}}" class="company-logo">
                     {{end}}
-                    <div class="company-name">{{.Company}}</div>
+                    <div class="company-info">
+                        <div class="company-name">{{.Company}}</div>
+                        <div class="company-location">{{.Location}}</div>
+                    </div>
                 </div>
         {{end}}
         <div class="experience-item {{if not $firstInCompany}}subsequent-role{{end}}">
@@ -32,7 +35,6 @@
                             {{end}}
                         </div>
                     </div>
-                    <div class="date-location">{{.Location}}</div>
                 </div>
             </div>
             {{if or .Summary .Highlights .StackDetails}}
