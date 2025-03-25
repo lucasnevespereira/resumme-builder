@@ -14,7 +14,13 @@
             <div class="company-group">
                 <div class="company-group-header">
                     {{if .CompanyLogo}}
-                        <img src="{{.CompanyLogo}}" alt="{{.Company}}" class="company-logo">
+                        {{ if .CompanyURL}}
+                            <a href="{{.CompanyURL}}">
+                                <img src="{{.CompanyLogo}}" alt="{{.Company}}" class="company-logo">
+                            </a>
+                        {{ else }}
+                            <img src="{{.CompanyLogo}}" alt="{{.Company}}" class="company-logo">
+                        {{ end }}
                     {{end}}
                     <div class="company-info">
                         <div class="company-name">{{.Company}}</div>
