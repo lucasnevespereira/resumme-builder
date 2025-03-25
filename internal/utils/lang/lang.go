@@ -10,13 +10,15 @@ import (
 	"github.com/nicksnyder/go-i18n/v2/i18n"
 )
 
-const localesDir = "internal/utils/lang/locales"
+var (
+	bundle             *i18n.Bundle
+	localesDir         string
+	supportedLanguages = []string{"en", "fr"}
+)
 
-var bundle *i18n.Bundle
+func Init(uiDir string) {
+	localesDir = filepath.Join(uiDir, "locales")
 
-var supportedLanguages = []string{"en", "fr"}
-
-func init() {
 	bundle = i18n.NewBundle(language.English)
 	bundle.RegisterUnmarshalFunc("json", json.Unmarshal)
 
