@@ -1,4 +1,5 @@
 <style>
+
     :root {
         --text-color: #333;
         --text-color-light: #666;
@@ -28,12 +29,8 @@
         size: 21cm 29.7cm;
     }
 
-    @page :left {
-        margin: 0;
-    }
-
-    @page :right {
-        margin: 0;
+    @page :first {
+        margin-top: 0.0in; /* Smaller margin for first page */
     }
 
     html, body {
@@ -58,6 +55,7 @@
         align-items: flex-start;
         margin-bottom: 1rem;
         gap: var(--gap-medium);
+        margin-top: -0.2in; /* Compensate for the first page margin */
     }
 
     .main-content {
