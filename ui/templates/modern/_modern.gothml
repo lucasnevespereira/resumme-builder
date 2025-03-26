@@ -25,8 +25,8 @@
     {{ template "socials.gohtml" . }}
     {{ template "education.gohtml" . }}
     {{ template "certificates.gohtml" . }}
-    {{ template "skills.gohtml" . }}
     {{ template "soft-skills.gohtml" . }}
+    {{ template "skills.gohtml" . }}
     {{ template "languages.gohtml" . }}
     {{ template "publications.gohtml" . }}
     {{ template "interests.gohtml" . }}
