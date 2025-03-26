@@ -6,6 +6,9 @@
             <div class="project-title">{{.Name}}</div>
             <a href="{{.URL}}" class="project-link">{{ trimURLPrefix .URL}}</a>
             <div class="project-description">{{.Description}}</div>
+            {{if .StackDetails}}
+                <div class="project-stack-details"> <b>Stack:</b> {{.StackDetails}}</div>
+            {{end}}
         </div>
     {{end}}
 </section>

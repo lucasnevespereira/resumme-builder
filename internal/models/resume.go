@@ -57,10 +57,11 @@ type Work struct {
 }
 
 type Project struct {
-	Name        string   `json:"name"`
-	Description string   `json:"description"`
-	Highlights  []string `json:"highlights"`
-	URL         string   `json:"url"`
+	Name         string   `json:"name"`
+	Description  string   `json:"description"`
+	Highlights   []string `json:"highlights"`
+	URL          string   `json:"url"`
+	StackDetails *string  `json:"stackDetails,omitempty"`
 }
 
 type Publications struct {
