@@ -1,0 +1,70 @@
+<section class="section">
+    <h2>{{ .Labels.Experiences }}</h2>
+    {{$since := .Labels.Since}}
+    <div class="experience-list">
+    {{$currentCompany := ""}}
+    {{$firstInCompany := true}}
+    {{range $index, $work := .Work}}
+        {{if ne $currentCompany .Company}}
+            {{if ne $currentCompany ""}}
+                </div>{{/* Close previous company group */}}
+            {{end}}
+            {{$currentCompany = .Company}}
+            {{$firstInCompany = true}}
+            <div class="company-group">
+                <div class="company-group-header">
+                    {{if .CompanyLogo}}
+                        {{ if .CompanyURL}}
+                            <a href="{{.CompanyURL}}">
+                                <img src="{{.CompanyLogo}}" alt="{{.Company}}" class="company-logo">
+                            </a>
+                        {{ else }}
+                            <img src="{{.CompanyLogo}}" alt="{{.Company}}" class="company-logo">
+                        {{ end }}
+                    {{end}}
+                    <div class="company-info">
+                        <div class="company-name">{{.Company}}</div>
+                        <div class="company-location">{{.Location}}</div>
+                    </div>
+                </div>
+        {{end}}
+        <div class="experience-item {{if not $firstInCompany}}subsequent-role{{end}}">
+            <div class="experience-item-header">
+                <div class="experience-content">
+                    <div class="company-header">
+                        <div class="job-title">{{.Position}}</div>
+                        <div class="date-location">
+                            {{if .EndDate}}
+                                {{ formatDate "Jan, 2006" .StartDate $.Meta.Lang }} - {{ formatDate "Jan, 2006" .EndDate $.Meta.Lang }}
+                            {{else}}
+                                {{$since}} {{ formatDate "Jan, 2006" .StartDate $.Meta.Lang }}
+                            {{end}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{if or .Summary .Highlights .StackDetails}}
+                <div class="content-wrapper">
+                    {{if .Summary}}
+                        <p class="summary">{{.Summary}}</p>
+                    {{end}}
+                    {{if .Highlights}}
+                        <ul>
+                            {{range .Highlights}}
+                                <li>{{.}}</li>
+                            {{end}}
+                        </ul>
+                    {{end}}
+                    {{if .StackDetails}}
+                        <p class="stack-details"><b>Stack:</b> {{.StackDetails}}</p>
+                    {{end}}
+                </div>
+            {{end}}
+        </div>
+        {{$firstInCompany = false}}
+    {{end}}
+    {{if ne $currentCompany ""}}
+        </div>{{/* Close last company group */}}
+    {{end}}
+    </div>
+</section>

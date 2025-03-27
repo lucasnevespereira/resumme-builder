@@ -1,0 +1,11 @@
+{{if .Publications}}
+<section class="section">
+    <h2>{{ .Labels.Publications }}</h2>
+     {{range .Publications }}
+        <div class="publication-item">
+            <a href="{{.URL}}" target="_blank" class="publication-title">{{.Name}}</a>
+            <div class="publication-description">{{.Publisher}} {{if .ReleaseDate}} - {{.ReleaseDate}}{{end}}</div>
+        </div>
+    {{end}}
+</section>
+{{end}}

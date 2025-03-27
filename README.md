@@ -99,8 +99,8 @@ your needs. The default language is English (en), but you can choose to use othe
 
 Currently, the following languages are supported:
 
-- English (en_US)
-- French (fr_FR)
+- English (en)
+- French (fr)
 
 This will automatically translate labels such as "Education," "Experiences," and other sections based on the chosen
 language.
@@ -109,7 +109,7 @@ To set the language for your resume, include the following field in the JSON res
 e.g [examples/example.resume.json](examples/example.resume.json)
 
 ```json
-"lang": "fr_FR"
+"lang": "fr"
 ```
 
 ## Date Formats

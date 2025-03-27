@@ -1,6 +1,6 @@
 {{if .Basics.Summary }}
 <section class="section summary">
     <h2>{{ .Labels.Profile }}</h2>
-    <p>{{ .Basics.Summary }}</p>
+    <p>{{ paragraphLineFeeds .Basics.Summary }}</p>
 </section>
 {{end}}

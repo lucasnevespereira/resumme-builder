@@ -1,0 +1,15 @@
+{{if .Projects}}
+<section class="section projects-section">
+    <h2>{{ .Labels.Projects }}</h2>
+     {{range .Projects }}
+        <div class="project-item">
+            <div class="project-title">{{.Name}}</div>
+            <a href="{{.URL}}" class="project-link">{{ trimURLPrefix .URL}}</a>
+            <div class="project-description">{{.Description}}</div>
+            {{if .StackDetails}}
+                <div class="project-stack-details"> <b>Stack:</b> {{.StackDetails}}</div>
+            {{end}}
+        </div>
+    {{end}}
+</section>
+{{end}}

@@ -1,0 +1,18 @@
+    <div class="profile-info">
+        <h1>{{ .Basics.Name }}</h1>
+        <div class="subtitle">{{ .Basics.Label }}</div>
+        <div class="contact-info">
+            {{if .Basics.Phone}}
+                <a href="tel:{{ .Basics.Phone }}">{{ .Basics.Phone }}</a>
+            {{end}}
+            {{if .Basics.Email}}
+                <a href="mailto:{{ .Basics.Email }}">{{ .Basics.Email }}</a>
+            {{end}}
+            {{if .Basics.URL}}
+                <a href="{{ .Basics.URL }}" target="_blank">{{ trimURLPrefix .Basics.URL }}</a>
+            {{end}}
+            {{if .Basics.Location}}
+                <span>{{ displayLocation .Basics.Location }}</span>
+            {{end}}
+        </div>
+    </div>

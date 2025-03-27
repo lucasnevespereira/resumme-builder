@@ -1,0 +1,17 @@
+{{if .Basics.Profiles}}
+<section class="section">
+    <h2>{{.Labels.Socials}}</h2>
+    {{range .Basics.Profiles}}
+        <div class="socials-item">
+            {{if lowerEq .Network "github"}}
+                <span><i class="fa-brands fa-github"></i> {{.Network}}</span>
+            {{else if lowerEq .Network "linkedin"}}
+                <span><i class="fa-brands fa-linkedin"></i> {{.Network}}</span>
+            {{else}}
+                <span>{{.Network}}</span>
+            {{end}}
+            <a href="{{.URL}}" target="_blank">{{trimURLPrefix .URL}}</a>
+        </div>
+    {{end}}
+</section>
+{{end}}
