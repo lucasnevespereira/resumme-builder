@@ -67,7 +67,6 @@ func (g *Generator) saveURLAsPDF(url string, pdf *[]byte) chromedp.Tasks {
 				WithPaperWidth(8.3).
 				WithPaperHeight(11.7).
 				WithPrintBackground(true).
-				WithScale(0.85).
 				Do(ctx)
 			if err != nil {
 				return errors.Wrap(err, "saveURLAsPDF - page.PrintToPDF")
