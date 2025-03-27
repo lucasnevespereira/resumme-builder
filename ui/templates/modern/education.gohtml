@@ -2,7 +2,7 @@
                 <h2>{{ .Labels.Education }}</h2>
                 {{range .Education}}
                     <div class="education-item">
-                        <div class="title">{{.StudyType}} {{.Area}}</div>
+                        <div class="title">{{.StudyType}}{{if .Area}} - {{.Area}}{{end}}</div>
                         <div class="subtitle">{{.Institution}}</div>
                         <div class="location">
                             {{if .Location}}

@@ -109,3 +109,8 @@ func formatDate(layout string, date string, locale string) string {
 	}
 	panic(fmt.Sprintf("Source string date format could not be recognized, valid formats are: %v", strings.Join(formats, ", ")))
 }
+
+func paragraphLineFeeds(text string) template.HTML {
+	output := strings.ReplaceAll(text, "\n", "</p>\n<p>")
+	return template.HTML(output)
+}

@@ -1,17 +1,20 @@
 <style>
+
     :root {
         --text-color: #333;
         --text-color-light: #666;
-        --background-color: #f5f5f5;
+        --softskills-bgcolor:rgb(145, 255, 191);
+        --skills-bgcolor:rgb(151, 231, 255);
         --border-color: #eee;
         --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        --font-extra-small: 10px;
-        --font-small: 12px;
-        --font-medium: 14px;
-        --font-large: 16px;
-        --font-xlarge: 20px;
-        --font-xxlarge: 24px;
-        --font-xxxlarge: 32px;
+        --font-extra-small: 12px;
+        --font-small: 14px;
+        --font-medium: 16px;
+        --font-large: 18px;
+        --font-xlarge: 22px;
+        --font-xxlarge: 32px;
+        --font-xxxlarge: 42px;
+        --gap-tiny: 0.25rem;
         --gap-small: 0.5rem;
         --gap-medium: 1rem;
         --gap-large: 2rem;
@@ -28,12 +31,8 @@
         size: 21cm 29.7cm;
     }
 
-    @page :left {
-        margin: 0;
-    }
-
-    @page :right {
-        margin: 0;
+    @page :first {
+        margin-top: 0.0in; /* Smaller margin for first page */
     }
 
     html, body {
@@ -112,7 +111,7 @@
 
     .subtitle {
         color: var(--text-color);
-        font-size: var(--font-large);
+        font-size: var(--font-xlarge);
         margin-bottom: 1rem;
         font-weight: 500;
     }
@@ -167,67 +166,119 @@
         text-align: justify;
     }
 
-
     /* EXPERIENCES */
     .experience-list {
         display: flex;
         flex-direction: column;
-        gap: var(--gap-medium);
+        gap: var(--gap-tiny);
     }
 
-    .experience-item {
+    .company-group {
         page-break-inside: avoid;
         break-inside: avoid;
-        margin-bottom: var(--gap-medium);
-    }
-
-   .experience-item-header {
-        display: flex;
-        gap: var(--gap-small);
         margin-bottom: var(--gap-small);
+        position: relative;
     }
 
-    .company-logo {
+    .company-group-header {
+        display: flex;
+        align-items: center;
+        gap: var(--gap-small);
+        margin-bottom: var(--gap-tiny);
+    }
+
+    /* Create consistent left alignment with space for logo */
+    .company-group-header .company-logo {
         width: 32px;
         height: 32px;
         border-radius: 10px;
         object-fit: cover;
+        flex-shrink: 0;
+    }
+
+    .company-group-header .company-name {
+        font-size: var(--font-medium);
+        font-weight: bold;
+        padding-left: var(--gap-small);
+    }
+    .company-location {
+        color: var(--text-color-light);
+        font-size: var(--font-small);
+        margin-top: 0.1rem;
+        margin-bottom: var(--gap-tiny);
+        padding-left: var(--gap-small);
+        text-align: left; /* Ensure left alignment */
+    }
+
+    /* When no logo, maintain alignment */
+    .company-group-header:not(:has(.company-logo)) .company-name {
+        margin-left: 32px; /* Width of logo */
+        padding-left: var(--gap-medium);
+    }
+
+    .experience-item {
+        position: relative;
+        margin-bottom: var(--gap-tiny);
+        margin-left: 32px; /* Width of logo */
+        padding-left: var(--gap-medium);
+    }
+
+    .company-group:has(.subsequent-role) .experience-item {
+        &::after {
+            content: "";
+            position: absolute;
+            left: -4px;
+            top: 8px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: var(--text-color-light);
+            opacity: 0.8;
+            z-index: 1;
+        }
+
+        &:not(:last-child)::before {
+            content: "";
+            position: absolute;
+            left: -1px;
+            top: 24px;
+            height: calc(100% + calc(var(--gap-small) / 1.5) - 28px); /* Adjusted for tighter spacing */
+            width: 1px;
+            background-color: var(--text-color-light);
+            opacity: 0.3;
+        }
     }
 
     .experience-content {
-        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 0.1rem; /* Minimal spacing between title and location */
     }
 
     .company-header {
         display: flex;
         justify-content: space-between;
-        margin-bottom: 0.25rem;
-    }
-
-    .company-name {
-        font-weight: bold;
-    }
-
-    .summary {
-        font-size: var(--font-small);
-        text-align: justify;
-        margin-top: var(--gap-small);
-        margin-bottom: var(--gap-small);
+        align-items: flex-start;
     }
 
     .job-title {
         font-weight: bold;
-        font-size: var(--font-medium);
+        font-size: var(--font-large);
     }
 
     .date-location {
         color: var(--text-color-light);
         font-size: var(--font-small);
+        text-align: right; /* Ensure left alignment */
+    }
+
+    .content-wrapper {
+        margin-top: var(--gap-tiny);
     }
 
     .stack-details {
         font-size: var(--font-small);
-        margin-top: var(--gap-small);
+        margin-top: var(--gap-tiny);
     }
 
     
@@ -274,10 +325,38 @@
     .socials-item a {
         color: var(--text-color-light);
         font-size: var(--font-small);
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .socials-item a i {
+        font-size: 1.2em;
     }
 
     .socials-item a:hover {
         color: var(--text-color);
+    }
+
+    .socials-item span {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-weight: bold;
+        font-size: var(--font-small);
+    }
+
+    .socials-item span i {
+        font-size: 1.2em;
+    }
+
+    /* Social icons colors */
+    .fa-github {
+        color: #171515;
+    }
+
+    .fa-linkedin {
+        color: #0077b5;
     }
 
      /* SKILLS */
@@ -291,7 +370,7 @@
         font-size: var(--font-small);
         page-break-inside: avoid;
         break-inside: avoid;
-        background-color: var(--background-color);
+        background-color: var(--skills-bgcolor);
         padding: 0.3rem;
         border-radius: 10px;
     }
@@ -307,7 +386,9 @@
         font-size: var(--font-small);
         page-break-inside: avoid;
         break-inside: avoid;
+        background-color: var(--softskills-bgcolor);
         padding: 0.3rem;
+        border-radius: 10px;
     }
 
     /* LANGUAGES */
@@ -431,5 +512,11 @@
         font-size: var(--font-small);
     }
     
-    
+    .section p {
+        margin-bottom: 1em; /* Add space between paragraphs */
+    }
+
+    .section p:last-child {
+        margin-bottom: 0; /* Remove margin from last paragraph */
+    }
 </style>

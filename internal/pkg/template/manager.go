@@ -1,7 +1,9 @@
 package template
 
 import (
+	"fmt"
 	"html/template"
+	"os"
 	"path/filepath"
 
 	"github.com/pkg/errors"
@@ -18,7 +20,12 @@ func NewTemplateManager(templateDir string) *Manager {
 }
 
 func (tm *Manager) GetTemplate(name string) (*template.Template, error) {
-	templateFiles, err := filepath.Glob(filepath.Join(tm.TemplateDir, name, "*"))
+	inputFile := filepath.Join(tm.TemplateDir, name)
+	if _, err := os.Stat(inputFile); os.IsNotExist(err) {
+		return nil, fmt.Errorf("template not found: %s", inputFile)
+	}
+
+	templateFiles, err := filepath.Glob(filepath.Join(inputFile, "*"))
 	if err != nil {
 		return nil, errors.Wrap(err, "GetTemplate filepath.Glob")
 	}
@@ -34,6 +41,7 @@ func (tm *Manager) GetTemplate(name string) (*template.Template, error) {
 		"lowerEq":                  lowerEq,
 		"lower":                    lower,
 		"formatDate":               formatDate,
+		"paragraphLineFeeds":       paragraphLineFeeds,
 	}
 
 	t := template.New(filepath.Base(templateFiles[0])).Funcs(templateFuncs)

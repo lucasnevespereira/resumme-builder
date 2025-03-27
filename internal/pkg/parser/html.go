@@ -28,7 +28,7 @@ func NewHTMLParser(outputDir, outputHtmlFile string, templateMgr *template.Manag
 func (p *HTMLParser) ParseToHtml(resumeData models.Resume) (string, error) {
 	startedAt := time.Now()
 
-	fs.EnsureDir(p.OutputDir)
+	fs.CreateDir(p.OutputDir)
 
 	htmlOut, err := fs.CreateFile(p.OutputHtmlFile)
 	if err != nil {

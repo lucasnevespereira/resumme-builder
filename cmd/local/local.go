@@ -1,20 +1,24 @@
 package local
 
 import (
-	"github.com/spf13/cobra"
+	"path/filepath"
 	"resumme-builder/internal/models"
 	"resumme-builder/internal/pkg/parser"
 	"resumme-builder/internal/pkg/pdf"
 	"resumme-builder/internal/pkg/template"
 	"resumme-builder/internal/services"
 	"resumme-builder/internal/utils/fs"
+	"resumme-builder/internal/utils/lang"
 	"resumme-builder/internal/utils/logger"
+
+	"github.com/spf13/cobra"
 )
 
-var resumeDataFile string
+var resumeDataFile, resumeUIDir string
 
 func init() {
 	localCmd.Flags().StringVarP(&resumeDataFile, "file", "f", "", "Resume data file")
+	localCmd.Flags().StringVarP(&resumeUIDir, "ui", "u", "ui", "UI data directory")
 	err := localCmd.MarkFlagRequired("file")
 	if err != nil {
 		logger.Log.Error("Failed to mark 'file' flag as required:", err)
@@ -35,13 +39,21 @@ func preRunLocalCommand(cmd *cobra.Command, args []string) error {
 		return err
 	}
 
+	uiDir := cmd.Flag("ui").Value.String()
+	err = fs.EnsureDir(uiDir)
+	if err != nil {
+		return err
+	}
+
+	lang.Init(resumeUIDir)
 	return nil
 }
 
 func runLocalCommand(cmd *cobra.Command, args []string) error {
 	logger.Log.Info("Generating output")
 
-	templateManager := template.NewTemplateManager("ui")
+	templateDir := filepath.Join(resumeUIDir, "templates")
+	templateManager := template.NewTemplateManager(templateDir)
 	parser := parser.NewHTMLParser(models.OutputDir, models.OutputHtmlFile, templateManager)
 	pdfGenerator := pdf.NewPDFGenerator()
 	resumeService := services.NewResumeService(parser, pdfGenerator)
