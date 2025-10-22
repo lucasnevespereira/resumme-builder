@@ -32,7 +32,7 @@ func GetPdf(service *services.ResumeService) gin.HandlerFunc {
 			logger.Log.Fatal(err)
 		}
 
-		pdfData, err := service.Pdf.GenerateFromHTML(htmlFile)
+		pdfData, err := service.Pdf.GenerateFromHTML(htmlFile, models.OutputPdfFile)
 		if err != nil {
 			logger.Log.Fatal(err)
 		}

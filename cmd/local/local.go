@@ -2,6 +2,7 @@ package local
 
 import (
 	"path/filepath"
+	"strings"
 	"resumme-builder/internal/models"
 	"resumme-builder/internal/pkg/parser"
 	"resumme-builder/internal/pkg/pdf"
@@ -14,10 +15,11 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var resumeDataFile, resumeUIDir string
+var resumeDataFile, resumeUIDir, outputPdfFilename string
 
 func init() {
 	localCmd.Flags().StringVarP(&resumeDataFile, "file", "f", "", "Resume data file")
+	localCmd.Flags().StringVarP(&outputPdfFilename, "name", "n", "", "Output PDF file name")
 	localCmd.Flags().StringVarP(&resumeUIDir, "ui", "u", "ui", "UI data directory")
 	err := localCmd.MarkFlagRequired("file")
 	if err != nil {
@@ -38,6 +40,18 @@ func preRunLocalCommand(cmd *cobra.Command, args []string) error {
 	if err != nil {
 		return err
 	}
+
+	// Set the global outputPdfFilename variable
+	outputPdfFilename = cmd.Flag("name").Value.String()
+	if outputPdfFilename == "" {
+		baseFilename := strings.TrimSuffix(filepath.Base(filePath), filepath.Ext(filePath))
+		outputPdfFilename = filepath.Join(models.OutputDir, baseFilename+".pdf")
+	} else {
+		// Extract only the filename (no path) and place it in output directory
+		filename := filepath.Base(outputPdfFilename)
+		outputPdfFilename = filepath.Join(models.OutputDir, filename)
+	}
+	logger.Log.Info("Output PDF file name:", outputPdfFilename)
 
 	uiDir := cmd.Flag("ui").Value.String()
 	err = fs.EnsureDir(uiDir)
@@ -67,7 +81,7 @@ func runLocalCommand(cmd *cobra.Command, args []string) error {
 		return err
 	}
 
-	if err := resumeService.GeneratePDF(resumeData); err != nil {
+	if err := resumeService.GeneratePDF(resumeData, outputPdfFilename); err != nil {
 		return err
 	}
 

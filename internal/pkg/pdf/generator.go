@@ -28,7 +28,7 @@ func NewPDFGenerator() *Generator {
 }
 
 // GenerateFromHTML generates a PDF from HTML file.
-func (g *Generator) GenerateFromHTML(file string) ([]byte, error) {
+func (g *Generator) GenerateFromHTML(file string, pdfFilename string) ([]byte, error) {
 	startedAt := time.Now()
 
 	chromeCtx, cancelCtx := chromedp.NewContext(context.Background())
@@ -41,7 +41,7 @@ func (g *Generator) GenerateFromHTML(file string) ([]byte, error) {
 		return nil, errors.Wrap(err, "GenerateFromHTML - chromedp.Run")
 	}
 
-	logger.Log.Infof("PDF %s generated in %f seconds", file, time.Since(startedAt).Seconds())
+	logger.Log.Infof("PDF %s generated in %f seconds", pdfFilename, time.Since(startedAt).Seconds())
 
 	return pdfData, nil
 }
