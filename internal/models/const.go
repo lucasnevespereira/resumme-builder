@@ -13,6 +13,7 @@ const (
 const (
 	EducationLabel    = "EducationLabel"
 	ExperiencesLabel  = "ExperiencesLabel"
+	VolunteerLabel    = "VolunteerLabel"
 	LanguagesLabel    = "LanguagesLabel"
 	SkillsLabel       = "SkillsLabel"
 	SoftSkillsLabel   = "SoftSkillsLabel"

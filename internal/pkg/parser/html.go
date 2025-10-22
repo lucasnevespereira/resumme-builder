@@ -58,6 +58,7 @@ func (p *HTMLParser) ParseToHtml(resumeData models.Resume) (string, error) {
 func (p *HTMLParser) updateResumeLabels(resumeData *models.Resume) error {
 	resumeData.Labels.Education = resumeData.GetEducationLabel()
 	resumeData.Labels.Experiences = resumeData.GetExperiencesLabel()
+	resumeData.Labels.Volunteer = resumeData.GetVolunteerLabel()
 	resumeData.Labels.Projects = resumeData.GetProjectsLabel()
 	resumeData.Labels.Publications = resumeData.GetPublicationsLabel()
 	resumeData.Labels.Skills = resumeData.GetSkillsLabel()
