@@ -169,19 +169,25 @@
 
 
     /* EXPERIENCES */
-    .experience-list {
+    .experience-list,
+    .volunteer-list {
         display: flex;
         flex-direction: column;
         gap: var(--gap-medium);
     }
 
-    .experience-item {
+    .experience-item,
+    .volunteer-item {
         page-break-inside: avoid;
         break-inside: avoid;
-        margin-bottom: var(--gap-medium);
     }
 
-   .experience-item-header {
+    .experience-item {
+        margin-bottom: var(--gap-medium)
+    }
+
+   .experience-item-header,
+   .volunteer-item-header {
         display: flex;
         gap: var(--gap-small);
         margin-bottom: var(--gap-small);
@@ -194,17 +200,22 @@
         object-fit: cover;
     }
 
-    .experience-content {
+    .experience-content,
+    .volunteer-content {
         flex: 1;
     }
 
-    .company-header {
+    .company-header,
+    .organization-header {
         display: flex;
         justify-content: space-between;
         margin-bottom: 0.25rem;
     }
 
-    .company-name {
+    .job-title,
+    .position-title,
+    .company-name,
+    .organization-name {
         font-weight: bold;
     }
 
@@ -215,8 +226,8 @@
         margin-bottom: var(--gap-small);
     }
 
-    .job-title {
-        font-weight: bold;
+    .job-title,
+    .organization-name {
         font-size: var(--font-medium);
     }
 
@@ -271,12 +282,14 @@
         font-size: var(--font-small);
     }
 
-    .socials-item a {
+    .socials-item a,
+    .organization-url a {
         color: var(--text-color-light);
         font-size: var(--font-small);
     }
 
-    .socials-item a:hover {
+    .socials-item a:hover,
+    .organization-url a:hover {
         color: var(--text-color);
     }
 
