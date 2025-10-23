@@ -1,0 +1,34 @@
+{{ if .Volunteer}}
+    <div class="volunteer">
+        <div class="subtitle">
+            {{.Labels.Volunteer}}
+        </div>
+        {{$since := .Labels.Since}}
+        {{range .Volunteer}}
+            <div class="element">
+                <div style="display: flex; flex-direction: row; align-items: center;">
+                    <div style="margin-right: 10px; display: flex; flex-direction: column;">
+                        <div class="position">{{.Position}} <span>| {{.Organization}}</span></div>
+                        <div class="dates">
+                            {{if .EndDate}}
+                                {{ formatDate "Jan, 2006" .StartDate $.Meta.Lang }} - {{ formatDate "Jan, 2006" .EndDate $.Meta.Lang }}
+                            {{else}}
+                                {{$since}} {{ formatDate "Jan, 2006" .StartDate $.Meta.Lang }}
+                            {{end}}
+                        </div>
+                    </div>
+                </div>
+                <div class="summary">
+                    {{ evaluate .Summary}}
+                    {{if .Highlights}}
+                        <ul class="highlights">
+                            {{range .Highlights}}
+                                <li>{{evaluate .}}</li>
+                            {{end}}
+                        </ul>
+                    {{end}}
+                </div>
+            </div>
+        {{end}}
+    </div>
+{{end}}
