@@ -1,0 +1,46 @@
+{{ if .Volunteer }}
+<section class="section">
+  <header>
+    <h2 class='section-title'>{{ .Labels.Volunteer }}</h2>
+  </header>
+  <section id="volunteer">
+    {{ range $index, $volunteer := .Volunteer }}
+    <section class="volunteer-item">
+      {{ if $volunteer.Summary }}
+      <label for="volunteer-item-{{ $index }}"></label>
+      {{ end }}
+
+      <header class="clear">
+        <div class="date">
+          {{ if $volunteer.StartDate }}
+          <span class="startDate">{{ formatDate "Jan, 2006" $volunteer.StartDate $.Meta.Lang }}</span>
+          {{ end }}
+          {{ if $volunteer.EndDate }}
+          <span class="endDate">- {{ formatDate "Jan, 2006" $volunteer.EndDate $.Meta.Lang }}</span>
+          {{ else }}
+          <span class="endDate">- Current</span>
+          {{ end }}
+        </div>
+        {{ if $volunteer.Position }}
+        <div class="position">{{ $volunteer.Position }}</div>
+        {{ end }}
+        <div class="organization">{{ $volunteer.Organization }}</div>
+      </header>
+
+      <div class="item" id="volunteer-item">
+        {{ if $volunteer.Summary }}
+        <div class="summary">{{ $volunteer.Summary }}</div>
+        {{ end }}
+        {{ if $volunteer.Highlights }}
+        <ul class="highlights">
+          {{ range $highlight := $volunteer.Highlights }}
+          <li>{{ $highlight }}</li>
+          {{ end }}
+        </ul>
+        {{ end }}
+      </div>
+    </section>
+    {{ end }}
+  </section>
+</section>
+{{ end }}
