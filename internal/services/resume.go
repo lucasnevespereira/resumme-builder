@@ -21,18 +21,18 @@ func NewResumeService(parser *parser.HTMLParser, pdf *pdf.Generator) *ResumeServ
 	}
 }
 
-func (s *ResumeService) GeneratePDF(resumeData models.Resume) error {
+func (s *ResumeService) GeneratePDF(resumeData models.Resume, pdfFilename string) error {
 	htmlFile, err := s.Parser.ParseToHtml(resumeData)
 	if err != nil {
 		return err
 	}
 
-	pdfData, err := s.Pdf.GenerateFromHTML(htmlFile)
+	pdfData, err := s.Pdf.GenerateFromHTML(htmlFile, pdfFilename)
 	if err != nil {
 		return err
 	}
 
-	if err := fs.WriteFile(models.OutputPdfFile, pdfData); err != nil {
+	if err := fs.WriteFile(pdfFilename, pdfData); err != nil {
 		return err
 	}
 
