@@ -1,0 +1,40 @@
+{{if .Volunteer}}
+    <section class="section">
+        <h2>{{ .Labels.Volunteer }}</h2>
+        {{$since := .Labels.Since}}
+        <div class="volunteer-list">
+        {{range .Volunteer }}
+            <div class="volunteer-item">
+                <div class="volunteer-item-header">
+                    <div class="volunteer-content">
+                        <div class="organization-header">
+                            <div class="organization-name">{{.Organization}}</div>
+                            <div class="date-location">
+                                {{if .EndDate}}
+                                    {{ formatDate "Jan, 2006" .StartDate $.Meta.Lang }} -  {{ formatDate "Jan, 2006" .EndDate $.Meta.Lang }}
+                                {{else}}
+                                    {{$since}} {{ formatDate "Jan, 2006" .StartDate $.Meta.Lang }}
+                                {{end}}
+                            </div>
+                        </div>
+                        <div class="position-title">{{.Position}}</div>
+                        {{if .URL}}
+                            <div class="organization-url"><a href="{{.URL}}" target="_blank">{{.URL}}</a></div>
+                        {{end}}
+                    </div>
+                </div>
+                {{if .Summary}}
+                    <p class="summary">{{.Summary}}</p>
+                {{end}}
+                {{if .Highlights}}
+                    <ul>
+                        {{range .Highlights}}
+                            <li>{{.}}</li>
+                        {{end}}
+                    </ul>
+                {{end}}
+            </div>
+        {{end}}
+        </div>
+    </section>
+{{end}}

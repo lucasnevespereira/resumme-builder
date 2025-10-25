@@ -18,6 +18,7 @@
   <div class="left-column">
     {{ template "summary.gohtml" . }}
     {{ template "experiences.gohtml" . }}
+    {{ template "volunteer.gohtml" . }}
     {{ template "projects.gohtml" . }}
   </div>
   <div class="right-column">

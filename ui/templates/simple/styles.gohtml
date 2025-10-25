@@ -159,39 +159,46 @@
     }
 
 
-    .experiences .wrapper {
+    .experiences .wrapper,
+    .volunteer .wrapper {
         display: grid;
         grid-template-columns: 20% 80%;
         grid-column-gap: 10px;
     }
 
-    .experiences .wrapper .dates {
+    .experiences .wrapper .dates,
+    .volunteer .wrapper .dates {
         display: flex;
         flex-direction: column;
         font-size: var(--font-small);
         font-weight: var(--normal);
     }
 
-    .experiences .wrapper .dates span:first-child {
+    .experiences .wrapper .dates span:first-child,
+    .volunteer .wrapper .dates span:first-child {
         margin-bottom: 10px;
     }
 
-    .experiences .wrapper .element {
+    .experiences .wrapper .element,
+    .volunteer .wrapper .element {
 
     }
 
-    .experiences .wrapper .element .position {
+    .experiences .wrapper .element .position,
+    .volunteer .wrapper .element .position {
         font-weight: var(--normal);
         color: var(--text-color);
         font-size: var(--font-medium);
     }
 
-    .experiences .wrapper .element .company {
+    .experiences .wrapper .element .company,
+    .volunteer .wrapper .element .organization {
         font-weight: var(--semi-bold);
         font-size: var(--font-small);
     }
 
-    .experiences .wrapper .element .description {
+    .experiences .wrapper .element .description,
+    .volunteer .wrapper .element .description {
         font-size: var(--font-small-xs);
     }
 

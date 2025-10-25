@@ -70,6 +70,32 @@
       "highlights": []
     }
   ],
+  "volunteer": [
+    {
+      "organization": "Code for Good",
+      "position": "Technical Mentor",
+      "url": "https://codeforgood.org/",
+      "startDate": "2019-01-01",
+      "endDate": "2021-12-31",
+      "summary": "Mentored junior developers in open source projects focused on social impact applications.",
+      "highlights": [
+        "Awarded 'Volunteer of the Month' for outstanding contribution",
+        "Led a team of 5 volunteers in developing a disaster relief coordination app",
+        "Conducted weekly coding workshops for underrepresented communities"
+      ]
+    },
+    {
+      "organization": "Local Tech Meetup",
+      "position": "Event Organizer",
+      "url": "https://localtechmeetup.com/",
+      "startDate": "2018-06-01",
+      "summary": "Organized monthly tech meetups bringing together 100+ developers and tech enthusiasts.",
+      "highlights": [
+        "Increased meetup attendance by 200% over 2 years",
+        "Secured sponsorships from major tech companies"
+      ]
+    }
+  ],
   "projects": [
     {
       "name": "CloudFormation Templates",
@@ -186,7 +212,7 @@
     }
   ],
   "meta": {
-    "template": "classic",
+    "template": "modern",
     "lang": "en_US"
   }
 }

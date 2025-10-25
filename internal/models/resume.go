@@ -5,6 +5,7 @@ import "resumme-builder/internal/utils/lang"
 type Resume struct {
 	Basics       Basics         `json:"basics"`
 	Work         []Work         `json:"work"`
+	Volunteer    []Volunteer    `json:"volunteer"`
 	Projects     []Project      `json:"projects"`
 	Publications []Publications `json:"publications"`
 	Education    []Education    `json:"education"`
@@ -54,6 +55,16 @@ type Work struct {
 	TeamDetails  *string  `json:"teamDetails,omitempty"`
 	StackDetails *string  `json:"stackDetails,omitempty"`
 	CompanyURL   *string  `json:"companyURL,omitempty"`
+}
+
+type Volunteer struct {
+	Organization string   `json:"organization"`
+	Position     string   `json:"position"`
+	URL          string   `json:"url"`
+	StartDate    string   `json:"startDate"`
+	EndDate      string   `json:"endDate"`
+	Summary      string   `json:"summary"`
+	Highlights   []string `json:"highlights"`
 }
 
 type Project struct {
@@ -115,6 +126,7 @@ type Meta struct {
 type ResumeLabels struct {
 	Education    string
 	Experiences  string
+	Volunteer    string
 	Publications string
 	Projects     string
 	Skills       string
@@ -173,4 +185,8 @@ func (r *Resume) GetCertificatesLabel() string {
 
 func (r *Resume) GetSocialsLabel() string {
 	return lang.Translate(r.Meta.Lang, SocialsLabel)
+}
+
+func (r *Resume) GetVolunteerLabel() string {
+	return lang.Translate(r.Meta.Lang, VolunteerLabel)
 }
