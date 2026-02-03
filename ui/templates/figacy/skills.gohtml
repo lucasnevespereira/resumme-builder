@@ -1,39 +1,37 @@
 {{if .Skills}}
     <div class="skills">
         <div class="section-title">{{.Labels.Skills}}</div>
-        <div class="tech-soft-skills">
-            <div class="softSkills">
-                <div class="skillsTitle uppercase">
-                    {{ if eq .Meta.Lang "fr_FR" }}
-                        Savoir-être
-                    {{ else }}
-                        Soft Skills
-                    {{ end }}
-                </div>
-                    <ul class="items">
-                        {{range $index, $skill := .SoftSkills }}
-                            <li class="skills-value">
-                                {{$skill.Name}}
-                            </li>
-                        {{end}}
-                    </ul>
+        <div class="technicalSkills">
+            <div class="skillsTitle uppercase">
+                {{ if eq .Meta.Lang "fr_FR" }}
+                Savoir-faire
+                {{ else }}
+                Tech Skills
+                {{ end }}
             </div>
-            <div class="technicalSkills">
-                <div class="skillsTitle uppercase">
-                    {{ if eq .Meta.Lang "fr_FR" }}
-                    Savoir-faire
-                    {{ else }}
-                    Tech Skills
-                    {{ end }}
-                </div>
-                <ul class="items">
-                    {{range $index, $skill := .Skills }}
-                        <li class="skills-value">
-                            {{$skill.Name}}
-                        </li>
-                    {{end}}
-                </ul>
+            <ul class="items">
+                {{range $index, $skill := .Skills }}
+                    <li class="skills-value">
+                        {{$skill.Name}}
+                    </li>
+                {{end}}
+            </ul>
+        </div>
+        <div class="softSkills">
+            <div class="skillsTitle uppercase">
+                {{ if eq .Meta.Lang "fr_FR" }}
+                    Savoir-être
+                {{ else }}
+                    Soft Skills
+                {{ end }}
             </div>
+            <ul class="items">
+                {{range $index, $skill := .SoftSkills }}
+                    <li class="skills-value">
+                        {{$skill.Name}}
+                    </li>
+                {{end}}
+            </ul>
         </div>
     </div>
 {{end}}
