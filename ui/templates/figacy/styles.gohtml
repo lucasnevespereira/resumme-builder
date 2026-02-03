@@ -2,9 +2,22 @@
     @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;900&display=swap');
     @import url('https://fonts.googleapis.com/css2?family=Catamaran&family=Roboto:wght@400;900&display=swap');
 
+    @page {
+        background: var(--header-color-50);
+        margin: 60px 0;
+    }
+    
+    @page :first {
+        margin-bottom: 60px;
+        margin-top: 0;
+    }
+
     :root {
         /*Colors*/
         --text-color: #000;
+        --header-color: #3f4959;
+        --header-color-50:rgb(86, 100, 122);;
+        --header-light-color: #e8eaed;
 
         /*Fonts*/
         --main-font: 'Playfair Display', serif;
@@ -28,8 +41,9 @@
         --header-height: 180px;
         --photo-size: 120px;
 
-        --dark-gold-color: #a38c60;
+        --dark-gold-color:rgb(169, 136, 75);
         --gold-color: #daa520;
+        --gold-text-color:rgb(204, 165, 68);
     }
 
     * {
@@ -37,15 +51,24 @@
         box-sizing: border-box;
     }
 
+    html {
+        margin: 0;
+        padding: 0;
+    }
+
     body {
         background-color: #fff;
         color: var(--text-color);
-        font-family: var(--main-font)
+        font-family: var(--secondary-font);
+        margin: 0;
+        padding: 0;
     }
 
     main {
         max-width: var(--page-max-width);
-        margin-left: -8px;
+        margin: 0 auto;
+        padding: 0;
+        padding-top: 115px;
     }
 
     ul {
@@ -54,6 +77,11 @@
         padding-inline-start: 0 !important;
         margin-block-start: 0 !important;
         margin-block-end: 0 !important;
+        padding-left: 20px !important;
+    }
+
+    .skills ul, .languages ul, .interestFields ul {
+        list-style: none;
         padding-left: 0 !important;
     }
 
@@ -79,10 +107,10 @@
     .header {
         display: flex;
         flex-direction: column;
-        background: #3f4959;
-        margin-top: -32px;
+        background: var(--header-color);
+        margin: 0;
         min-height: 200px;
-        min-width: 800px;
+        width: 100%;
         padding-top: 58px;
         padding-bottom: 10px;
     }
@@ -99,6 +127,7 @@
     .name {
         text-align: center;
         color: white;
+        font-family: var(--main-font);
         font-size: var(--font-large-xxl);
         letter-spacing: .2em;
         text-transform: uppercase;
@@ -117,6 +146,7 @@
 
     .job-position-label{
         text-transform: uppercase;
+        font-family: var(--main-font);
     }
 
     .job-position-line {
@@ -151,14 +181,18 @@
         font-weight: 500;
         display: flex;
         flex-direction: row;
-        align-items: center;
+        align-items: flex-start;
         margin-bottom: 10px;
+        page-break-inside: avoid;
+        break-inside: avoid;
     }
 
     .contact .item svg {
         width: 15px;
         height: 15px;
         margin-right: 11px;
+        margin-top: 2px;
+        flex-shrink: 0;
     }
 
     .value {
@@ -170,13 +204,23 @@
         color: white;
     }
 
+    .location-wrapper {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .city-underline {
+        text-decoration: underline;
+    }
+
     .profile-container {
         display: flex;
         gap: 30px;
         flex-direction: row;
         padding-block: 30px;
         padding-inline: 24px;
-        margin-bottom: 20px;
+        margin-top: -60px;
+       
     }
 
     .profile-description {
@@ -205,19 +249,12 @@
     .content-container {
         display: flex;
         flex-direction: row;
-        margin-inline: 12px;
+        margin-inline: 0;
     }
 
     .content-container > :nth-child(1) {
         flex: 1;
-    }
-
-    .content-container > :nth-child(2) {
-        flex: 0 0 90px;
-    }
-
-    .content-container > :nth-child(3) {
-        flex: 1.6;
+        padding-left: 0;
     }
 
     .vertical-separator:after {
@@ -229,15 +266,65 @@
         background: #000;
     }
 
+    aside {
+        background: var(--header-light-color);
+        padding: 20px 90px 80px 0px;
+        margin-left: calc(-50vw + 50%);
+        padding-left: calc(50vw - 50%);
+        position: relative;
+    }
+    
+    aside::after {
+        content: "";
+        position: absolute;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        width: 1px;
+        background: #000;
+    }
+    
     aside>div {
+        margin-left: 30px;
+    }
+    
+    aside>div:first-child {
+        padding-top: 0;
+    }
+    
+    aside>div:last-child {
+        padding-bottom: 20px;
+    }
+    
+    .content-container > :nth-child(2) {
+        flex: 0 0 0px;
+        display: none;
+    }
+    
+    .content-container > :nth-child(3) {
+        flex: 1.6;
+        padding-left: 90px;
+        padding-right: 12px;
+    }
+
+    aside>div:not(:last-child) {
         margin-bottom: 45px;
+    }
+    
+    aside>div {
+        page-break-inside: avoid;
+        break-inside: avoid;
     }
 
     .section-title {
+        font-family: var(--main-font);
         font-size: 17px;
         margin-bottom: 24px;
         letter-spacing: 2.7px;
         text-transform: uppercase;
+        page-break-after: avoid;
+        page-break-inside: avoid;
+        break-inside: avoid;
     }
 
     .section-title:after {
@@ -249,14 +336,31 @@
         background: #191919;
     }
 
-    .experiences .element .position,
-    .educations .element .degree,
-    .skillsTitle {
-        font-family: var(--secondary-font);
+    .experiences .element .position {
+        font-family: var(--main-font);
         font-size: 14px;
         line-height: 1.64;
         letter-spacing: 2px;
         text-transform: uppercase;
+        color: var(--dark-gold-color);
+    }
+
+    .educations .element .degree {
+        font-family: var(--main-font);
+        font-size: 14px;
+        line-height: 1.64;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--gold-color);
+    }
+    
+    .skillsTitle {
+        font-family: var(--main-font);
+        font-size: 14px;
+        line-height: 1.64;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        margin-bottom: 8px;
         color: var(--gold-color);
     }
 
@@ -275,8 +379,8 @@
 
     .interestFields .item {
         font-family: var(--secondary-font);
-        font-weight: 400;
-        font-size: 10px;
+        font-weight: 200;
+        font-size: 12px;
         line-height: 24px;
     }
 
@@ -300,18 +404,26 @@
         margin-top: 15px;
     }
 
-    .tech-soft-skills {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        column-gap: 45px;
+    .technicalSkills,
+    .softSkills {
+        margin-bottom: 15px;
+        page-break-inside: avoid;
+        break-inside: avoid;
     }
 
-    .skills, .languages {
+    .skills {
+        padding-top: 0;
+    }
+    
+    .languages {
         padding-top: 20px;
     }
 
     .skills-value {
-        line-height: 0.5;
+        line-height: 0.8;
+        margin-bottom: -3px;
+        page-break-inside: avoid;
+        break-inside: avoid;
     }
 
     .languages .item {
@@ -325,6 +437,12 @@
 
     .highlight {
         font-weight: 300;
+    }
+
+    .highlight mark, .highlight strong.highlight-text {
+        color: var(--dark-gold-color);
+        background: none;
+        font-weight: 600;
     }
 
     .uppercase {

@@ -10,7 +10,16 @@
         {{if .Location}}
             <div class="item">
                 <svg fill="none" height="10" viewBox="0 0 10 10" width="10" xmlns="http://www.w3.org/2000/svg" data-v-ac837284=""><g clip-path="url(#clip0_683_3520)" data-v-ac837284=""><path d="M5 0C2.91815 0 1.23047 1.68767 1.23047 3.76953C1.23047 4.46576 1.36674 5.18484 1.75781 5.70313L5 10L8.24219 5.70313C8.59739 5.23238 8.76953 4.40016 8.76953 3.76953C8.76954 1.68767 7.08185 0 5 0ZM5 2.18323C5.87597 2.18323 6.5863 2.89357 6.5863 3.76953C6.5863 4.6455 5.87597 5.35583 5 5.35583C4.12404 5.35583 3.4137 4.6455 3.4137 3.76953C3.4137 2.89357 4.12404 2.18323 5 2.18323Z" fill="#DAA520" data-v-ac837284=""></path></g><defs data-v-ac837284=""><clipPath id="clip0_683_3520" data-v-ac837284=""><rect fill="#DAA520" height="10" width="10" data-v-ac837284=""></rect></clipPath></defs></svg>
-                <span class="value">{{ (displayLocationWithSlash .Location) }}</span>
+                {{if .Location.MapURL}}
+                <a href="{{.Location.MapURL}}" title="{{.Location.MapURL}}">
+                {{end}}
+                    <div class="location-wrapper">
+                        {{if .Location.City}}<div class="value city-underline" {{if .Location.MapURL}}title="Cliquez pour voir l'itinéraire sur Google Maps"{{end}}>{{.Location.City}}</div>{{end}}
+                        <div class="value">{{if .Location.CountryCode}}{{.Location.CountryCode}}{{end}}{{if and .Location.CountryCode .Location.Region}} - {{end}}{{if .Location.Region}}{{.Location.Region}}{{end}}</div>
+                    </div>
+                {{if .Location.MapURL}}
+                </a>
+                {{end}}
             </div>
         {{end}}
         {{if .Email}}

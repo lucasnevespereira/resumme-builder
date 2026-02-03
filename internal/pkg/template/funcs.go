@@ -34,22 +34,28 @@ func displayLocation(location models.Location) string {
 }
 
 func displayLocationWithSlash(location models.Location) string {
-	var parts []string
+	var result string
 
+	// City and postal code separated by a space
 	if location.City != "" {
-		parts = append(parts, location.City)
+		result = location.City
 	}
 	if location.CountryCode != "" {
-		parts = append(parts, location.CountryCode)
+		if result != "" {
+			result += " "
+		}
+		result += location.CountryCode
 	}
+
+	// region separated by a hyphen
 	if location.Region != "" {
-		parts = append(parts, location.Region)
+		if result != "" {
+			result += " - "
+		}
+		result += location.Region
 	}
 
-	locationStr := strings.Join(parts, "/ ")
-	locationStr = strings.TrimSuffix(locationStr, "/ ")
-
-	return locationStr
+	return result
 }
 
 func trimURLPrefix(url string) string {
