@@ -3,11 +3,7 @@
         <div class="section-title">{{.Labels.Skills}}</div>
         <div class="technicalSkills">
             <div class="skillsTitle uppercase">
-                {{ if eq .Meta.Lang "fr_FR" }}
-                Savoir-faire
-                {{ else }}
                 Tech Skills
-                {{ end }}
             </div>
             <ul class="items">
                 {{range $index, $skill := .Skills }}
@@ -19,11 +15,7 @@
         </div>
         <div class="softSkills">
             <div class="skillsTitle uppercase">
-                {{ if eq .Meta.Lang "fr_FR" }}
-                    Savoir-être
-                {{ else }}
                     Soft Skills
-                {{ end }}
             </div>
             <ul class="items">
                 {{range $index, $skill := .SoftSkills }}

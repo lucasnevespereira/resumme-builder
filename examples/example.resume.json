@@ -7,8 +7,9 @@
     "phone": "07123400808",
     "location": {
       "city": "Paris",
-      "countryCode": "FR",
-      "region": "Ile-de-France"
+      "countryCode": "France",
+      "region": "Ile-de-France",
+      "mapUrl": "https://www.google.com/maps/dir/Rue+de+Caumartin,+75009+Paris/Quai+du+Point+du+Jour,+92100+Boulogne-Billancourt/@48.8518896,2.2464811,13z/data=!3m1!4b1!4m14!4m13!1m5!1m1!1s0x47e66e34178afc3d:0x5716f94f5597887!2m2!1d2.3283126!2d48.8730704!1m5!1m1!1s0x47e67a92f0c5dbb5:0x8b0d31d76085f65e!2m2!1d2.2551109!2d48.8292525!3e3?entry=ttu&g_ep=EgoyMDI2MDIwMS4wIKXMDSoASAFQAw%3D%3D"
     },
     "url": "https://jdoerust.com",
     "summary": "Experienced DevOps Engineer with over 5 years of experience managing complex cloud infrastructures and implementing automation solutions. Proficient in various cloud platforms such as AWS, Azure, and Google Cloud. Skilled in containerization technologies like Docker and Kubernetes, as well as configuration management tools like Ansible and Chef.",
@@ -33,9 +34,9 @@
       "summary": "Led the implementation of cloud infrastructure on AWS and Azure platforms, resulting in a 50% reduction in infrastructure costs.Designed and implemented a highly available Kubernetes cluster for container orchestration, improving application resiliency and reducing downtime.Built a custom CI/CD pipeline using GitLab CI/CD and Jenkins, resulting in faster and more reliable application deployments.",
       "location": "Paris, France",
       "highlights": [
-        "Example highlight",
+        "Example <mark>highlighted with mark element</mark> only avaliable in highlights section",
         "Other highlighted example",
-        "One more highlighted example"
+        "One more <mark>highlighted example</mark>"
       ]
     },
     {
@@ -212,7 +213,7 @@
     }
   ],
   "meta": {
-    "template": "modern",
+    "template": "figacy",
     "lang": "en_US"
   }
 }
