@@ -34,6 +34,7 @@ type Location struct {
 	City        string `json:"city"`
 	CountryCode string `json:"countryCode"`
 	Region      string `json:"region"`
+	MapURL      string `json:"mapUrl"`
 }
 
 type Profile struct {
