@@ -61,9 +61,9 @@ func (g *Generator) saveURLAsPDF(url string, pdf *[]byte) chromedp.Tasks {
 			data, _, err := page.
 				PrintToPDF().
 				WithMarginLeft(0).
-				WithMarginTop(0.4).
+				WithMarginTop(0).
 				WithMarginRight(0).
-				WithMarginBottom(0.4).
+				WithMarginBottom(0).
 				WithPaperWidth(8.3).
 				WithPaperHeight(11.7).
 				WithPrintBackground(true).

@@ -7,22 +7,22 @@
     {{ template "styles.gohtml" }}
 </head>
 <body>
+<div class="header">
+    {{ template "about.gohtml" .Basics }}
+    {{ template "contact.gohtml" .Basics }}
+</div>
 <main>
-    <div class="header">
-        {{ template "about.gohtml" .Basics }}
-        {{ template "contact.gohtml" .Basics }}
-    </div>
-        {{ template "profile.gohtml" .Basics }}
+    {{ template "profile.gohtml" .Basics }}
     <div class="content-container">
         <aside>
             {{ template "education.gohtml" . }}
             {{ template "languages.gohtml" . }}
             {{ template "interests.gohtml" . }}
+            {{ template "skills.gohtml" . }}
         </aside>
         <div class="vertical-separator"></div>
         <article>
             {{ template "experiences.gohtml" . }}
-            {{ template "skills.gohtml" . }}
         </article>
     </div>
 </main>
