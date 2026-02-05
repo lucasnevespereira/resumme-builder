@@ -14,48 +14,50 @@ func isLast(index, length int) bool {
 	return index == length-1
 }
 
-func displayLocation(location models.Location) string {
-	var parts []string
-
-	if location.City != "" {
-		parts = append(parts, location.City)
-	}
-	if location.Region != "" {
-		parts = append(parts, location.Region)
-	}
-	if location.CountryCode != "" {
-		parts = append(parts, location.CountryCode)
-	}
-
-	locationStr := strings.Join(parts, ", ")
-	locationStr = strings.TrimSuffix(locationStr, ", ")
-
-	return locationStr
-}
-
-func displayLocationWithSlash(location models.Location) string {
+func formatLocation(location models.Location, separatorRegion, separatorCountry string) string {
 	var result string
 
-	// City and postal code separated by a space
 	if location.City != "" {
 		result = location.City
 	}
+	if location.Region != "" {
+		if result != "" {
+			result += separatorRegion
+		}
+		result += location.Region
+	}
 	if location.CountryCode != "" {
 		if result != "" {
-			result += " "
+			result += separatorCountry
 		}
 		result += location.CountryCode
 	}
 
-	// region separated by a hyphen
-	if location.Region != "" {
-		if result != "" {
-			result += " - "
-		}
-		result += location.Region
-	}
-
 	return result
+}
+
+func displayLocation(location models.Location) string {
+	return formatLocation(location, ", ", ", ")
+}
+
+func displayLocationWithSlash(location models.Location) string {
+	return formatLocation(location, "/ ", "/ ")
+}
+
+func displayLocationWithHyphen(location models.Location) string {
+	return formatLocation(location, " - ", " - ")
+}
+
+func displayLocationWithCommaAndHyphen(location models.Location) string {
+	return formatLocation(location, ", ", " - ")
+}
+
+func displayLocationWithCommaAndSpace(location models.Location) string {
+	return formatLocation(location, ", ", " ")
+}
+
+func displayLocationWithSpaces(location models.Location) string {
+	return formatLocation(location, " ", " ")
 }
 
 func trimURLPrefix(url string) string {

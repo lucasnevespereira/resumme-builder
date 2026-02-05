@@ -14,8 +14,9 @@
                 <a href="{{.Location.MapURL}}" title="{{.Location.MapURL}}">
                 {{end}}
                     <div class="location-wrapper">
-                        {{if .Location.City}}<div class="value city-underline" {{if .Location.MapURL}}title="Cliquez pour voir l'itinéraire sur Google Maps"{{end}}>{{.Location.City}}</div>{{end}}
-                        <div class="value">{{if .Location.CountryCode}}{{.Location.CountryCode}}{{end}}{{if and .Location.CountryCode .Location.Region}} - {{end}}{{if .Location.Region}}{{.Location.Region}}{{end}}</div>
+                        <div class="value">
+                            {{ (displayLocationWithCommaAndSpace .Location) }}
+                        </div>
                     </div>
                 {{if .Location.MapURL}}
                 </a>
