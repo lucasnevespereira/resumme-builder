@@ -15,9 +15,9 @@
                 {{if .StartDate}}
                     <span class="dates">
                         {{if .EndDate}}
-                            {{.StartDate}} - {{.EndDate}}
+                            {{ formatDate "January 2006" .StartDate $.Meta.Lang }} - {{ formatDate "January 2006" .EndDate $.Meta.Lang }}
                         {{else}}
-                            {{$since}} {{.StartDate}}
+                            {{$since}} {{ formatDate "January 2006" .StartDate $.Meta.Lang }}
                         {{end}}
                     </span>
                 {{end}}

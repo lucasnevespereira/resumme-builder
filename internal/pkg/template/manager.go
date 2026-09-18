@@ -46,6 +46,7 @@ func (tm *Manager) GetTemplate(name string) (*template.Template, error) {
 		"lower":                             lower,
 		"formatDate":                        formatDate,
 		"paragraphLineFeeds":                paragraphLineFeeds,
+		"imageSrc":                          imageSrc,
 	}
 
 	t := template.New(filepath.Base(templateFiles[0])).Funcs(templateFuncs)

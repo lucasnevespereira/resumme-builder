@@ -4,7 +4,7 @@
         <div class="item">
             {{range $index, $skill := .Skills }}
                 <span class="value">
-                    {{$skill.Name}}{{if not (isLast $index (len $.Skills))}},{{end}}
+                    {{$skill.Name}}{{if $skill.Keywords}} ({{range $i, $kw := $skill.Keywords}}{{if $i}}, {{end}}{{$kw}}{{end}}){{end}}{{if not (isLast $index (len $.Skills))}},{{end}}
                 </span>
             {{end}}
         </div>

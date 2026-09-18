@@ -1,7 +1,6 @@
 package template
 
 import (
-	"fmt"
 	"html/template"
 	"resumme-builder/internal/models"
 	"strings"
@@ -98,24 +97,46 @@ func lower(s string) string {
 	return strings.ToLower(s)
 }
 
+const yearOnlyFormat = "2006"
+
 var formats = []string{
 	"2006-01-02",
 	"2006-01",
 	"January 2 2006",
 	"January 2006",
-	"2006",
+	yearOnlyFormat,
+}
+
+// monday expects full locales ("fr_FR"), while resume data carries short codes ("fr").
+var mondayLocales = map[string]monday.Locale{
+	"fr": monday.LocaleFrFR,
+	"en": monday.LocaleEnUS,
 }
 
 func formatDate(layout string, date string, locale string) string {
+	mondayLocale, ok := mondayLocales[locale]
+	if !ok {
+		mondayLocale = monday.LocaleEnUS
+	}
+
 	for _, format := range formats {
 		t, err := time.Parse(format, date)
-		if err == nil {
-			return monday.Format(t, layout, monday.Locale(locale))
-		} else {
+		if err != nil {
+			continue
+		}
+		// Une source réduite à l'année est rendue telle quelle : la mise en
+		// forme lui attribuerait un mois de janvier absent de la donnée.
+		if format == yearOnlyFormat {
 			return date
 		}
+		return monday.Format(t, layout, mondayLocale)
 	}
-	panic(fmt.Sprintf("Source string date format could not be recognized, valid formats are: %v", strings.Join(formats, ", ")))
+	return date
+}
+
+// html/template rewrites data: URIs to "#ZgotmplZ", which breaks embedded images.
+func imageSrc(src string) template.URL {
+	return template.URL(src)
 }
 
 func paragraphLineFeeds(text string) template.HTML {

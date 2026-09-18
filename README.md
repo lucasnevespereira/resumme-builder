@@ -8,6 +8,7 @@ Build your resume with HTML/CSS and JSON Data
 - [Local Usage](#local-usage)
 - [API Usage](#api-usage)
 - [Templates](#templates)
+- [Skills](#skills)
 - [Image](#image)
 - [Languages](#languages)
 - [Date Formats](#date-formats)
@@ -81,6 +82,22 @@ To use a specific template, specify the template name in the JSON resume data:
 ```json
   "template": "classic"
 ```
+
+## Skills
+
+A skill can be listed on its own, or used as a category grouping several
+technologies through the `keywords` field:
+
+```json
+"skills": [
+  { "name": "Cloud", "keywords": ["AWS", "Google Cloud", "Azure"] },
+  { "name": "Bash/Python" }
+]
+```
+
+When `keywords` is filled, templates render the name as the category label
+followed by its technologies. When it is empty or absent, only the name is
+rendered, so existing resume data keeps working unchanged.
 
 ## Image
 

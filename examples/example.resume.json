@@ -113,7 +113,11 @@
       "startDate": "2013",
       "endDate": "2015",
       "score": "Graduated",
-      "courses": ["Protocol Management", "Finance", "Blockchain"]
+      "courses": [
+        "Protocol Management",
+        "Finance",
+        "Blockchain"
+      ]
     },
     {
       "institution": "Pedro Alto University",
@@ -123,7 +127,12 @@
       "startDate": "2010",
       "endDate": "2013",
       "score": "Graduated",
-      "courses": ["Algorithms", "Network", "Security", "Unix"]
+      "courses": [
+        "Algorithms",
+        "Network",
+        "Security",
+        "Unix"
+      ]
     }
   ],
   "certificates": [
@@ -144,6 +153,23 @@
   ],
   "skills": [
     {
+      "name": "Cloud",
+      "level": "",
+      "keywords": [
+        "AWS",
+        "Google Cloud",
+        "Azure"
+      ]
+    },
+    {
+      "name": "Observability",
+      "level": "",
+      "keywords": [
+        "Prometheus",
+        "Grafana"
+      ]
+    },
+    {
       "name": "Go/Java/TypeScript",
       "level": "",
       "keywords": []
@@ -154,16 +180,10 @@
       "keywords": []
     },
     {
-      "name": "Prometheus/Grafana"
-    },
-    {
       "name": "Jenkins/Travis CI"
     },
     {
       "name": "Docker/Kubernetes"
-    },
-    {
-      "name": "AWS/Google Cloud"
     }
   ],
   "softSkills": [

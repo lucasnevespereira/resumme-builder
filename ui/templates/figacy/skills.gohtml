@@ -8,7 +8,12 @@
             <ul class="items">
                 {{range $index, $skill := .Skills }}
                     <li class="skills-value">
-                        {{$skill.Name}}
+                        {{if $skill.Keywords}}
+                            <span class="skills-category">{{$skill.Name}}</span>
+                            {{range $i, $kw := $skill.Keywords}}{{if $i}}, {{end}}{{$kw}}{{end}}
+                        {{else}}
+                            {{$skill.Name}}
+                        {{end}}
                     </li>
                 {{end}}
             </ul>

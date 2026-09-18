@@ -2,7 +2,7 @@
     <h2>{{.Labels.Skills}}</h2>
     <div class="skills-list">
         {{range .Skills}}
-            <span class="skill-item">{{.Name}}</span>
+            <span class="skill-item">{{.Name}}{{if .Keywords}} ({{range $i, $kw := .Keywords}}{{if $i}}, {{end}}{{$kw}}{{end}}){{end}}</span>
         {{end}}
     </div>
 </section>
