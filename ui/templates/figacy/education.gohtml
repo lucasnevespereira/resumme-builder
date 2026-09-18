@@ -11,7 +11,7 @@
                     {{if .Location}}
                         <span> / {{.Location}}</span>
                     {{end}}
-                    <span class="dates"> / {{ .StartDate }} - {{ .EndDate }}</span>
+                    <span class="dates"> / {{ formatDate "January 2006" .StartDate $.Meta.Lang }} - {{ formatDate "January 2006" .EndDate $.Meta.Lang }}</span>
                 </span>
             </div>
         </div>

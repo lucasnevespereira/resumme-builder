@@ -1,7 +1,7 @@
 <div class="profile-container">
     {{ if .Image }}
         <div class="top-container-image">
-            <img class="base64imageRound" src="{{ .Image }}">
+            <img class="base64imageRound" src="{{ imageSrc .Image }}">
         </div>
     {{ end }}
     {{ if .Summary }}
