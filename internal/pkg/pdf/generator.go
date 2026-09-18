@@ -3,6 +3,7 @@ package pdf
 import (
 	"context"
 	"fmt"
+	"math"
 	"os"
 	"resumme-builder/internal/utils/logger"
 	"time"
@@ -17,6 +18,15 @@ const (
 	userAgentOverride   = "WebScraper 1.0"
 	htmlSelector        = "body"
 	networkReadyTimeOut = 15 * time.Second
+
+	paperWidthInches  = 8.3
+	paperHeightInches = 11.7
+	cssPixelsPerInch  = 96
+)
+
+var (
+	paperWidthPx  = int64(math.Round(paperWidthInches * cssPixelsPerInch))
+	paperHeightPx = int64(math.Round(paperHeightInches * cssPixelsPerInch))
 )
 
 // Generator provides functionality to generate PDF from HTML.
@@ -57,6 +67,14 @@ func (g *Generator) saveURLAsPDF(url string, pdf *[]byte) chromedp.Tasks {
 			}
 			return nil
 		}),
+		// The template works out where the page breaks fall itself. That
+		// measurement must run under output conditions: some widths depend on
+		// vw units, hence on the paper size rather than on the window.
+		emulation.SetDeviceMetricsOverride(paperWidthPx, paperHeightPx, 1, false),
+		emulation.SetEmulatedMedia().WithMedia("print"),
+		chromedp.ActionFunc(func(ctx context.Context) error {
+			return chromedp.Evaluate("window.fitSidebar && window.fitSidebar()", nil).Do(ctx)
+		}),
 		chromedp.ActionFunc(func(ctx context.Context) error {
 			data, _, err := page.
 				PrintToPDF().
@@ -64,8 +82,8 @@ func (g *Generator) saveURLAsPDF(url string, pdf *[]byte) chromedp.Tasks {
 				WithMarginTop(0).
 				WithMarginRight(0).
 				WithMarginBottom(0).
-				WithPaperWidth(8.3).
-				WithPaperHeight(11.7).
+				WithPaperWidth(paperWidthInches).
+				WithPaperHeight(paperHeightInches).
 				WithPrintBackground(true).
 				Do(ctx)
 			if err != nil {

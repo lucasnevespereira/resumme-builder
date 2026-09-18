@@ -4,12 +4,12 @@
 
     @page {
         background: var(--header-color-50);
-        margin: 60px 0;
+        margin: var(--page-margin-top) 0 var(--page-margin-bottom);
     }
-    
+
     @page :first {
-        margin-bottom: 60px;
         margin-top: 0;
+        margin-bottom: var(--page-margin-bottom);
     }
 
     :root {
@@ -40,6 +40,20 @@
         --page-max-width: 45rem;
         --header-height: 180px;
         --photo-size: 120px;
+        /* Gap between the bottom of the header and the photo + intro block.
+           The block's offset and the sidebar-echo mask both derive from it, so
+           the three values cannot drift apart. */
+        --main-top-padding: 115px;
+        --profile-offset: 10px;
+        --sidebar-echo-width: 20px;
+
+        /* Paper geometry, read by fitSidebar() to work out where the page
+           breaks fall. --page-height must stay consistent with the size passed
+           to PrintToPDF in internal/pkg/pdf/generator.go
+           (11.7in x 96dpi = 1123.2px). */
+        --page-height: 1123.2px;
+        --page-margin-top: 60px;
+        --page-margin-bottom: 60px;
 
         --dark-gold-color:rgb(169, 136, 75);
         --gold-color: #daa520;
@@ -56,6 +70,19 @@
         padding: 0;
     }
 
+    /* Sidebar echo. Fixed positioning, because the print engine repeats this
+       element on every page, including those where the aside has no content
+       left — a background on html would not be carried over. */
+    .sidebar-echo {
+        position: fixed;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: var(--sidebar-echo-width);
+        background: var(--header-light-color);
+        z-index: -1;
+    }
+
     body {
         background-color: #fff;
         color: var(--text-color);
@@ -68,7 +95,7 @@
         max-width: var(--page-max-width);
         margin: 0 auto;
         padding: 0;
-        padding-top: 115px;
+        padding-top: var(--main-top-padding);
     }
 
     ul {
@@ -219,8 +246,21 @@
         flex-direction: row;
         padding-block: 30px;
         padding-inline: 24px;
-        margin-top: -60px;
-       
+        margin-top: calc(var(--profile-offset) - var(--main-top-padding));
+        position: relative;
+    }
+
+    /* Masks the sidebar echo alongside the photo block: the grey column only
+       starts at the first section, so this area must stay white. */
+    .profile-container::before {
+        content: "";
+        position: absolute;
+        left: calc(-50vw + 50%);
+        right: calc(-50vw + 50%);
+        top: calc(-1 * var(--profile-offset));
+        bottom: 0;
+        background: #fff;
+        z-index: -1;
     }
 
     .profile-description {
@@ -247,14 +287,14 @@
     }
 
     .content-container {
-        display: flex;
-        flex-direction: row;
+        display: block;
         margin-inline: 0;
     }
 
-    .content-container > :nth-child(1) {
-        flex: 1;
-        padding-left: 0;
+    .content-container::after {
+        content: "";
+        display: block;
+        clear: both;
     }
 
     .vertical-separator:after {
@@ -267,8 +307,11 @@
     }
 
     aside {
+        float: left;
+        width: 38%;
+        margin-right: 30px;
         background: var(--header-light-color);
-        padding: 20px 90px 80px 0px;
+        padding: 20px 40px 80px 0px;
         margin-left: calc(-50vw + 50%);
         padding-left: calc(50vw - 50%);
         position: relative;
@@ -286,6 +329,7 @@
     
     aside>div {
         margin-left: 30px;
+        padding-top: 12px;
     }
     
     aside>div:first-child {
@@ -302,8 +346,7 @@
     }
     
     .content-container > :nth-child(3) {
-        flex: 1.6;
-        padding-left: 90px;
+        padding-left: 40px;
         padding-right: 12px;
     }
 
@@ -411,19 +454,6 @@
         break-inside: avoid;
     }
 
-    .skills-category {
-        display: block;
-        color: var(--dark-gold-color);
-        font-weight: 500;
-        letter-spacing: 0.5px;
-        margin-bottom: 7px;
-    }
-
-    .technicalSkills .skills-value {
-        margin-bottom: 14px;
-        line-height: 1.5;
-    }
-
     .skills {
         padding-top: 0;
     }
@@ -450,8 +480,33 @@
         }
     }
 
+    /* padding, not margin: the print engine drops top margins at the start of
+       a page while it keeps padding. This is what frees the space above the
+       text on continuation pages. */
     .highlight {
         font-weight: 300;
+        margin-top: 0;
+        padding-top: 12px;
+    }
+
+    .skills-category {
+        display: block;
+        color: var(--dark-gold-color);
+        font-weight: 500;
+        letter-spacing: 0.5px;
+        margin-bottom: 7px;
+    }
+
+    .technicalSkills .skills-value {
+        margin-bottom: 14px;
+        line-height: 1.5;
+    }
+
+    /* Without this a bullet is split by the page break and the next page
+       resumes mid-paragraph, where no block spacing applies. */
+    article li {
+        page-break-inside: avoid;
+        break-inside: avoid;
     }
 
     .highlight mark, .highlight strong.highlight-text {

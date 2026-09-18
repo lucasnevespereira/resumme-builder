@@ -7,6 +7,7 @@
     {{ template "styles.gohtml" }}
 </head>
 <body>
+<div class="sidebar-echo"></div>
 <div class="header">
     {{ template "about.gohtml" .Basics }}
     {{ template "contact.gohtml" .Basics }}
@@ -26,5 +27,42 @@
         </article>
     </div>
 </main>
+<script>
+    // Stretches the sidebar down to the page break that follows its content, so
+    // that the text only reclaims the full width from the next page onwards.
+    // CSS cannot target a page, hence the measurement.
+    // Also called by the PDF generator, in print media, because the sidebar's
+    // width depends on vw units and therefore on the output format.
+    window.fitSidebar = function () {
+        var aside = document.querySelector('aside');
+        if (!aside) {
+            return null;
+        }
+
+        var css = getComputedStyle(document.documentElement);
+        var px = function (name) { return parseFloat(css.getPropertyValue(name)); };
+        var pageHeight = px('--page-height');
+        var firstPage = pageHeight - px('--page-margin-bottom');
+        var nextPages = firstPage - px('--page-margin-top');
+
+        aside.style.minHeight = '0px';
+        var top = aside.getBoundingClientRect().top + window.scrollY;
+        var end = top + aside.offsetHeight;
+
+        var boundary = firstPage;
+        while (boundary < end) {
+            boundary += nextPages;
+        }
+
+        // 2px short on purpose: overshooting would leave a fragment of sidebar
+        // at the top of the next page, whereas falling short is invisible.
+        aside.style.minHeight = (boundary - top - 2) + 'px';
+        return { top: top, naturalEnd: end, boundary: boundary };
+    };
+
+    // On screen the paper geometry does not apply, so the adjustment only runs
+    // when printing. The PDF generator calls the function directly.
+    window.addEventListener('beforeprint', window.fitSidebar);
+</script>
 </body>
 </html>
