@@ -124,8 +124,8 @@ func formatDate(layout string, date string, locale string) string {
 		if err != nil {
 			continue
 		}
-		// Une source réduite à l'année est rendue telle quelle : la mise en
-		// forme lui attribuerait un mois de janvier absent de la donnée.
+		// A source reduced to a year is returned as is: formatting it would
+		// attribute a January that the data never carried.
 		if format == yearOnlyFormat {
 			return date
 		}
