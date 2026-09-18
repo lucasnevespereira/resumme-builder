@@ -311,7 +311,7 @@
         width: 38%;
         margin-right: 30px;
         background: var(--header-light-color);
-        padding: 20px 20px 20px 0px;
+        padding: 10px 20px 20px 0px;
         margin-left: calc(-50vw + 50%);
         padding-left: calc(50vw - 50% - 24px);
         position: relative;
@@ -329,7 +329,7 @@
     
     aside>div {
         margin-left: 16px;
-        padding-top: 12px;
+        padding-top: 26px;
     }
     
     aside>div:first-child {
@@ -350,8 +350,11 @@
         padding-right: 12px;
     }
 
+    /* L'écart entre blocs est porté par le padding plutôt que par la marge :
+       une marge haute est supprimée en début de page, un padding est conservé,
+       ce qui dégage le premier bloc d'une page de la bande de marge colorée. */
     aside>div:not(:last-child) {
-        margin-bottom: 45px;
+        margin-bottom: 2px;
     }
     
     aside>div {
@@ -362,7 +365,7 @@
     .section-title {
         font-family: var(--main-font);
         font-size: 17px;
-        margin-bottom: 24px;
+        margin-bottom: 14px;
         letter-spacing: 2.7px;
         text-transform: uppercase;
         page-break-after: avoid;
@@ -371,7 +374,7 @@
     }
 
     .section-title:after {
-        margin-top: 20.5px;
+        margin-top: 12px;
         content: "";
         display: block;
         width: 100px;
@@ -454,13 +457,6 @@
         break-inside: avoid;
     }
 
-    .skills {
-        padding-top: 0;
-    }
-    
-    .languages {
-        padding-top: 20px;
-    }
 
     .skills-value {
         line-height: 0.8;
