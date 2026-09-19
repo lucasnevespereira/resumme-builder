@@ -13,7 +13,10 @@ import (
 	"github.com/lucasnevespereira/resb/internal/utils/logger"
 )
 
-var rootCmd = &cobra.Command{}
+var rootCmd = &cobra.Command{
+	Use:   "resb",
+	Short: "Build a resume PDF from JSON Resume data",
+}
 
 func init() {
 	rootCmd.AddCommand(local.Cmd())
