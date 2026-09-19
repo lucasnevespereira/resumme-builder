@@ -1,6 +1,6 @@
-# resb
+# resb (resume builder)
 
-Build your resume with HTML/CSS and JSON Data. `resb` is short for Resume Builder.
+Build your resume with HTML/CSS and JSON Data.
 
 ## Table of Contents
 
@@ -219,21 +219,6 @@ Example of date fields in JSON resume data:
 - [x] Add tests for rendering, the API and the PDF printer
 - [ ] Expand template options
 - [ ] Implement automatic translation support
-
-### Versioned CLI
-
-To release, push a version tag: `git tag v0.1.0 && git push origin v0.1.0`. A workflow creates the GitHub release with notes generated from the commits. Where the CLI stands:
-
-- [x] Release on version tags, with generated release notes
-- [x] Module path that `go install` can resolve
-- [x] Themes and translations embedded in the binary, so it runs from any directory
-- [x] `version` command, plus `-v` and `--version`
-- [ ] Attach macOS and Linux binaries to each release (GoReleaser)
-- [ ] Publish the Docker image to GHCR on each release (build it with Go 1.24+ so `version` is stamped, it prints `dev` today)
-- [ ] Clear error when Chrome is not installed
-- [x] Document `go install github.com/lucasnevespereira/resb@latest`
-
-Feel free to contribute additional templates and features to enhance resb!
 
 ## How to Contribute
 
