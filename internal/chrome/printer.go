@@ -2,6 +2,7 @@ package chrome
 
 import (
 	"context"
+	"fmt"
 	"math"
 	"os"
 	"resumme-builder/internal/utils/logger"
@@ -61,7 +62,7 @@ func (p *Printer) Print(ctx context.Context, html []byte) ([]byte, error) {
 	defer cancelCtx()
 
 	var pdfData []byte
-	if err := chromedp.Run(chromeCtx, printTasks("file://"+file.Name(), &pdfData)); err != nil {
+	if err := chromedp.Run(chromeCtx, p.saveURLAsPDF("file://"+file.Name(), &pdfData)); err != nil {
 		return nil, errors.Wrap(err, "Print - chromedp.Run")
 	}
 
@@ -70,34 +71,17 @@ func (p *Printer) Print(ctx context.Context, html []byte) ([]byte, error) {
 	return pdfData, nil
 }
 
-func printTasks(url string, pdf *[]byte) chromedp.Tasks {
-	idle := make(chan struct{}, 1)
+func (p *Printer) saveURLAsPDF(url string, pdf *[]byte) chromedp.Tasks {
 	return chromedp.Tasks{
 		emulation.SetUserAgentOverride(userAgentOverride),
-		chromedp.ActionFunc(func(ctx context.Context) error {
-			// A page target's main frame shares its ID. Iframes fire their own
-			// networkIdle, so only the main frame counts, and repeats are dropped.
-			mainFrame := cdp.FrameID(chromedp.FromContext(ctx).Target.TargetID)
-			chromedp.ListenTarget(ctx, func(ev interface{}) {
-				if e, ok := ev.(*page.EventLifecycleEvent); ok && e.Name == "networkIdle" && e.FrameID == mainFrame {
-					select {
-					case idle <- struct{}{}:
-					default:
-					}
-				}
-			})
-			return nil
-		}),
 		chromedp.Navigate(url),
 		chromedp.WaitVisible(htmlSelector, chromedp.ByQuery),
 		chromedp.ActionFunc(func(ctx context.Context) error {
-			select {
-			case <-idle:
-			case <-ctx.Done():
-				return ctx.Err()
-			case <-time.After(networkIdleTimeout):
-				// Slow fonts or images shouldn't fail the print.
-				logger.Log.Warnf("no network idle after %s, printing anyway", networkIdleTimeout)
+			if err := waitForNetworkIdle(ctx, networkIdleTimeout); err != nil {
+				if ctx.Err() != nil {
+					return err
+				}
+				logger.Log.Warn(err)
 			}
 			return nil
 		}),
@@ -121,10 +105,39 @@ func printTasks(url string, pdf *[]byte) chromedp.Tasks {
 				WithPrintBackground(true).
 				Do(ctx)
 			if err != nil {
-				return errors.Wrap(err, "printTasks - page.PrintToPDF")
+				return errors.Wrap(err, "saveURLAsPDF - page.PrintToPDF")
 			}
 			*pdf = data
 			return nil
 		}),
+	}
+}
+
+// waitForNetworkIdle waits until the page has had no network activity for
+// 500ms, so fonts and icons loaded late still make it into the PDF.
+func waitForNetworkIdle(ctx context.Context, timeout time.Duration) error {
+	mainFrame := cdp.FrameID(chromedp.FromContext(ctx).Target.TargetID)
+	idle := make(chan struct{}, 1)
+
+	chromedp.ListenTarget(ctx, func(ev interface{}) {
+		// Iframes fire their own networkIdle, and Chrome can fire it more than
+		// once: only the main frame counts, and repeats are dropped.
+		event, ok := ev.(*page.EventLifecycleEvent)
+		if !ok || event.Name != "networkIdle" || event.FrameID != mainFrame {
+			return
+		}
+		select {
+		case idle <- struct{}{}:
+		default:
+		}
+	})
+
+	select {
+	case <-idle:
+		return nil
+	case <-ctx.Done():
+		return ctx.Err()
+	case <-time.After(timeout):
+		return fmt.Errorf("timeout %.0f seconds waiting for network idle", timeout.Seconds())
 	}
 }
