@@ -121,7 +121,7 @@ func waitForNetworkIdle(ctx context.Context, timeout time.Duration) error {
 
 	chromedp.ListenTarget(ctx, func(ev interface{}) {
 		// Iframes fire their own networkIdle, and Chrome can fire it more than
-		// once: only the main frame counts, and repeats are dropped.
+		// once. Only the main frame counts, and repeats are dropped.
 		event, ok := ev.(*page.EventLifecycleEvent)
 		if !ok || event.Name != "networkIdle" || event.FrameID != mainFrame {
 			return
