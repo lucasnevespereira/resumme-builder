@@ -1,4 +1,4 @@
-name: CI
+name: ci
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
   pull_request:
 
 jobs:
-  test:
+  lint:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -15,10 +15,24 @@ jobs:
           go-version-file: go.mod
       - name: gofmt
         run: test -z "$(gofmt -l .)" || (gofmt -l . && exit 1)
-      - run: go vet ./...
+      - name: go vet
+        run: go vet ./...
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
       # The runner ships Google Chrome, so the printer tests run for real.
       # Ubuntu 24.04 blocks the user namespaces Chrome's sandbox needs:
       # https://chromium.googlesource.com/chromium/src/+/main/docs/security/apparmor-userns-restrictions.md
       - name: Allow Chrome's sandbox
         run: sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0
-      - run: go test ./...
+      # Chrome's first start on a fresh runner can take longer than
+      # chromedp's 20s connect timeout.
+      - name: Warm up Chrome
+        run: google-chrome --headless --disable-gpu --dump-dom about:blank > /dev/null
+      - name: go test
+        run: go test -v ./...
