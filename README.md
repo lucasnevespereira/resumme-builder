@@ -182,9 +182,9 @@ Example of date fields in JSON resume data:
 
 ### Versioned CLI
 
-Releases are cut by [release-please](https://github.com/googleapis/release-please) from Conventional Commits. The steps left before the CLI can be installed and run on its own:
+To release, push a version tag: `git tag v0.1.0 && git push origin v0.1.0`. A workflow creates the GitHub release with notes generated from the commits. The steps left before the CLI can be installed and run on its own:
 
-- [x] Tag releases and keep a changelog
+- [x] Release on version tags, with generated release notes
 - [x] Module path that `go install` can resolve
 - [ ] Embed `ui/` in the binary with `go:embed`, so it runs from any directory
 - [x] `version` command
