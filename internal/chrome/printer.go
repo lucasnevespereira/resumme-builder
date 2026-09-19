@@ -103,6 +103,8 @@ func (p *Printer) saveURLAsPDF(url string, pdf *[]byte) chromedp.Tasks {
 				WithPaperWidth(paperWidthInches).
 				WithPaperHeight(paperHeightInches).
 				WithPrintBackground(true).
+				// Tagged PDFs keep the structure screen readers and ATS parsers read.
+				WithGenerateTaggedPDF(true).
 				Do(ctx)
 			if err != nil {
 				return errors.Wrap(err, "saveURLAsPDF - page.PrintToPDF")

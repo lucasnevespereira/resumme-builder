@@ -229,7 +229,7 @@ To release, push a version tag: `git tag v0.1.0 && git push origin v0.1.0`. A wo
 - [x] Themes and translations embedded in the binary, so it runs from any directory
 - [x] `version` command, plus `-v` and `--version`
 - [ ] Attach macOS and Linux binaries to each release (GoReleaser)
-- [ ] Publish the Docker image to GHCR on each release (build it with Go 1.24+ so `version` is stamped, it prints `dev` today)
+- [ ] Publish the Docker image to GHCR on each release (check that `resb -v` shows the tag inside the image)
 - [ ] Clear error when Chrome is not installed
 - [x] Document `go install github.com/lucasnevespereira/resb@latest`
 
