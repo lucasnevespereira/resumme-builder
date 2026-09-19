@@ -187,9 +187,9 @@ To release, push a version tag: `git tag v0.1.0 && git push origin v0.1.0`. A wo
 - [x] Release on version tags, with generated release notes
 - [x] Module path that `go install` can resolve
 - [ ] Embed `ui/` in the binary with `go:embed`, so it runs from any directory
-- [x] `version` command
+- [x] `version` command, plus `-v` and `--version`
 - [ ] Attach macOS and Linux binaries to each release (GoReleaser)
-- [ ] Publish the Docker image to GHCR on each release
+- [ ] Publish the Docker image to GHCR on each release (build it with Go 1.24+ so `version` is stamped, it prints `dev` today)
 - [ ] Clear error when Chrome is not installed
 - [ ] Document `go install github.com/lucasnevespereira/resumme-builder@latest`
 
