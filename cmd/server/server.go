@@ -1,7 +1,7 @@
 package server
 
 import (
-	"github.com/lucasnevespereira/resumme-builder/internal/api"
+	"github.com/lucasnevespereira/resb/internal/api"
 	"github.com/spf13/cobra"
 )
 

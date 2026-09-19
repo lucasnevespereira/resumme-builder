@@ -7,10 +7,10 @@ import (
 	"github.com/spf13/cobra"
 	"github.com/spf13/pflag"
 
-	"github.com/lucasnevespereira/resumme-builder/cmd/local"
-	"github.com/lucasnevespereira/resumme-builder/cmd/server"
-	"github.com/lucasnevespereira/resumme-builder/cmd/version"
-	"github.com/lucasnevespereira/resumme-builder/internal/utils/logger"
+	"github.com/lucasnevespereira/resb/cmd/local"
+	"github.com/lucasnevespereira/resb/cmd/server"
+	"github.com/lucasnevespereira/resb/cmd/version"
+	"github.com/lucasnevespereira/resb/internal/utils/logger"
 )
 
 var rootCmd = &cobra.Command{}

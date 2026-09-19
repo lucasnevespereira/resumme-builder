@@ -1,4 +1,4 @@
-module github.com/lucasnevespereira/resumme-builder
+module github.com/lucasnevespereira/resb
 
 go 1.20
 

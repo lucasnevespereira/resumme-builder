@@ -3,7 +3,7 @@ package chrome
 import (
 	"context"
 	"fmt"
-	"github.com/lucasnevespereira/resumme-builder/internal/utils/logger"
+	"github.com/lucasnevespereira/resb/internal/utils/logger"
 	"math"
 	"os"
 	"time"

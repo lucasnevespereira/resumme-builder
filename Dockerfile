@@ -4,7 +4,7 @@ RUN mkdir /app
 ADD . /app
 WORKDIR /app
 
-RUN CGO_ENABLED=0 GOOS=linux go build -o resumme-builder
+RUN CGO_ENABLED=0 GOOS=linux go build -o resb
 
 EXPOSE 9000
 
@@ -16,4 +16,4 @@ RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.d
 RUN apt-get install -y ./google-chrome-stable_current_amd64.deb
 
 COPY --from=builder /app .
-CMD ["./resumme-builder", "server"]
+CMD ["./resb", "server"]

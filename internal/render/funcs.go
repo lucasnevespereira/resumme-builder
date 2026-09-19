@@ -1,7 +1,7 @@
 package render
 
 import (
-	"github.com/lucasnevespereira/resumme-builder/internal/models"
+	"github.com/lucasnevespereira/resb/internal/models"
 	"html/template"
 	"strings"
 	"time"

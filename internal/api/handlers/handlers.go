@@ -2,9 +2,9 @@ package handlers
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/lucasnevespereira/resumme-builder/internal/models"
-	"github.com/lucasnevespereira/resumme-builder/internal/render"
-	"github.com/lucasnevespereira/resumme-builder/internal/utils/logger"
+	"github.com/lucasnevespereira/resb/internal/models"
+	"github.com/lucasnevespereira/resb/internal/render"
+	"github.com/lucasnevespereira/resb/internal/utils/logger"
 	"net/http"
 )
 

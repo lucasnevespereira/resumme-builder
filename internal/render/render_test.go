@@ -8,7 +8,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/lucasnevespereira/resumme-builder/internal/models"
+	"github.com/lucasnevespereira/resb/internal/models"
 )
 
 func newTestRenderer(t *testing.T) *Renderer {

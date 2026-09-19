@@ -3,11 +3,11 @@ package api
 import (
 	"fmt"
 	"github.com/gin-gonic/gin"
-	"github.com/lucasnevespereira/resumme-builder/configs"
-	"github.com/lucasnevespereira/resumme-builder/internal/api/router"
-	"github.com/lucasnevespereira/resumme-builder/internal/chrome"
-	"github.com/lucasnevespereira/resumme-builder/internal/render"
-	"github.com/lucasnevespereira/resumme-builder/internal/utils/logger"
+	"github.com/lucasnevespereira/resb/configs"
+	"github.com/lucasnevespereira/resb/internal/api/router"
+	"github.com/lucasnevespereira/resb/internal/chrome"
+	"github.com/lucasnevespereira/resb/internal/render"
+	"github.com/lucasnevespereira/resb/internal/utils/logger"
 	"net/http"
 	"os"
 )

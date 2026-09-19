@@ -1,6 +1,6 @@
-# Resumme Builder
+# resb
 
-Build your resume with HTML/CSS and JSON Data
+Build your resume with HTML/CSS and JSON Data. `resb` is short for Resume Builder.
 
 ## Table of Contents
 
@@ -19,7 +19,7 @@ Build your resume with HTML/CSS and JSON Data
 
 ## Introduction
 
-Resumme Builder is a tool that allows you to generate a resume using HTML/CSS templates and JSON data.
+resb is a tool that allows you to generate a resume using HTML/CSS templates and JSON data.
 It follows the [JSON Resume](https://jsonresume.org/) standard for structuring resume data.
 
 ## Architecture
@@ -50,7 +50,7 @@ The generated resume files (`resume.pdf` and `resume.html`) will be saved in the
 
 ## API Usage
 
-To use Resumme Builder as an API, follow these steps:
+To use resb as an API, follow these steps:
 
 Start the server by running the following command:
 
@@ -74,7 +74,7 @@ e.g example json data request in [examples/example.resume.json](examples/example
 
 ## Templates
 
-Resumme Builder provides the following templates for generating resumes:
+resb provides the following templates for generating resumes:
 
 - Classic: [Example](examples/example.classic.pdf)
 - Basic: [Example](examples/example.basic.pdf)
@@ -118,7 +118,7 @@ Upload your image to a service like [imgur](https://imgur.com/) and copy the dir
 
 ## Languages
 
-Resumme Builder supports multiple languages for your resume, allowing you to create your resume in a language that suits
+resb supports multiple languages for your resume, allowing you to create your resume in a language that suits
 your needs. The default language is English (en), but you can choose to use other supported languages as well.
 
 Currently, the following languages are supported:
@@ -138,7 +138,7 @@ e.g [examples/example.resume.json](examples/example.resume.json)
 
 ## Date Formats
 
-Resumme Builder supports the following date formats:
+resb supports the following date formats:
 
 - `2006-01-02` (e.g., "2024-07-09")
 - `2006-01` (e.g., "2024-07")
@@ -191,9 +191,9 @@ To release, push a version tag: `git tag v0.1.0 && git push origin v0.1.0`. A wo
 - [ ] Attach macOS and Linux binaries to each release (GoReleaser)
 - [ ] Publish the Docker image to GHCR on each release (build it with Go 1.24+ so `version` is stamped, it prints `dev` today)
 - [ ] Clear error when Chrome is not installed
-- [ ] Document `go install github.com/lucasnevespereira/resumme-builder@latest`
+- [ ] Document `go install github.com/lucasnevespereira/resb@latest`
 
-Feel free to contribute additional templates and features to enhance the Resumme Builder project!
+Feel free to contribute additional templates and features to enhance resb!
 
 ## How to Contribute
 

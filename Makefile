@@ -1,6 +1,6 @@
 .PHONY: local server clean lint fmt
 
-APP_NAME=resumme-builder
+APP_NAME=resb
 
 fmt:
 	gofmt -s -l -w .
