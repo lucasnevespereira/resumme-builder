@@ -5,8 +5,9 @@ Build your resume with HTML/CSS and JSON Data. `resb` is short for Resume Builde
 ## Table of Contents
 
 - [Introduction](#introduction)
+- [Installation](#installation)
+- [Usage](#usage)
 - [Architecture](#architecture)
-- [Local Usage](#local-usage)
 - [API Usage](#api-usage)
 - [Templates](#templates)
 - [Skills](#skills)
@@ -22,41 +23,57 @@ Build your resume with HTML/CSS and JSON Data. `resb` is short for Resume Builde
 resb is a tool that allows you to generate a resume using HTML/CSS templates and JSON data.
 It follows the [JSON Resume](https://jsonresume.org/) standard for structuring resume data.
 
+## Installation
+
+resb prints PDFs with headless Chrome, so you need [Google Chrome](https://www.google.com/chrome/) or Chromium installed.
+
+With Go:
+
+```shell
+go install github.com/lucasnevespereira/resb@latest
+resb -v
+```
+
+Or run it from a clone, without installing:
+
+```shell
+git clone https://github.com/lucasnevespereira/resb.git
+cd resb
+make local file="examples/example.resume.json"
+```
+
+## Usage
+
+Create a JSON file with your resume data. See [examples/example.resume.json](examples/example.resume.json) for a full example.
+
+```shell
+resb local -f resume.json
+```
+
+This writes `output/resume.pdf` in the current directory, named after your JSON file, plus `output/resume.html`. Options:
+
+- `-n cv.pdf` sets the PDF file name.
+- `-u ./my-ui` uses your own `templates/` and `locales/` instead of the built-in ones.
+
+`local` is the default command, so `resb -f resume.json` works too.
+
 ## Architecture
 
 ![Architecture](docs/architecture.png)
 
 The `local` command and the API both go through the render module (`internal/render`). It renders the chosen template with labels from `ui/locales`, then headless Chrome prints the page to PDF.
 
-## Local Usage
-
-Create a JSON file with your resume data. You can specify the file path using the `file` flag.
-
-<i>You can see a json file example in [examples/example.resume.json](examples/example.resume.json)</i>
-
-Run the following command to generate the resume in PDF and HTML formats:
-
-```shell
-make local file="data/resume.json"
-```
-
-Alternatively, you can use the following command:
-
-```shell
-go run *.go local -f="data/resume.json"
-```
-
-The generated resume files (`resume.pdf` and `resume.html`) will be saved in the `output` directory.
-
 ## API Usage
 
 To use resb as an API, follow these steps:
 
-Start the server by running the following command:
+Start the server:
 
+```shell
+resb server
 ```
-make server
-```
+
+From a clone, `make server` does the same.
 
 You can also use Docker to run the server:
 
@@ -182,16 +199,16 @@ Example of date fields in JSON resume data:
 
 ### Versioned CLI
 
-To release, push a version tag: `git tag v0.1.0 && git push origin v0.1.0`. A workflow creates the GitHub release with notes generated from the commits. The steps left before the CLI can be installed and run on its own:
+To release, push a version tag: `git tag v0.1.0 && git push origin v0.1.0`. A workflow creates the GitHub release with notes generated from the commits. Where the CLI stands:
 
 - [x] Release on version tags, with generated release notes
 - [x] Module path that `go install` can resolve
-- [ ] Embed `ui/` in the binary with `go:embed`, so it runs from any directory
+- [x] Themes and translations embedded in the binary, so it runs from any directory
 - [x] `version` command, plus `-v` and `--version`
 - [ ] Attach macOS and Linux binaries to each release (GoReleaser)
 - [ ] Publish the Docker image to GHCR on each release (build it with Go 1.24+ so `version` is stamped, it prints `dev` today)
 - [ ] Clear error when Chrome is not installed
-- [ ] Document `go install github.com/lucasnevespereira/resb@latest`
+- [x] Document `go install github.com/lucasnevespereira/resb@latest`
 
 Feel free to contribute additional templates and features to enhance resb!
 

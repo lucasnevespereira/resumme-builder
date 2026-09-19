@@ -15,8 +15,7 @@ var versionCmd = &cobra.Command{
 	},
 }
 
-// String returns the module version Go stamps into the binary,
-// like v0.1.0 for `go install ...@v0.1.0`.
+// String returns the version Go stamps into the binary, like v0.1.0.
 func String() string {
 	info, ok := debug.ReadBuildInfo()
 	if !ok || info.Main.Version == "" || info.Main.Version == "(devel)" {

@@ -8,8 +8,8 @@ import (
 	"github.com/lucasnevespereira/resb/internal/chrome"
 	"github.com/lucasnevespereira/resb/internal/render"
 	"github.com/lucasnevespereira/resb/internal/utils/logger"
+	"github.com/lucasnevespereira/resb/ui"
 	"net/http"
-	"os"
 )
 
 type Api struct {
@@ -18,7 +18,7 @@ type Api struct {
 }
 
 func New() (*Api, error) {
-	renderer, err := render.New(os.DirFS("ui"), chrome.NewPrinter())
+	renderer, err := render.New(ui.FS, chrome.NewPrinter())
 	if err != nil {
 		return nil, err
 	}

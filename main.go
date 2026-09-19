@@ -23,7 +23,6 @@ func init() {
 	rootCmd.AddCommand(server.Cmd())
 	rootCmd.AddCommand(version.Cmd())
 
-	// Gives the root command -v and --version, printing the same as `version`.
 	rootCmd.Version = version.String()
 	rootCmd.SetVersionTemplate("{{.Version}}\n")
 	rootCmd.InitDefaultVersionFlag()
