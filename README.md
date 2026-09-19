@@ -53,7 +53,7 @@ resb local -f resume.json
 This writes `output/resume.pdf` in the current directory, named after your JSON file, plus `output/resume.html`. Options:
 
 - `-n cv.pdf` sets the PDF file name.
-- `-u ./my-ui` uses your own `templates/` and `locales/` instead of the built-in ones.
+- `-u ./my-ui` uses your own templates instead of the built-in ones. See [Custom templates](#custom-templates).
 
 `local` is the default command, so `resb -f resume.json` works too.
 
@@ -106,6 +106,29 @@ To use a specific template, specify the template name in the JSON resume data:
 ```json
   "template": "classic"
 ```
+
+### Custom templates
+
+To use your own theme without rebuilding resb, put it in a folder shaped like [`ui/`](ui):
+
+```text
+my-ui/
+├── templates/
+│   └── mytheme/
+│       ├── _mytheme.gohtml   # root file, its name starts with _
+│       └── ...
+└── locales/
+    ├── en.json               # required
+    └── fr.json
+```
+
+Then set `"template": "mytheme"` in your resume and run:
+
+```shell
+resb -f resume.json -u ./my-ui
+```
+
+The folder replaces the built-in themes and translations. Copy the ones you want to keep from [`ui/`](ui).
 
 ## Skills
 
