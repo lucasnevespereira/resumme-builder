@@ -73,7 +73,7 @@ func TestLabelsFollowTheResumeLanguage(t *testing.T) {
 	resume := exampleResume(t)
 	resume.Meta.Template = "stackoverflow"
 
-	for lang, want := range map[string]string{"fr": "Formation", "fr_FR": "Formation", "de": "Education", "": "Education"} {
+	for lang, want := range map[string]string{"fr": "Formation", "fr_FR": "Formation", "fr-FR": "Formation", "de": "Education", "": "Education"} {
 		resume.Meta.Lang = lang
 		html, err := r.HTML(resume)
 		if err != nil {
@@ -135,5 +135,16 @@ func TestPDFPrintsTheRenderedHTML(t *testing.T) {
 	html, _ := r.HTML(resume)
 	if string(pdf) != "%PDF" || !bytes.Equal(printer.got, html) {
 		t.Error("PDF should print exactly the rendered HTML")
+	}
+}
+
+func TestDatesFollowTheSameLanguageAsLabels(t *testing.T) {
+	for _, lang := range []string{"fr", "fr_FR", "fr-FR", "FR"} {
+		if got := formatDate("January 2006", "2020-01-15", lang); got != "janvier 2020" {
+			t.Errorf("lang %q: got %q, want janvier 2020", lang, got)
+		}
+	}
+	if got := formatDate("January 2006", "2020-01-15", "de"); got != "January 2020" {
+		t.Errorf("unknown lang: got %q, want English", got)
 	}
 }

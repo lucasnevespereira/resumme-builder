@@ -37,15 +37,20 @@ func loadLabels(ui fs.FS) (map[string]map[string]string, error) {
 	return labels, nil
 }
 
-// labelsFor accepts "fr" as well as regional codes like "fr_FR" or "fr-FR".
+// labelsFor falls back to English for a language without a locale file.
 func (r *Renderer) labelsFor(lang string) map[string]string {
 	if l, ok := r.labels[lang]; ok {
 		return l
 	}
-	if base, _, found := strings.Cut(strings.ReplaceAll(lang, "-", "_"), "_"); found {
-		if l, ok := r.labels[base]; ok {
-			return l
-		}
+	if l, ok := r.labels[baseLang(lang)]; ok {
+		return l
 	}
 	return r.labels[defaultLang]
+}
+
+// baseLang turns regional codes like "fr_FR" or "fr-FR" into "fr".
+// Labels and dates both go through it, so they always agree.
+func baseLang(lang string) string {
+	base, _, _ := strings.Cut(strings.ReplaceAll(lang, "-", "_"), "_")
+	return strings.ToLower(base)
 }
