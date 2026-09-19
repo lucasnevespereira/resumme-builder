@@ -13,7 +13,7 @@ Build your resume with HTML/CSS and JSON Data
 - [Image](#image)
 - [Languages](#languages)
 - [Date Formats](#date-formats)
-- [Todo List](#todo-list)
+- [Roadmap](#roadmap)
 - [How to Contribute](#how-to-contribute)
 - [License](#license)
 
@@ -170,15 +170,28 @@ Example of date fields in JSON resume data:
 }
 ```
 
-## Todo List
+## Roadmap
 
 - [x] Parse data to HTML
 - [x] Generate PDF
 - [x] Build an API
 - [x] Handle multiple languages (i18n)
+- [x] Add tests for rendering, the API and the PDF printer
 - [ ] Expand template options
 - [ ] Implement automatic translation support
-- [ ] Add unit tests and improve test coverage
+
+### Versioned CLI
+
+Releases are cut by [release-please](https://github.com/googleapis/release-please) from Conventional Commits. The steps left before the CLI can be installed and run on its own:
+
+- [x] Tag releases and keep a changelog
+- [x] Module path that `go install` can resolve
+- [ ] Embed `ui/` in the binary with `go:embed`, so it runs from any directory
+- [ ] `--version` flag, set at build time
+- [ ] Attach macOS and Linux binaries to each release (GoReleaser)
+- [ ] Publish the Docker image to GHCR on each release
+- [ ] Clear error when Chrome is not installed
+- [ ] Document `go install github.com/lucasnevespereira/resumme-builder@latest`
 
 Feel free to contribute additional templates and features to enhance the Resumme Builder project!
 
