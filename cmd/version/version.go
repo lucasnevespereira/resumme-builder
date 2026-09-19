@@ -11,13 +11,13 @@ var versionCmd = &cobra.Command{
 	Use:   "version",
 	Short: "Prints the CLI version",
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println(version())
+		fmt.Println(String())
 	},
 }
 
-// version comes from the module version Go stamps into the binary,
+// String returns the module version Go stamps into the binary,
 // like v0.1.0 for `go install ...@v0.1.0`.
-func version() string {
+func String() string {
 	info, ok := debug.ReadBuildInfo()
 	if !ok || info.Main.Version == "" || info.Main.Version == "(devel)" {
 		return "dev"

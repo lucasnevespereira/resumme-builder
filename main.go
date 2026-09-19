@@ -19,6 +19,11 @@ func init() {
 	rootCmd.AddCommand(local.Cmd())
 	rootCmd.AddCommand(server.Cmd())
 	rootCmd.AddCommand(version.Cmd())
+
+	// Gives the root command -v and --version, printing the same as `version`.
+	rootCmd.Version = version.String()
+	rootCmd.SetVersionTemplate("{{.Version}}\n")
+	rootCmd.InitDefaultVersionFlag()
 }
 
 func main() {
@@ -29,7 +34,7 @@ func main() {
 
 	// default cmd if no cmd is given
 	cmd, _, err := rootCmd.Find(os.Args[1:])
-	if err == nil && cmd.Use == rootCmd.Use && !errors.Is(cmd.Flags().Parse(os.Args[1:]), pflag.ErrHelp) {
+	if err == nil && cmd.Use == rootCmd.Use && !errors.Is(cmd.Flags().Parse(os.Args[1:]), pflag.ErrHelp) && !cmd.Flags().Changed("version") {
 		args := append([]string{local.Cmd().Use}, os.Args[1:]...)
 		rootCmd.SetArgs(args)
 	}
