@@ -38,7 +38,7 @@ func New(ui fs.FS, printer Printer) (*Renderer, error) {
 	return &Renderer{themes: themes, labels: labels, printer: printer}, nil
 }
 
-// page is what themes see: the resume fields at the root, plus Labels.
+// page is what themes see. It has the resume fields at the root, plus Labels.
 type page struct {
 	models.Resume
 	Labels map[string]string

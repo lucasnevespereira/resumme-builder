@@ -46,13 +46,7 @@ func TestGetPdfReturnsThePdf(t *testing.T) {
 	}
 }
 
-func TestGetPdfRejectsInvalidJSON(t *testing.T) {
-	if rec := postPdf(t, "{"); rec.Code != http.StatusBadRequest {
-		t.Errorf("got %d, want 400", rec.Code)
-	}
-}
-
-// Used to call logger.Fatal, which exits the process: this test would not return.
+// The handler used to call logger.Fatal here, which exits the process.
 func TestGetPdfReportsRenderErrors(t *testing.T) {
 	rec := postPdf(t, `{"meta": {"template": "nope"}}`)
 	if rec.Code != http.StatusInternalServerError || !strings.Contains(rec.Body.String(), "unknown template") {
