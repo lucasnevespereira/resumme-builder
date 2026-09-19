@@ -37,21 +37,33 @@ func NewPDFGenerator() *Generator {
 	return &Generator{}
 }
 
-// GenerateFromHTML generates a PDF from HTML file.
-func (g *Generator) GenerateFromHTML(file string, pdfFilename string) ([]byte, error) {
+// Print loads html in headless Chrome and prints it to PDF.
+func (g *Generator) Print(ctx context.Context, html []byte) ([]byte, error) {
 	startedAt := time.Now()
 
-	chromeCtx, cancelCtx := chromedp.NewContext(context.Background())
+	// Each call gets its own file, so concurrent requests never share one.
+	file, err := os.CreateTemp("", "resume-*.html")
+	if err != nil {
+		return nil, errors.Wrap(err, "Print - os.CreateTemp")
+	}
+	defer os.Remove(file.Name())
+	if _, err := file.Write(html); err != nil {
+		file.Close()
+		return nil, errors.Wrap(err, "Print - write html")
+	}
+	if err := file.Close(); err != nil {
+		return nil, errors.Wrap(err, "Print - close html")
+	}
+
+	chromeCtx, cancelCtx := chromedp.NewContext(ctx)
 	defer cancelCtx()
 
 	var pdfData []byte
-	url := getFilePathAsURL(file)
-
-	if err := chromedp.Run(chromeCtx, g.saveURLAsPDF(url, &pdfData)); err != nil {
-		return nil, errors.Wrap(err, "GenerateFromHTML - chromedp.Run")
+	if err := chromedp.Run(chromeCtx, g.saveURLAsPDF("file://"+file.Name(), &pdfData)); err != nil {
+		return nil, errors.Wrap(err, "Print - chromedp.Run")
 	}
 
-	logger.Log.Infof("PDF %s generated in %f seconds", pdfFilename, time.Since(startedAt).Seconds())
+	logger.Log.Infof("PDF generated in %f seconds", time.Since(startedAt).Seconds())
 
 	return pdfData, nil
 }
@@ -93,15 +105,6 @@ func (g *Generator) saveURLAsPDF(url string, pdf *[]byte) chromedp.Tasks {
 			return nil
 		}),
 	}
-}
-
-func getFilePathAsURL(filename string) string {
-	path, err := os.Getwd()
-	if err != nil {
-		logger.Log.Error(err)
-	}
-
-	return fmt.Sprintf("file://%s/%s", path, filename)
 }
 
 func waitForNetworkIdle(ctx context.Context, timeout time.Duration) error {

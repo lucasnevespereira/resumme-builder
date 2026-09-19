@@ -1,17 +1,18 @@
 package local
 
 import (
+	"os"
 	"path/filepath"
 	"strings"
+
 	"resumme-builder/internal/models"
-	"resumme-builder/internal/pkg/parser"
 	"resumme-builder/internal/pkg/pdf"
-	"resumme-builder/internal/pkg/template"
-	"resumme-builder/internal/services"
+	"resumme-builder/internal/render"
 	"resumme-builder/internal/utils/fs"
-	"resumme-builder/internal/utils/lang"
+	"resumme-builder/internal/utils/json"
 	"resumme-builder/internal/utils/logger"
 
+	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 )
 
@@ -54,38 +55,43 @@ func preRunLocalCommand(cmd *cobra.Command, args []string) error {
 	logger.Log.Info("Output PDF file name:", outputPdfFilename)
 
 	uiDir := cmd.Flag("ui").Value.String()
-	err = fs.EnsureDir(uiDir)
-	if err != nil {
-		return err
-	}
-
-	lang.Init(resumeUIDir)
-	return nil
+	return fs.EnsureDir(uiDir)
 }
 
 func runLocalCommand(cmd *cobra.Command, args []string) error {
 	logger.Log.Info("Generating output")
 
-	templateDir := filepath.Join(resumeUIDir, "templates")
-	templateManager := template.NewTemplateManager(templateDir)
-	parser := parser.NewHTMLParser(models.OutputDir, models.OutputHtmlFile, templateManager)
-	pdfGenerator := pdf.NewPDFGenerator()
-	resumeService := services.NewResumeService(parser, pdfGenerator)
+	printer := pdf.NewPDFGenerator()
+	renderer, err := render.New(os.DirFS(resumeUIDir), printer)
+	if err != nil {
+		return err
+	}
 
 	fileData, err := fs.ReadFile(resumeDataFile)
 	if err != nil {
 		return err
 	}
-	resumeData, err := resumeService.UnmarshalResume(fileData)
+	var resumeData models.Resume
+	if err := json.Unmarshal(fileData, &resumeData); err != nil {
+		return errors.Wrap(err, "failed to unmarshal JSON")
+	}
+
+	html, err := renderer.HTML(resumeData)
 	if err != nil {
 		return err
 	}
-
-	if err := resumeService.GeneratePDF(resumeData, outputPdfFilename); err != nil {
+	if err := os.MkdirAll(models.OutputDir, 0o755); err != nil {
+		return err
+	}
+	if err := fs.WriteFile(models.OutputHtmlFile, html); err != nil {
 		return err
 	}
 
-	return nil
+	pdfData, err := printer.Print(cmd.Context(), html)
+	if err != nil {
+		return err
+	}
+	return fs.WriteFile(outputPdfFilename, pdfData)
 }
 
 func Cmd() *cobra.Command {
