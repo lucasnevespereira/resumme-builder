@@ -5,6 +5,7 @@ Build your resume with HTML/CSS and JSON Data
 ## Table of Contents
 
 - [Introduction](#introduction)
+- [Architecture](#architecture)
 - [Local Usage](#local-usage)
 - [API Usage](#api-usage)
 - [Templates](#templates)
@@ -20,6 +21,12 @@ Build your resume with HTML/CSS and JSON Data
 
 Resumme Builder is a tool that allows you to generate a resume using HTML/CSS templates and JSON data.
 It follows the [JSON Resume](https://jsonresume.org/) standard for structuring resume data.
+
+## Architecture
+
+![Architecture](docs/architecture.png)
+
+The `local` command and the API both go through `ResumeService`. It renders the chosen template to `output/resume.html`, then headless Chrome prints that page to PDF.
 
 ## Local Usage
 
