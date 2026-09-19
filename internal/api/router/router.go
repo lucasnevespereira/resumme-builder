@@ -2,8 +2,8 @@ package router
 
 import (
 	"github.com/gin-gonic/gin"
-	"resumme-builder/internal/api/handlers"
-	"resumme-builder/internal/render"
+	"github.com/lucasnevespereira/resumme-builder/internal/api/handlers"
+	"github.com/lucasnevespereira/resumme-builder/internal/render"
 )
 
 func Init(renderer *render.Renderer) *gin.Engine {

@@ -2,10 +2,10 @@ package handlers
 
 import (
 	"github.com/gin-gonic/gin"
+	"github.com/lucasnevespereira/resumme-builder/internal/models"
+	"github.com/lucasnevespereira/resumme-builder/internal/render"
+	"github.com/lucasnevespereira/resumme-builder/internal/utils/logger"
 	"net/http"
-	"resumme-builder/internal/models"
-	"resumme-builder/internal/render"
-	"resumme-builder/internal/utils/logger"
 )
 
 func Status() gin.HandlerFunc {

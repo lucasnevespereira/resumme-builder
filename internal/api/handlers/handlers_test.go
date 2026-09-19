@@ -10,7 +10,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 
-	"resumme-builder/internal/render"
+	"github.com/lucasnevespereira/resumme-builder/internal/render"
 )
 
 type fakePrinter struct{}

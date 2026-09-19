@@ -1,4 +1,4 @@
-module resumme-builder
+module github.com/lucasnevespereira/resumme-builder
 
 go 1.20
 

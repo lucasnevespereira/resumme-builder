@@ -3,13 +3,13 @@ package api
 import (
 	"fmt"
 	"github.com/gin-gonic/gin"
+	"github.com/lucasnevespereira/resumme-builder/configs"
+	"github.com/lucasnevespereira/resumme-builder/internal/api/router"
+	"github.com/lucasnevespereira/resumme-builder/internal/chrome"
+	"github.com/lucasnevespereira/resumme-builder/internal/render"
+	"github.com/lucasnevespereira/resumme-builder/internal/utils/logger"
 	"net/http"
 	"os"
-	"resumme-builder/configs"
-	"resumme-builder/internal/api/router"
-	"resumme-builder/internal/chrome"
-	"resumme-builder/internal/render"
-	"resumme-builder/internal/utils/logger"
 )
 
 type Api struct {

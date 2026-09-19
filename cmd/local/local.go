@@ -5,12 +5,12 @@ import (
 	"path/filepath"
 	"strings"
 
-	"resumme-builder/internal/chrome"
-	"resumme-builder/internal/models"
-	"resumme-builder/internal/render"
-	"resumme-builder/internal/utils/fs"
-	"resumme-builder/internal/utils/json"
-	"resumme-builder/internal/utils/logger"
+	"github.com/lucasnevespereira/resumme-builder/internal/chrome"
+	"github.com/lucasnevespereira/resumme-builder/internal/models"
+	"github.com/lucasnevespereira/resumme-builder/internal/render"
+	"github.com/lucasnevespereira/resumme-builder/internal/utils/fs"
+	"github.com/lucasnevespereira/resumme-builder/internal/utils/json"
+	"github.com/lucasnevespereira/resumme-builder/internal/utils/logger"
 
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"

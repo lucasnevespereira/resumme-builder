@@ -9,7 +9,7 @@ import (
 	"path"
 	"strings"
 
-	"resumme-builder/internal/models"
+	"github.com/lucasnevespereira/resumme-builder/internal/models"
 )
 
 const DefaultTheme = "classic"

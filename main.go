@@ -7,9 +7,9 @@ import (
 	"github.com/spf13/cobra"
 	"github.com/spf13/pflag"
 
-	"resumme-builder/cmd/local"
-	"resumme-builder/cmd/server"
-	"resumme-builder/internal/utils/logger"
+	"github.com/lucasnevespereira/resumme-builder/cmd/local"
+	"github.com/lucasnevespereira/resumme-builder/cmd/server"
+	"github.com/lucasnevespereira/resumme-builder/internal/utils/logger"
 )
 
 var rootCmd = &cobra.Command{}
