@@ -187,7 +187,7 @@ Releases are cut by [release-please](https://github.com/googleapis/release-pleas
 - [x] Tag releases and keep a changelog
 - [x] Module path that `go install` can resolve
 - [ ] Embed `ui/` in the binary with `go:embed`, so it runs from any directory
-- [ ] `--version` flag, set at build time
+- [x] `version` command
 - [ ] Attach macOS and Linux binaries to each release (GoReleaser)
 - [ ] Publish the Docker image to GHCR on each release
 - [ ] Clear error when Chrome is not installed

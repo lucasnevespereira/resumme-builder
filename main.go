@@ -9,6 +9,7 @@ import (
 
 	"github.com/lucasnevespereira/resumme-builder/cmd/local"
 	"github.com/lucasnevespereira/resumme-builder/cmd/server"
+	"github.com/lucasnevespereira/resumme-builder/cmd/version"
 	"github.com/lucasnevespereira/resumme-builder/internal/utils/logger"
 )
 
@@ -17,6 +18,7 @@ var rootCmd = &cobra.Command{}
 func init() {
 	rootCmd.AddCommand(local.Cmd())
 	rootCmd.AddCommand(server.Cmd())
+	rootCmd.AddCommand(version.Cmd())
 }
 
 func main() {
