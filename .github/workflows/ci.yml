@@ -17,4 +17,8 @@ jobs:
         run: test -z "$(gofmt -l .)" || (gofmt -l . && exit 1)
       - run: go vet ./...
       # The runner ships Google Chrome, so the printer tests run for real.
+      # Ubuntu 24.04 blocks the user namespaces Chrome's sandbox needs:
+      # https://chromium.googlesource.com/chromium/src/+/main/docs/security/apparmor-userns-restrictions.md
+      - name: Allow Chrome's sandbox
+        run: sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0
       - run: go test ./...
