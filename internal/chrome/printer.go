@@ -1,13 +1,13 @@
-package pdf
+package chrome
 
 import (
 	"context"
-	"fmt"
 	"math"
 	"os"
 	"resumme-builder/internal/utils/logger"
 	"time"
 
+	"github.com/chromedp/cdproto/cdp"
 	"github.com/chromedp/cdproto/emulation"
 	"github.com/chromedp/cdproto/page"
 	"github.com/chromedp/chromedp"
@@ -15,9 +15,10 @@ import (
 )
 
 const (
-	userAgentOverride   = "WebScraper 1.0"
-	htmlSelector        = "body"
-	networkReadyTimeOut = 15 * time.Second
+	userAgentOverride  = "WebScraper 1.0"
+	htmlSelector       = "body"
+	networkIdleTimeout = 15 * time.Second
+	printTimeout       = time.Minute
 
 	paperWidthInches  = 8.3
 	paperHeightInches = 11.7
@@ -29,16 +30,15 @@ var (
 	paperHeightPx = int64(math.Round(paperHeightInches * cssPixelsPerInch))
 )
 
-// Generator provides functionality to generate PDF from HTML.
-type Generator struct{}
+// Printer prints HTML to PDF in headless Chrome.
+type Printer struct{}
 
-// NewPDFGenerator creates a new instance of PDFGenerator.
-func NewPDFGenerator() *Generator {
-	return &Generator{}
+func NewPrinter() *Printer {
+	return &Printer{}
 }
 
-// Print loads html in headless Chrome and prints it to PDF.
-func (g *Generator) Print(ctx context.Context, html []byte) ([]byte, error) {
+// Print loads html in a fresh Chrome and prints it to PDF.
+func (p *Printer) Print(ctx context.Context, html []byte) ([]byte, error) {
 	startedAt := time.Now()
 
 	// Each call gets its own file, so concurrent requests never share one.
@@ -55,11 +55,13 @@ func (g *Generator) Print(ctx context.Context, html []byte) ([]byte, error) {
 		return nil, errors.Wrap(err, "Print - close html")
 	}
 
+	ctx, cancel := context.WithTimeout(ctx, printTimeout)
+	defer cancel()
 	chromeCtx, cancelCtx := chromedp.NewContext(ctx)
 	defer cancelCtx()
 
 	var pdfData []byte
-	if err := chromedp.Run(chromeCtx, g.saveURLAsPDF("file://"+file.Name(), &pdfData)); err != nil {
+	if err := chromedp.Run(chromeCtx, printTasks("file://"+file.Name(), &pdfData)); err != nil {
 		return nil, errors.Wrap(err, "Print - chromedp.Run")
 	}
 
@@ -68,14 +70,34 @@ func (g *Generator) Print(ctx context.Context, html []byte) ([]byte, error) {
 	return pdfData, nil
 }
 
-func (g *Generator) saveURLAsPDF(url string, pdf *[]byte) chromedp.Tasks {
+func printTasks(url string, pdf *[]byte) chromedp.Tasks {
+	idle := make(chan struct{}, 1)
 	return chromedp.Tasks{
 		emulation.SetUserAgentOverride(userAgentOverride),
+		chromedp.ActionFunc(func(ctx context.Context) error {
+			// A page target's main frame shares its ID. Iframes fire their own
+			// networkIdle, so only the main frame counts, and repeats are dropped.
+			mainFrame := cdp.FrameID(chromedp.FromContext(ctx).Target.TargetID)
+			chromedp.ListenTarget(ctx, func(ev interface{}) {
+				if e, ok := ev.(*page.EventLifecycleEvent); ok && e.Name == "networkIdle" && e.FrameID == mainFrame {
+					select {
+					case idle <- struct{}{}:
+					default:
+					}
+				}
+			})
+			return nil
+		}),
 		chromedp.Navigate(url),
 		chromedp.WaitVisible(htmlSelector, chromedp.ByQuery),
 		chromedp.ActionFunc(func(ctx context.Context) error {
-			if err := waitForNetworkIdle(ctx, networkReadyTimeOut); err != nil {
-				logger.Log.Warn(err)
+			select {
+			case <-idle:
+			case <-ctx.Done():
+				return ctx.Err()
+			case <-time.After(networkIdleTimeout):
+				// Slow fonts or images shouldn't fail the print.
+				logger.Log.Warnf("no network idle after %s, printing anyway", networkIdleTimeout)
 			}
 			return nil
 		}),
@@ -99,30 +121,10 @@ func (g *Generator) saveURLAsPDF(url string, pdf *[]byte) chromedp.Tasks {
 				WithPrintBackground(true).
 				Do(ctx)
 			if err != nil {
-				return errors.Wrap(err, "saveURLAsPDF - page.PrintToPDF")
+				return errors.Wrap(err, "printTasks - page.PrintToPDF")
 			}
 			*pdf = data
 			return nil
 		}),
-	}
-}
-
-func waitForNetworkIdle(ctx context.Context, timeout time.Duration) error {
-	idleChan := make(chan struct{})
-
-	chromedp.ListenTarget(ctx, func(ev interface{}) {
-		if event, ok := ev.(*page.EventLifecycleEvent); ok {
-			if event.Name == "networkIdle" {
-				close(idleChan)
-			}
-		}
-	})
-
-	select {
-	case <-idleChan:
-		// Network is idle
-		return nil
-	case <-time.After(timeout):
-		return fmt.Errorf("timeout %.0f seconds waiting for network idle", timeout.Seconds())
 	}
 }

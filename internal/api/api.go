@@ -7,7 +7,7 @@ import (
 	"os"
 	"resumme-builder/configs"
 	"resumme-builder/internal/api/router"
-	"resumme-builder/internal/pkg/pdf"
+	"resumme-builder/internal/chrome"
 	"resumme-builder/internal/render"
 	"resumme-builder/internal/utils/logger"
 )
@@ -18,7 +18,7 @@ type Api struct {
 }
 
 func New() (*Api, error) {
-	renderer, err := render.New(os.DirFS("ui"), pdf.NewPDFGenerator())
+	renderer, err := render.New(os.DirFS("ui"), chrome.NewPrinter())
 	if err != nil {
 		return nil, err
 	}
