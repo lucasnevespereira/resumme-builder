@@ -10,7 +10,8 @@ import (
 
 	"github.com/gin-gonic/gin"
 
-	"resumme-builder/internal/render"
+	"github.com/lucasnevespereira/resb/internal/render"
+	"github.com/lucasnevespereira/resb/ui"
 )
 
 type fakePrinter struct{}
@@ -21,7 +22,7 @@ func (fakePrinter) Print(context.Context, []byte) ([]byte, error) {
 
 func postPdf(t *testing.T, body string) *httptest.ResponseRecorder {
 	t.Helper()
-	renderer, err := render.New(os.DirFS("../../../ui"), fakePrinter{})
+	renderer, err := render.New(ui.FS, fakePrinter{})
 	if err != nil {
 		t.Fatal(err)
 	}

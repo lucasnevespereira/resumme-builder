@@ -3,9 +3,9 @@ package chrome
 import (
 	"context"
 	"fmt"
+	"github.com/lucasnevespereira/resb/internal/utils/logger"
 	"math"
 	"os"
-	"resumme-builder/internal/utils/logger"
 	"time"
 
 	"github.com/chromedp/cdproto/cdp"

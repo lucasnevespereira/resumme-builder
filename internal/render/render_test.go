@@ -8,12 +8,13 @@ import (
 	"strings"
 	"testing"
 
-	"resumme-builder/internal/models"
+	"github.com/lucasnevespereira/resb/internal/models"
+	"github.com/lucasnevespereira/resb/ui"
 )
 
 func newTestRenderer(t *testing.T) *Renderer {
 	t.Helper()
-	r, err := New(os.DirFS("../../ui"), nil)
+	r, err := New(ui.FS, nil)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -35,7 +36,7 @@ func exampleResume(t *testing.T) models.Resume {
 
 func TestEveryThemeRendersTheExample(t *testing.T) {
 	r := newTestRenderer(t)
-	themes, err := fs.ReadDir(os.DirFS("../../ui/templates"), ".")
+	themes, err := fs.ReadDir(ui.FS, "templates")
 	if err != nil {
 		t.Fatal(err)
 	}

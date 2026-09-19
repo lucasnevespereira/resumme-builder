@@ -1,16 +1,18 @@
 package local
 
 import (
+	iofs "io/fs"
 	"os"
 	"path/filepath"
 	"strings"
 
-	"resumme-builder/internal/chrome"
-	"resumme-builder/internal/models"
-	"resumme-builder/internal/render"
-	"resumme-builder/internal/utils/fs"
-	"resumme-builder/internal/utils/json"
-	"resumme-builder/internal/utils/logger"
+	"github.com/lucasnevespereira/resb/internal/chrome"
+	"github.com/lucasnevespereira/resb/internal/models"
+	"github.com/lucasnevespereira/resb/internal/render"
+	"github.com/lucasnevespereira/resb/internal/utils/fs"
+	"github.com/lucasnevespereira/resb/internal/utils/json"
+	"github.com/lucasnevespereira/resb/internal/utils/logger"
+	"github.com/lucasnevespereira/resb/ui"
 
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
@@ -21,7 +23,7 @@ var resumeDataFile, resumeUIDir, outputPdfFilename string
 func init() {
 	localCmd.Flags().StringVarP(&resumeDataFile, "file", "f", "", "Resume data file")
 	localCmd.Flags().StringVarP(&outputPdfFilename, "name", "n", "", "Output PDF file name")
-	localCmd.Flags().StringVarP(&resumeUIDir, "ui", "u", "ui", "UI data directory")
+	localCmd.Flags().StringVarP(&resumeUIDir, "ui", "u", "", "Directory with your own templates/ and locales/ (default: built in)")
 	err := localCmd.MarkFlagRequired("file")
 	if err != nil {
 		logger.Log.Error("Failed to mark 'file' flag as required:", err)
@@ -54,15 +56,21 @@ func preRunLocalCommand(cmd *cobra.Command, args []string) error {
 	}
 	logger.Log.Info("Output PDF file name:", outputPdfFilename)
 
-	uiDir := cmd.Flag("ui").Value.String()
-	return fs.EnsureDir(uiDir)
+	if resumeUIDir == "" {
+		return nil
+	}
+	return fs.EnsureDir(resumeUIDir)
 }
 
 func runLocalCommand(cmd *cobra.Command, args []string) error {
 	logger.Log.Info("Generating output")
 
 	printer := chrome.NewPrinter()
-	renderer, err := render.New(os.DirFS(resumeUIDir), printer)
+	var uiFS iofs.FS = ui.FS
+	if resumeUIDir != "" {
+		uiFS = os.DirFS(resumeUIDir)
+	}
+	renderer, err := render.New(uiFS, printer)
 	if err != nil {
 		return err
 	}

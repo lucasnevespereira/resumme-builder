@@ -7,7 +7,7 @@ type ApiConfig struct {
 
 func LoadApiConfig() ApiConfig {
 	conf := ApiConfig{}
-	conf.AppName = "Resumme Builder"
+	conf.AppName = "resb"
 	conf.Port = 9000
 	return conf
 }

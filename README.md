@@ -1,26 +1,61 @@
-# Resumme Builder
+# resb
 
-Build your resume with HTML/CSS and JSON Data
+Build your resume with HTML/CSS and JSON Data. `resb` is short for Resume Builder.
 
 ## Table of Contents
 
 - [Introduction](#introduction)
+- [Installation](#installation)
+- [Usage](#usage)
 - [Architecture](#architecture)
-- [Local Usage](#local-usage)
 - [API Usage](#api-usage)
 - [Templates](#templates)
 - [Skills](#skills)
 - [Image](#image)
 - [Languages](#languages)
 - [Date Formats](#date-formats)
-- [Todo List](#todo-list)
+- [Roadmap](#roadmap)
 - [How to Contribute](#how-to-contribute)
 - [License](#license)
 
 ## Introduction
 
-Resumme Builder is a tool that allows you to generate a resume using HTML/CSS templates and JSON data.
+resb is a tool that allows you to generate a resume using HTML/CSS templates and JSON data.
 It follows the [JSON Resume](https://jsonresume.org/) standard for structuring resume data.
+
+## Installation
+
+resb prints PDFs with headless Chrome, so you need [Google Chrome](https://www.google.com/chrome/) or Chromium installed.
+
+With Go:
+
+```shell
+go install github.com/lucasnevespereira/resb@latest
+resb -v
+```
+
+Or run it from a clone, without installing:
+
+```shell
+git clone https://github.com/lucasnevespereira/resb.git
+cd resb
+make local file="examples/example.resume.json"
+```
+
+## Usage
+
+Create a JSON file with your resume data. See [examples/example.resume.json](examples/example.resume.json) for a full example.
+
+```shell
+resb local -f resume.json
+```
+
+This writes `output/resume.pdf` in the current directory, named after your JSON file, plus `output/resume.html`. Options:
+
+- `-n cv.pdf` sets the PDF file name.
+- `-u ./my-ui` uses your own templates instead of the built-in ones. See [Custom templates](#custom-templates).
+
+`local` is the default command, so `resb -f resume.json` works too.
 
 ## Architecture
 
@@ -28,35 +63,17 @@ It follows the [JSON Resume](https://jsonresume.org/) standard for structuring r
 
 The `local` command and the API both go through the render module (`internal/render`). It renders the chosen template with labels from `ui/locales`, then headless Chrome prints the page to PDF.
 
-## Local Usage
-
-Create a JSON file with your resume data. You can specify the file path using the `file` flag.
-
-<i>You can see a json file example in [examples/example.resume.json](examples/example.resume.json)</i>
-
-Run the following command to generate the resume in PDF and HTML formats:
-
-```shell
-make local file="data/resume.json"
-```
-
-Alternatively, you can use the following command:
-
-```shell
-go run *.go local -f="data/resume.json"
-```
-
-The generated resume files (`resume.pdf` and `resume.html`) will be saved in the `output` directory.
-
 ## API Usage
 
-To use Resumme Builder as an API, follow these steps:
+To use resb as an API, follow these steps:
 
-Start the server by running the following command:
+Start the server:
 
+```shell
+resb server
 ```
-make server
-```
+
+From a clone, `make server` does the same.
 
 You can also use Docker to run the server:
 
@@ -74,7 +91,7 @@ e.g example json data request in [examples/example.resume.json](examples/example
 
 ## Templates
 
-Resumme Builder provides the following templates for generating resumes:
+resb provides the following templates for generating resumes:
 
 - Classic: [Example](examples/example.classic.pdf)
 - Basic: [Example](examples/example.basic.pdf)
@@ -89,6 +106,29 @@ To use a specific template, specify the template name in the JSON resume data:
 ```json
   "template": "classic"
 ```
+
+### Custom templates
+
+To use your own theme without rebuilding resb, put it in a folder shaped like [`ui/`](ui):
+
+```text
+my-ui/
+├── templates/
+│   └── mytheme/
+│       ├── _mytheme.gohtml   # root file, its name starts with _
+│       └── ...
+└── locales/
+    ├── en.json               # required
+    └── fr.json
+```
+
+Then set `"template": "mytheme"` in your resume and run:
+
+```shell
+resb -f resume.json -u ./my-ui
+```
+
+The folder replaces the built-in themes and translations. Copy the ones you want to keep from [`ui/`](ui).
 
 ## Skills
 
@@ -118,7 +158,7 @@ Upload your image to a service like [imgur](https://imgur.com/) and copy the dir
 
 ## Languages
 
-Resumme Builder supports multiple languages for your resume, allowing you to create your resume in a language that suits
+resb supports multiple languages for your resume, allowing you to create your resume in a language that suits
 your needs. The default language is English (en), but you can choose to use other supported languages as well.
 
 Currently, the following languages are supported:
@@ -138,7 +178,7 @@ e.g [examples/example.resume.json](examples/example.resume.json)
 
 ## Date Formats
 
-Resumme Builder supports the following date formats:
+resb supports the following date formats:
 
 - `2006-01-02` (e.g., "2024-07-09")
 - `2006-01` (e.g., "2024-07")
@@ -170,17 +210,30 @@ Example of date fields in JSON resume data:
 }
 ```
 
-## Todo List
+## Roadmap
 
 - [x] Parse data to HTML
 - [x] Generate PDF
 - [x] Build an API
 - [x] Handle multiple languages (i18n)
+- [x] Add tests for rendering, the API and the PDF printer
 - [ ] Expand template options
 - [ ] Implement automatic translation support
-- [ ] Add unit tests and improve test coverage
 
-Feel free to contribute additional templates and features to enhance the Resumme Builder project!
+### Versioned CLI
+
+To release, push a version tag: `git tag v0.1.0 && git push origin v0.1.0`. A workflow creates the GitHub release with notes generated from the commits. Where the CLI stands:
+
+- [x] Release on version tags, with generated release notes
+- [x] Module path that `go install` can resolve
+- [x] Themes and translations embedded in the binary, so it runs from any directory
+- [x] `version` command, plus `-v` and `--version`
+- [ ] Attach macOS and Linux binaries to each release (GoReleaser)
+- [ ] Publish the Docker image to GHCR on each release (build it with Go 1.24+ so `version` is stamped, it prints `dev` today)
+- [ ] Clear error when Chrome is not installed
+- [x] Document `go install github.com/lucasnevespereira/resb@latest`
+
+Feel free to contribute additional templates and features to enhance resb!
 
 ## How to Contribute
 

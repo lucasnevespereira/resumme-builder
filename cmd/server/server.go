@@ -1,8 +1,8 @@
 package server
 
 import (
+	"github.com/lucasnevespereira/resb/internal/api"
 	"github.com/spf13/cobra"
-	"resumme-builder/internal/api"
 )
 
 var serverCmd = &cobra.Command{

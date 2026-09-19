@@ -3,13 +3,13 @@ package api
 import (
 	"fmt"
 	"github.com/gin-gonic/gin"
+	"github.com/lucasnevespereira/resb/configs"
+	"github.com/lucasnevespereira/resb/internal/api/router"
+	"github.com/lucasnevespereira/resb/internal/chrome"
+	"github.com/lucasnevespereira/resb/internal/render"
+	"github.com/lucasnevespereira/resb/internal/utils/logger"
+	"github.com/lucasnevespereira/resb/ui"
 	"net/http"
-	"os"
-	"resumme-builder/configs"
-	"resumme-builder/internal/api/router"
-	"resumme-builder/internal/chrome"
-	"resumme-builder/internal/render"
-	"resumme-builder/internal/utils/logger"
 )
 
 type Api struct {
@@ -18,7 +18,7 @@ type Api struct {
 }
 
 func New() (*Api, error) {
-	renderer, err := render.New(os.DirFS("ui"), chrome.NewPrinter())
+	renderer, err := render.New(ui.FS, chrome.NewPrinter())
 	if err != nil {
 		return nil, err
 	}
