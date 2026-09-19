@@ -26,7 +26,7 @@ It follows the [JSON Resume](https://jsonresume.org/) standard for structuring r
 
 ![Architecture](docs/architecture.png)
 
-The `local` command and the API both go through `ResumeService`. It renders the chosen template to `output/resume.html`, then headless Chrome prints that page to PDF.
+The `local` command and the API both go through the render module (`internal/render`). It renders the chosen template with labels from `ui/locales`, then headless Chrome prints the page to PDF.
 
 ## Local Usage
 
