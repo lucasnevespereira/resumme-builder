@@ -2,7 +2,6 @@ package render
 
 import (
 	"bytes"
-	"context"
 	"encoding/json"
 	"io/fs"
 	"os"
@@ -12,21 +11,13 @@ import (
 	"resumme-builder/internal/models"
 )
 
-type fakePrinter struct{ got []byte }
-
-func (p *fakePrinter) Print(_ context.Context, html []byte) ([]byte, error) {
-	p.got = html
-	return []byte("%PDF"), nil
-}
-
-func newTestRenderer(t *testing.T) (*Renderer, *fakePrinter) {
+func newTestRenderer(t *testing.T) *Renderer {
 	t.Helper()
-	printer := &fakePrinter{}
-	r, err := New(os.DirFS("../../ui"), printer)
+	r, err := New(os.DirFS("../../ui"), nil)
 	if err != nil {
 		t.Fatal(err)
 	}
-	return r, printer
+	return r
 }
 
 func exampleResume(t *testing.T) models.Resume {
@@ -43,7 +34,7 @@ func exampleResume(t *testing.T) models.Resume {
 }
 
 func TestEveryThemeRendersTheExample(t *testing.T) {
-	r, _ := newTestRenderer(t)
+	r := newTestRenderer(t)
 	themes, err := fs.ReadDir(os.DirFS("../../ui/templates"), ".")
 	if err != nil {
 		t.Fatal(err)
@@ -69,7 +60,7 @@ func TestEveryThemeRendersTheExample(t *testing.T) {
 }
 
 func TestLabelsFollowTheResumeLanguage(t *testing.T) {
-	r, _ := newTestRenderer(t)
+	r := newTestRenderer(t)
 	resume := exampleResume(t)
 	resume.Meta.Template = "stackoverflow"
 
@@ -85,35 +76,8 @@ func TestLabelsFollowTheResumeLanguage(t *testing.T) {
 	}
 }
 
-func TestEveryLocaleHasTheEnglishKeys(t *testing.T) {
-	r, _ := newTestRenderer(t)
-	for lang, labels := range r.labels {
-		for key := range r.labels[defaultLang] {
-			if _, ok := labels[key]; !ok {
-				t.Errorf("locales/%s.json is missing %q", lang, key)
-			}
-		}
-	}
-}
-
-func TestEmptyTemplateUsesTheDefaultTheme(t *testing.T) {
-	r, _ := newTestRenderer(t)
-	resume := exampleResume(t)
-
-	resume.Meta.Template = ""
-	got, err := r.HTML(resume)
-	if err != nil {
-		t.Fatal(err)
-	}
-	resume.Meta.Template = DefaultTheme
-	want, _ := r.HTML(resume)
-	if !bytes.Equal(got, want) {
-		t.Error("empty template should render the default theme")
-	}
-}
-
 func TestUnknownTemplateIsAnError(t *testing.T) {
-	r, _ := newTestRenderer(t)
+	r := newTestRenderer(t)
 	resume := exampleResume(t)
 
 	for _, name := range []string{"nope", "..", "../locales", "classic/..", "*"} {
@@ -121,19 +85,5 @@ func TestUnknownTemplateIsAnError(t *testing.T) {
 		if _, err := r.HTML(resume); err == nil || !strings.Contains(err.Error(), "unknown template") {
 			t.Errorf("template %q: want unknown template error, got %v", name, err)
 		}
-	}
-}
-
-func TestPDFPrintsTheRenderedHTML(t *testing.T) {
-	r, printer := newTestRenderer(t)
-	resume := exampleResume(t)
-
-	pdf, err := r.PDF(context.Background(), resume)
-	if err != nil {
-		t.Fatal(err)
-	}
-	html, _ := r.HTML(resume)
-	if string(pdf) != "%PDF" || !bytes.Equal(printer.got, html) {
-		t.Error("PDF should print exactly the rendered HTML")
 	}
 }

@@ -11,7 +11,7 @@ import (
 
 const defaultLang = "en"
 
-// loadLabels reads every locales/<lang>.json into lang -> key -> text.
+// loadLabels reads every locales/<lang>.json, keyed by language.
 func loadLabels(ui fs.FS) (map[string]map[string]string, error) {
 	files, err := fs.Glob(ui, "locales/*.json")
 	if err != nil {
