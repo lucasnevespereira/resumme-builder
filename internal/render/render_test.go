@@ -64,7 +64,7 @@ func TestLabelsFollowTheResumeLanguage(t *testing.T) {
 	resume := exampleResume(t)
 	resume.Meta.Template = "stackoverflow"
 
-	for lang, want := range map[string]string{"fr": "Formation", "fr_FR": "Formation", "de": "Education", "": "Education"} {
+	for lang, want := range map[string]string{"fr": "Formation", "fr_FR": "Formation", "fr-FR": "Formation", "de": "Education", "": "Education"} {
 		resume.Meta.Lang = lang
 		html, err := r.HTML(resume)
 		if err != nil {
@@ -84,6 +84,14 @@ func TestUnknownTemplateIsAnError(t *testing.T) {
 		resume.Meta.Template = name
 		if _, err := r.HTML(resume); err == nil || !strings.Contains(err.Error(), "unknown template") {
 			t.Errorf("template %q: want unknown template error, got %v", name, err)
+		}
+	}
+}
+
+func TestDatesFollowTheSameLanguageAsLabels(t *testing.T) {
+	for _, lang := range []string{"fr", "fr_FR", "fr-FR"} {
+		if got := formatDate("January 2006", "2020-01-15", lang); got != "janvier 2020" {
+			t.Errorf("lang %q: got %q, want janvier 2020", lang, got)
 		}
 	}
 }

@@ -133,7 +133,7 @@ var mondayLocales = map[string]monday.Locale{
 }
 
 func formatDate(layout string, date string, locale string) string {
-	mondayLocale, ok := mondayLocales[locale]
+	mondayLocale, ok := mondayLocales[baseLang(locale)]
 	if !ok {
 		mondayLocale = monday.LocaleEnUS
 	}

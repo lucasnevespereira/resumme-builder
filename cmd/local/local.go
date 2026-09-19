@@ -5,8 +5,8 @@ import (
 	"path/filepath"
 	"strings"
 
+	"resumme-builder/internal/chrome"
 	"resumme-builder/internal/models"
-	"resumme-builder/internal/pkg/pdf"
 	"resumme-builder/internal/render"
 	"resumme-builder/internal/utils/fs"
 	"resumme-builder/internal/utils/json"
@@ -61,7 +61,7 @@ func preRunLocalCommand(cmd *cobra.Command, args []string) error {
 func runLocalCommand(cmd *cobra.Command, args []string) error {
 	logger.Log.Info("Generating output")
 
-	printer := pdf.NewPDFGenerator()
+	printer := chrome.NewPrinter()
 	renderer, err := render.New(os.DirFS(resumeUIDir), printer)
 	if err != nil {
 		return err

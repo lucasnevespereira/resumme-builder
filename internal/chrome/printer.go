@@ -1,4 +1,4 @@
-package pdf
+package chrome
 
 import (
 	"context"
@@ -8,6 +8,7 @@ import (
 	"resumme-builder/internal/utils/logger"
 	"time"
 
+	"github.com/chromedp/cdproto/cdp"
 	"github.com/chromedp/cdproto/emulation"
 	"github.com/chromedp/cdproto/page"
 	"github.com/chromedp/chromedp"
@@ -15,9 +16,10 @@ import (
 )
 
 const (
-	userAgentOverride   = "WebScraper 1.0"
-	htmlSelector        = "body"
-	networkReadyTimeOut = 15 * time.Second
+	userAgentOverride  = "WebScraper 1.0"
+	htmlSelector       = "body"
+	networkIdleTimeout = 15 * time.Second
+	printTimeout       = time.Minute
 
 	paperWidthInches  = 8.3
 	paperHeightInches = 11.7
@@ -29,16 +31,15 @@ var (
 	paperHeightPx = int64(math.Round(paperHeightInches * cssPixelsPerInch))
 )
 
-// Generator provides functionality to generate PDF from HTML.
-type Generator struct{}
+// Printer prints HTML to PDF in headless Chrome.
+type Printer struct{}
 
-// NewPDFGenerator creates a new instance of PDFGenerator.
-func NewPDFGenerator() *Generator {
-	return &Generator{}
+func NewPrinter() *Printer {
+	return &Printer{}
 }
 
-// Print loads html in headless Chrome and prints it to PDF.
-func (g *Generator) Print(ctx context.Context, html []byte) ([]byte, error) {
+// Print loads html in a fresh Chrome and prints it to PDF.
+func (p *Printer) Print(ctx context.Context, html []byte) ([]byte, error) {
 	startedAt := time.Now()
 
 	// Each call gets its own file, so concurrent requests never share one.
@@ -55,11 +56,13 @@ func (g *Generator) Print(ctx context.Context, html []byte) ([]byte, error) {
 		return nil, errors.Wrap(err, "Print - close html")
 	}
 
+	ctx, cancel := context.WithTimeout(ctx, printTimeout)
+	defer cancel()
 	chromeCtx, cancelCtx := chromedp.NewContext(ctx)
 	defer cancelCtx()
 
 	var pdfData []byte
-	if err := chromedp.Run(chromeCtx, g.saveURLAsPDF("file://"+file.Name(), &pdfData)); err != nil {
+	if err := chromedp.Run(chromeCtx, p.saveURLAsPDF("file://"+file.Name(), &pdfData)); err != nil {
 		return nil, errors.Wrap(err, "Print - chromedp.Run")
 	}
 
@@ -68,13 +71,16 @@ func (g *Generator) Print(ctx context.Context, html []byte) ([]byte, error) {
 	return pdfData, nil
 }
 
-func (g *Generator) saveURLAsPDF(url string, pdf *[]byte) chromedp.Tasks {
+func (p *Printer) saveURLAsPDF(url string, pdf *[]byte) chromedp.Tasks {
 	return chromedp.Tasks{
 		emulation.SetUserAgentOverride(userAgentOverride),
 		chromedp.Navigate(url),
 		chromedp.WaitVisible(htmlSelector, chromedp.ByQuery),
 		chromedp.ActionFunc(func(ctx context.Context) error {
-			if err := waitForNetworkIdle(ctx, networkReadyTimeOut); err != nil {
+			if err := waitForNetworkIdle(ctx, networkIdleTimeout); err != nil {
+				if ctx.Err() != nil {
+					return err
+				}
 				logger.Log.Warn(err)
 			}
 			return nil
@@ -107,21 +113,30 @@ func (g *Generator) saveURLAsPDF(url string, pdf *[]byte) chromedp.Tasks {
 	}
 }
 
+// waitForNetworkIdle waits until the page has had no network activity for
+// 500ms, so fonts and icons loaded late still make it into the PDF.
 func waitForNetworkIdle(ctx context.Context, timeout time.Duration) error {
-	idleChan := make(chan struct{})
+	mainFrame := cdp.FrameID(chromedp.FromContext(ctx).Target.TargetID)
+	idle := make(chan struct{}, 1)
 
 	chromedp.ListenTarget(ctx, func(ev interface{}) {
-		if event, ok := ev.(*page.EventLifecycleEvent); ok {
-			if event.Name == "networkIdle" {
-				close(idleChan)
-			}
+		// Iframes fire their own networkIdle, and Chrome can fire it more than
+		// once. Only the main frame counts, and repeats are dropped.
+		event, ok := ev.(*page.EventLifecycleEvent)
+		if !ok || event.Name != "networkIdle" || event.FrameID != mainFrame {
+			return
+		}
+		select {
+		case idle <- struct{}{}:
+		default:
 		}
 	})
 
 	select {
-	case <-idleChan:
-		// Network is idle
+	case <-idle:
 		return nil
+	case <-ctx.Done():
+		return ctx.Err()
 	case <-time.After(timeout):
 		return fmt.Errorf("timeout %.0f seconds waiting for network idle", timeout.Seconds())
 	}
