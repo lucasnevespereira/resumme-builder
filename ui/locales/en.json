@@ -1,15 +1,15 @@
 {
-  "EducationLabel": "Education",
-  "ExperiencesLabel": "Experiences",
-  "VolunteerLabel": "Volunteering",
-  "SocialsLabel": "Socials",
-  "SkillsLabel": "Skills",
-  "SoftSkillsLabel": "Soft Skills",
-  "ProjectsLabel": "Projects",
-  "PublicationsLabel": "Publications",
-  "LanguagesLabel": "Languages",
-  "InterestsLabel": "Interests",
-  "ProfileLabel": "Profile",
-  "SinceLabel": "Since",
-  "CertificatesLabel": "Certifications"
+  "Education": "Education",
+  "Experiences": "Experiences",
+  "Volunteer": "Volunteering",
+  "Socials": "Socials",
+  "Skills": "Skills",
+  "SoftSkills": "Soft Skills",
+  "Projects": "Projects",
+  "Publications": "Publications",
+  "Languages": "Languages",
+  "Interests": "Interests",
+  "Profile": "Profile",
+  "Since": "Since",
+  "Certificates": "Certifications"
 }

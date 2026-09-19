@@ -9,10 +9,11 @@ var serverCmd = &cobra.Command{
 	Use:   "server",
 	Short: "Starts a server to use app as an API",
 	RunE: func(cmd *cobra.Command, args []string) error {
-		if err := api.New().Run(); err != nil {
+		server, err := api.New()
+		if err != nil {
 			return err
 		}
-		return nil
+		return server.Run()
 	},
 }
 

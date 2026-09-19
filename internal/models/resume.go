@@ -1,7 +1,5 @@
 package models
 
-import "resumme-builder/internal/utils/lang"
-
 type Resume struct {
 	Basics       Basics         `json:"basics"`
 	Work         []Work         `json:"work"`
@@ -15,7 +13,6 @@ type Resume struct {
 	Languages    []Language     `json:"languages"`
 	Interests    []Interest     `json:"interests"`
 	Meta         Meta           `json:"meta"`
-	Labels       ResumeLabels
 }
 
 type Basics struct {
@@ -122,72 +119,4 @@ type Interest struct {
 type Meta struct {
 	Template string `json:"template"`
 	Lang     string `json:"lang"`
-}
-
-type ResumeLabels struct {
-	Education    string
-	Experiences  string
-	Volunteer    string
-	Publications string
-	Projects     string
-	Skills       string
-	SoftSkills   string
-	Languages    string
-	Interests    string
-	Profile      string
-	Since        string
-	Certificates string
-	Socials      string
-}
-
-func (r *Resume) GetEducationLabel() string {
-	return lang.Translate(r.Meta.Lang, EducationLabel)
-}
-
-func (r *Resume) GetExperiencesLabel() string {
-	return lang.Translate(r.Meta.Lang, ExperiencesLabel)
-}
-
-func (r *Resume) GetSkillsLabel() string {
-	return lang.Translate(r.Meta.Lang, SkillsLabel)
-}
-
-func (r *Resume) GetSoftSkillsLabel() string {
-	return lang.Translate(r.Meta.Lang, SoftSkillsLabel)
-}
-
-func (r *Resume) GetProjectsLabel() string {
-	return lang.Translate(r.Meta.Lang, ProjectsLabel)
-}
-
-func (r *Resume) GetPublicationsLabel() string {
-	return lang.Translate(r.Meta.Lang, PublicationsLabel)
-}
-
-func (r *Resume) GetLanguagesLabel() string {
-	return lang.Translate(r.Meta.Lang, LanguagesLabel)
-}
-
-func (r *Resume) GetInterestsLabel() string {
-	return lang.Translate(r.Meta.Lang, InterestsLabel)
-}
-
-func (r *Resume) GetProfileLabel() string {
-	return lang.Translate(r.Meta.Lang, ProfileLabel)
-}
-
-func (r *Resume) GetSinceLabel() string {
-	return lang.Translate(r.Meta.Lang, SinceLabel)
-}
-
-func (r *Resume) GetCertificatesLabel() string {
-	return lang.Translate(r.Meta.Lang, CertificatesLabel)
-}
-
-func (r *Resume) GetSocialsLabel() string {
-	return lang.Translate(r.Meta.Lang, SocialsLabel)
-}
-
-func (r *Resume) GetVolunteerLabel() string {
-	return lang.Translate(r.Meta.Lang, VolunteerLabel)
 }

@@ -4,8 +4,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"resumme-builder/internal/models"
-	"resumme-builder/internal/services"
-	"resumme-builder/internal/utils/fs"
+	"resumme-builder/internal/render"
 	"resumme-builder/internal/utils/logger"
 )
 
@@ -15,7 +14,7 @@ func Status() gin.HandlerFunc {
 	}
 }
 
-func GetPdf(service *services.ResumeService) gin.HandlerFunc {
+func GetPdf(renderer *render.Renderer) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		var resumeData models.Resume
 
@@ -27,21 +26,16 @@ func GetPdf(service *services.ResumeService) gin.HandlerFunc {
 			return
 		}
 
-		htmlFile, err := service.Parser.ParseToHtml(resumeData)
+		pdfData, err := renderer.PDF(c.Request.Context(), resumeData)
 		if err != nil {
-			logger.Log.Fatal(err)
+			logger.Log.Error(err)
+			c.JSON(http.StatusInternalServerError, gin.H{
+				"error":  err.Error(),
+				"status": http.StatusInternalServerError,
+			})
+			return
 		}
 
-		pdfData, err := service.Pdf.GenerateFromHTML(htmlFile, models.OutputPdfFile)
-		if err != nil {
-			logger.Log.Fatal(err)
-		}
-
-		if err := fs.WriteFile(models.OutputPdfFile, pdfData); err != nil {
-			logger.Log.Fatal(err)
-		}
-
-		c.Writer.Header().Set("Content-type", "application/pdf")
-		c.File(models.OutputPdfFile)
+		c.Data(http.StatusOK, "application/pdf", pdfData)
 	}
 }

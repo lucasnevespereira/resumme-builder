@@ -1,15 +1,15 @@
 {
-  "EducationLabel": "Formation",
-  "ExperiencesLabel": "Expériences Professionnelles",
-  "VolunteerLabel": "Bénévolats",
-  "SocialsLabel": "Liens",
-  "SkillsLabel": "Compétences Techniques",
-  "SoftSkillsLabel": "Compétences Relationnelles",
-  "ProjectsLabel": "Projets",
-  "PublicationsLabel": "Publications",
-  "LanguagesLabel": "Langues",
-  "InterestsLabel": "Centres D'intérêt",
-  "ProfileLabel": "Profil",
-  "SinceLabel": "Depuis",
-  "CertificatesLabel": "Certifications"
+  "Education": "Formation",
+  "Experiences": "Expériences Professionnelles",
+  "Volunteer": "Bénévolats",
+  "Socials": "Liens",
+  "Skills": "Compétences Techniques",
+  "SoftSkills": "Compétences Relationnelles",
+  "Projects": "Projets",
+  "Publications": "Publications",
+  "Languages": "Langues",
+  "Interests": "Centres D'intérêt",
+  "Profile": "Profil",
+  "Since": "Depuis",
+  "Certificates": "Certifications"
 }

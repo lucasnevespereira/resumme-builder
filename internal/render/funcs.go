@@ -1,4 +1,4 @@
-package template
+package render
 
 import (
 	"html/template"
@@ -8,6 +8,25 @@ import (
 
 	"github.com/ruang-guru/monday"
 )
+
+var funcs = template.FuncMap{
+	"isLast":                            isLast,
+	"displayLocation":                   displayLocation,
+	"displayLocationWithSlash":          displayLocationWithSlash,
+	"displayLocationWithHyphen":         displayLocationWithHyphen,
+	"displayLocationWithCommaAndHyphen": displayLocationWithCommaAndHyphen,
+	"displayLocationWithCommaAndSpace":  displayLocationWithCommaAndSpace,
+	"displayLocationWithSpaces":         displayLocationWithSpaces,
+	"trimURLPrefix":                     trimURLPrefix,
+	"getFirstName":                      getFirstName,
+	"getLastName":                       getLastName,
+	"evaluate":                          evaluate,
+	"lowerEq":                           lowerEq,
+	"lower":                             lower,
+	"formatDate":                        formatDate,
+	"paragraphLineFeeds":                paragraphLineFeeds,
+	"imageSrc":                          imageSrc,
+}
 
 func isLast(index, length int) bool {
 	return index == length-1
@@ -114,7 +133,7 @@ var mondayLocales = map[string]monday.Locale{
 }
 
 func formatDate(layout string, date string, locale string) string {
-	mondayLocale, ok := mondayLocales[locale]
+	mondayLocale, ok := mondayLocales[baseLang(locale)]
 	if !ok {
 		mondayLocale = monday.LocaleEnUS
 	}
